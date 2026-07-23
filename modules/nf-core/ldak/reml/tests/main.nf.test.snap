@@ -1,0 +1,374 @@
+{
+    "homo_sapiens popgen - quantitative with explicit mpheno 1": {
+        "content": [
+            {
+                "coeff": [
+                    [
+                        {
+                            "id": "reml_quantitative"
+                        },
+                        "reml_quantitative.coeff:md5,a7a5b2b62a0f452658790859dc6d4b50"
+                    ]
+                ],
+                "combined": [
+                    
+                ],
+                "cross": [
+                    [
+                        {
+                            "id": "reml_quantitative"
+                        },
+                        "reml_quantitative.cross:md5,e97f9ee475482d63f7325b910deb2d25"
+                    ]
+                ],
+                "indi_blp": [
+                    [
+                        {
+                            "id": "reml_quantitative"
+                        },
+                        "reml_quantitative.indi.blp:md5,7f71e6fc7b8a65bd39efcf522484b413"
+                    ]
+                ],
+                "indi_res": [
+                    [
+                        {
+                            "id": "reml_quantitative"
+                        },
+                        "reml_quantitative.indi.res:md5,ab0964688d1ca68161369420b87ce0a5"
+                    ]
+                ],
+                "progress": [
+                    [
+                        {
+                            "id": "reml_quantitative"
+                        },
+                        "reml_quantitative.progress:md5,cc2eab4890a7a8bc3b0286b2bb896660"
+                    ]
+                ],
+                "reml_results": [
+                    [
+                        {
+                            "id": "reml_quantitative"
+                        },
+                        "reml_quantitative.reml:md5,389e7c6016b8ef315ed86715480fee78"
+                    ]
+                ],
+                "share": [
+                    [
+                        {
+                            "id": "reml_quantitative"
+                        },
+                        "reml_quantitative.share:md5,01b0b07a8fc56e5ad02a43b20beafe6d"
+                    ]
+                ],
+                "vars": [
+                    [
+                        {
+                            "id": "reml_quantitative"
+                        },
+                        "reml_quantitative.vars:md5,59d9c5072f6dd05621bcd802af5d821f"
+                    ]
+                ],
+                "versions_ldak6": [
+                    [
+                        "LDAK_REML",
+                        "ldak6",
+                        "6"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T15:23:49.287559139"
+    },
+    "homo_sapiens popgen - binary observed scale": {
+        "content": [
+            {
+                "coeff": [
+                    [
+                        {
+                            "id": "reml_binary_observed"
+                        },
+                        "reml_binary_observed.coeff:md5,494493469ec8acee9a98f7b1977ec519"
+                    ]
+                ],
+                "combined": [
+                    
+                ],
+                "cross": [
+                    [
+                        {
+                            "id": "reml_binary_observed"
+                        },
+                        "reml_binary_observed.cross:md5,48654bd4fc3b6428751a35836a85d040"
+                    ]
+                ],
+                "indi_blp": [
+                    [
+                        {
+                            "id": "reml_binary_observed"
+                        },
+                        "reml_binary_observed.indi.blp:md5,ef77e77225fc669b8c1218b18c3d69ec"
+                    ]
+                ],
+                "indi_res": [
+                    [
+                        {
+                            "id": "reml_binary_observed"
+                        },
+                        "reml_binary_observed.indi.res:md5,ddf5131774a2db8854ea722d743abd2c"
+                    ]
+                ],
+                "progress": [
+                    [
+                        {
+                            "id": "reml_binary_observed"
+                        },
+                        "reml_binary_observed.progress:md5,5adb53c3e9bc242385967888a9c107b1"
+                    ]
+                ],
+                "reml_results": [
+                    [
+                        {
+                            "id": "reml_binary_observed"
+                        },
+                        "reml_binary_observed.reml:md5,b5ae792dfbcaca182102419050d23882"
+                    ]
+                ],
+                "share": [
+                    [
+                        {
+                            "id": "reml_binary_observed"
+                        },
+                        "reml_binary_observed.share:md5,01b0b07a8fc56e5ad02a43b20beafe6d"
+                    ]
+                ],
+                "vars": [
+                    [
+                        {
+                            "id": "reml_binary_observed"
+                        },
+                        "reml_binary_observed.vars:md5,a9585962160b30cbc432958cbf4607c0"
+                    ]
+                ],
+                "versions_ldak6": [
+                    [
+                        "LDAK_REML",
+                        "ldak6",
+                        "6"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T15:24:11.373816315"
+    },
+    "homo_sapiens popgen - stub": {
+        "content": [
+            {
+                "coeff": [
+                    [
+                        {
+                            "id": "reml_stub"
+                        },
+                        "reml_stub.coeff:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "coeff_liability": [
+                    [
+                        {
+                            "id": "reml_stub"
+                        },
+                        "reml_stub.coeff.liab:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "combined": [
+                    
+                ],
+                "cross": [
+                    [
+                        {
+                            "id": "reml_stub"
+                        },
+                        "reml_stub.cross:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "indi_blp": [
+                    [
+                        {
+                            "id": "reml_stub"
+                        },
+                        "reml_stub.indi.blp:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "indi_blp_liability": [
+                    [
+                        {
+                            "id": "reml_stub"
+                        },
+                        "reml_stub.indi.blp.liab:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "indi_res": [
+                    [
+                        {
+                            "id": "reml_stub"
+                        },
+                        "reml_stub.indi.res:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "liability_factor": [
+                    [
+                        {
+                            "id": "reml_stub"
+                        },
+                        "reml_stub.factor:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "progress": [
+                    [
+                        {
+                            "id": "reml_stub"
+                        },
+                        "reml_stub.progress:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "reml_liability": [
+                    [
+                        {
+                            "id": "reml_stub"
+                        },
+                        "reml_stub.reml.liab:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "reml_results": [
+                    [
+                        {
+                            "id": "reml_stub"
+                        },
+                        "reml_stub.reml:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "share": [
+                    [
+                        {
+                            "id": "reml_stub"
+                        },
+                        "reml_stub.share:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "vars": [
+                    [
+                        {
+                            "id": "reml_stub"
+                        },
+                        "reml_stub.vars:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions_ldak6": [
+                    [
+                        "LDAK_REML",
+                        "ldak6",
+                        "6"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T15:29:50.430626377"
+    },
+    "homo_sapiens popgen - binary liability scale": {
+        "content": [
+            {
+                "coeff": [
+                    [
+                        {
+                            "id": "reml_binary"
+                        },
+                        "reml_binary.coeff:md5,c216c8baff0528c4dfea778a55adcbba"
+                    ]
+                ],
+                "combined": [
+                    
+                ],
+                "cross": [
+                    [
+                        {
+                            "id": "reml_binary"
+                        },
+                        "reml_binary.cross:md5,7e7dfe82d493ab1317bf5148756bf033"
+                    ]
+                ],
+                "indi_blp": [
+                    [
+                        {
+                            "id": "reml_binary"
+                        },
+                        "reml_binary.indi.blp:md5,25ced35b8dd72608a4fcd70065960d1a"
+                    ]
+                ],
+                "indi_res": [
+                    [
+                        {
+                            "id": "reml_binary"
+                        },
+                        "reml_binary.indi.res:md5,656be57004f3504cd729eb44af365df6"
+                    ]
+                ],
+                "progress": [
+                    [
+                        {
+                            "id": "reml_binary"
+                        },
+                        "reml_binary.progress:md5,8a6fc9dada85c840f73b36c70289a7fc"
+                    ]
+                ],
+                "reml_results": [
+                    [
+                        {
+                            "id": "reml_binary"
+                        },
+                        "reml_binary.reml:md5,ef265460116c421d9b9edad27a17e18b"
+                    ]
+                ],
+                "share": [
+                    [
+                        {
+                            "id": "reml_binary"
+                        },
+                        "reml_binary.share:md5,01b0b07a8fc56e5ad02a43b20beafe6d"
+                    ]
+                ],
+                "vars": [
+                    [
+                        {
+                            "id": "reml_binary"
+                        },
+                        "reml_binary.vars:md5,8c6c3f10d8a061d05db7463ad1652cb8"
+                    ]
+                ],
+                "versions_ldak6": [
+                    [
+                        "LDAK_REML",
+                        "ldak6",
+                        "6"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T15:24:34.901266637"
+    }
+}
