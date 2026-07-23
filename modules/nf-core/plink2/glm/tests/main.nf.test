@@ -1,0 +1,180 @@
+nextflow_process {
+
+    name "Test Process PLINK2_GLM"
+    script "../main.nf"
+    process "PLINK2_GLM"
+    config "./nextflow.config"
+    tag "modules"
+    tag "modules_nfcore"
+    tag "plink2"
+    tag "plink2/glm"
+
+    test("plink2 glm - quantitative with covariates") {
+        when {
+            params {
+                module_args = "hide-covar omit-ref --pheno-name QuantitativeTrait --covar-name PC1,PC2"
+            }
+            process {
+                """
+                input[0] = [
+                    [ id: 'plink_simulated' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.pgen', checkIfExists: true),
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.psam', checkIfExists: true),
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.pvar', checkIfExists: true)
+                ]
+                input[1] = [
+                    [ id: 'plink_simulated_quantitative' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated_quantitative_phenoname.phe', checkIfExists: true)
+                ]
+                input[2] = [
+                    [ id: 'plink_simulated_covariates' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated_covariates.txt', checkIfExists: true)
+                ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(sanitizeOutput(process.out)).match() },
+                {
+                    def command = path(process.out.linear.get(0).get(1)).parent.resolve('.command.sh').text
+                    assert command.contains('--pheno-name QuantitativeTrait')
+                    assert command.contains('--covar-name PC1,PC2')
+                    assert command.contains('--covar plink_simulated_covariates.txt')
+                }
+            )
+        }
+    }
+
+    test("plink2 glm - binary logistic with no covariates") {
+        when {
+            params {
+                module_args = "hide-covar omit-ref no-firth allow-no-covars --1 --pheno-name BinaryTrait"
+            }
+            process {
+                """
+                input[0] = [
+                    [ id: 'plink_simulated_logistic' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.pgen', checkIfExists: true),
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.psam', checkIfExists: true),
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.pvar', checkIfExists: true)
+                ]
+                input[1] = [
+                    [ id: 'plink_simulated_binary' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated_binary_phenoname.phe', checkIfExists: true)
+                ]
+                input[2] = [[ id: 'no_covariates' ], []]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(sanitizeOutput(process.out)).match() },
+                {
+                    def command = path(process.out.logistic.get(0).get(1)).parent.resolve('.command.sh').text
+                    assert command.contains('allow-no-covars')
+                    assert !command.contains('--covar ')
+                }
+            )
+        }
+    }
+
+    test("plink2 glm - binary logistic-Firth hybrid") {
+        when {
+            params {
+                module_args = "hide-covar omit-ref firth-fallback --1 --pheno-name BinaryTrait --covar-name PC1,PC2"
+            }
+            process {
+                """
+                input[0] = [
+                    [ id: 'plink_simulated_hybrid' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.pgen', checkIfExists: true),
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.psam', checkIfExists: true),
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.pvar', checkIfExists: true)
+                ]
+                input[1] = [
+                    [ id: 'plink_simulated_binary' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated_binary_phenoname.phe', checkIfExists: true)
+                ]
+                input[2] = [
+                    [ id: 'plink_simulated_covariates' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated_covariates.txt', checkIfExists: true)
+                ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(sanitizeOutput(process.out)).match() }
+            )
+        }
+    }
+
+    test("plink2 glm - binary Firth") {
+        when {
+            params {
+                module_args = "hide-covar omit-ref firth --1 --pheno-name BinaryTrait --covar-name PC1,PC2"
+            }
+            process {
+                """
+                input[0] = [
+                    [ id: 'plink_simulated_firth' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.pgen', checkIfExists: true),
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.psam', checkIfExists: true),
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.pvar', checkIfExists: true)
+                ]
+                input[1] = [
+                    [ id: 'plink_simulated_binary' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated_binary_phenoname.phe', checkIfExists: true)
+                ]
+                input[2] = [
+                    [ id: 'plink_simulated_covariates' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated_covariates.txt', checkIfExists: true)
+                ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(sanitizeOutput(process.out)).match() }
+            )
+        }
+    }
+
+    test("plink2 glm - stub") {
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id: 'plink_simulated_stub' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.pgen', checkIfExists: true),
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.psam', checkIfExists: true),
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.pvar', checkIfExists: true)
+                ]
+                input[1] = [
+                    [ id: 'plink_simulated_quantitative' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated_quantitative_phenoname.phe', checkIfExists: true)
+                ]
+                input[2] = [[ id: 'no_covariates' ], []]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(sanitizeOutput(process.out)).match() }
+            )
+        }
+    }
+}

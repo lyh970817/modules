@@ -1,0 +1,232 @@
+{
+    "plink2 glm - binary logistic with no covariates": {
+        "content": [
+            {
+                "firth": [
+                    
+                ],
+                "linear": [
+                    
+                ],
+                "log": [
+                    [
+                        {
+                            "id": "plink_simulated_logistic"
+                        },
+                        "plink_simulated_logistic.log:md5,1d36b33f220c003b8ff4e5078f554655"
+                    ]
+                ],
+                "logistic": [
+                    [
+                        {
+                            "id": "plink_simulated_logistic"
+                        },
+                        "plink_simulated_logistic.BinaryTrait.glm.logistic:md5,b7c69d6786650788a0cc3ecf82a9caa9"
+                    ]
+                ],
+                "logistic_hybrid": [
+                    
+                ],
+                "versions_plink2": [
+                    [
+                        "PLINK2_GLM",
+                        "plink2",
+                        "2.0.0-a.6.9LM"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T13:41:40.527839328"
+    },
+    "plink2 glm - stub": {
+        "content": [
+            {
+                "firth": [
+                    [
+                        {
+                            "id": "plink_simulated_stub"
+                        },
+                        "plink_simulated_stub.stub.glm.firth:md5,1a2a53affb3832dcf4180a265f67e490"
+                    ]
+                ],
+                "linear": [
+                    [
+                        {
+                            "id": "plink_simulated_stub"
+                        },
+                        "plink_simulated_stub.stub.glm.linear:md5,a8b06b2aad29dd1472faae69302b81ce"
+                    ]
+                ],
+                "log": [
+                    [
+                        {
+                            "id": "plink_simulated_stub"
+                        },
+                        "plink_simulated_stub.log:md5,61b9c36b0b52fbdf5465c63471735fc4"
+                    ]
+                ],
+                "logistic": [
+                    [
+                        {
+                            "id": "plink_simulated_stub"
+                        },
+                        "plink_simulated_stub.stub.glm.logistic:md5,1a2a53affb3832dcf4180a265f67e490"
+                    ]
+                ],
+                "logistic_hybrid": [
+                    [
+                        {
+                            "id": "plink_simulated_stub"
+                        },
+                        "plink_simulated_stub.stub.glm.logistic.hybrid:md5,86da88f00e7243b624bd0c35eec6cc8c"
+                    ]
+                ],
+                "versions_plink2": [
+                    [
+                        "PLINK2_GLM",
+                        "plink2",
+                        "2.0.0-a.6.9LM"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T13:42:34.186417551"
+    },
+    "plink2 glm - quantitative with covariates": {
+        "content": [
+            {
+                "firth": [
+                    
+                ],
+                "linear": [
+                    [
+                        {
+                            "id": "plink_simulated"
+                        },
+                        "plink_simulated.QuantitativeTrait.glm.linear:md5,7ccaa66a3d5bbe70d9a2819b70fb1f18"
+                    ]
+                ],
+                "log": [
+                    [
+                        {
+                            "id": "plink_simulated"
+                        },
+                        "plink_simulated.log:md5,3a810fb3afc6f082e6fbd6d9fc7ee735"
+                    ]
+                ],
+                "logistic": [
+                    
+                ],
+                "logistic_hybrid": [
+                    
+                ],
+                "versions_plink2": [
+                    [
+                        "PLINK2_GLM",
+                        "plink2",
+                        "2.0.0-a.6.9LM"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T13:41:25.116852109"
+    },
+    "plink2 glm - binary Firth": {
+        "content": [
+            {
+                "firth": [
+                    [
+                        {
+                            "id": "plink_simulated_firth"
+                        },
+                        "plink_simulated_firth.BinaryTrait.glm.firth:md5,68d1fa6980823fcecba6e91ff14ce4e7"
+                    ]
+                ],
+                "linear": [
+                    
+                ],
+                "log": [
+                    [
+                        {
+                            "id": "plink_simulated_firth"
+                        },
+                        "plink_simulated_firth.log:md5,7fd4c1816380b445a477151db9df3326"
+                    ]
+                ],
+                "logistic": [
+                    
+                ],
+                "logistic_hybrid": [
+                    
+                ],
+                "versions_plink2": [
+                    [
+                        "PLINK2_GLM",
+                        "plink2",
+                        "2.0.0-a.6.9LM"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T13:42:18.213567443"
+    },
+    "plink2 glm - binary logistic-Firth hybrid": {
+        "content": [
+            {
+                "firth": [
+                    
+                ],
+                "linear": [
+                    
+                ],
+                "log": [
+                    [
+                        {
+                            "id": "plink_simulated_hybrid"
+                        },
+                        "plink_simulated_hybrid.log:md5,d118941e87b4cb98f00d39714266f87a"
+                    ]
+                ],
+                "logistic": [
+                    
+                ],
+                "logistic_hybrid": [
+                    [
+                        {
+                            "id": "plink_simulated_hybrid"
+                        },
+                        "plink_simulated_hybrid.BinaryTrait.glm.logistic.hybrid:md5,0dc9b1763cea955d2098592474c406a7"
+                    ]
+                ],
+                "versions_plink2": [
+                    [
+                        "PLINK2_GLM",
+                        "plink2",
+                        "2.0.0-a.6.9LM"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T13:41:59.453552482"
+    }
+}
