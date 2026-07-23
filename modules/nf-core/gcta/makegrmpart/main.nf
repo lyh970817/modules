@@ -2,12 +2,12 @@ process GCTA_MAKEGRMPART {
     tag "${meta.id}: part ${part_gcta_job} of ${nparts_gcta}"
     label 'process_medium'
     conda "${moduleDir}/environment.yml"
-    container "${workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container
+    container "${workflow.containerEngine in ['singularity', 'apptainer'] && !task.ext.singularity_pull_docker_container
         ? 'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/46/46b0d05f0daa47561d87d2a9cac5e51edc2c78e26f1bbab439c688386241a274/data'
         : 'community.wave.seqera.io/library/gcta:1.94.1--9bc35dc424fcf6e9'}"
 
     input:
-    tuple val(meta), val(nparts_gcta), val(part_gcta_job), path(mfile), path(bed_pgen), path(bim_pvar), path(fam_psam)
+    tuple val(meta), path(mfile), path(bed_pgen), path(bim_pvar), path(fam_psam), val(nparts_gcta), val(part_gcta_job)
     tuple val(meta2), path(snp_group_file)
 
     output:
@@ -18,8 +18,8 @@ process GCTA_MAKEGRMPART {
     task.ext.when == null || task.ext.when
 
     script:
-    nparts = nparts_gcta ?: 1
-    part = part_gcta_job ?: 1
+    nparts = nparts_gcta
+    part = part_gcta_job
     def extract_cmd = snp_group_file ? "--extract ${snp_group_file}" : ''
     def extra_args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
@@ -37,8 +37,8 @@ process GCTA_MAKEGRMPART {
     """
 
     stub:
-    nparts = nparts_gcta ?: 1
-    part = part_gcta_job ?: 1
+    nparts = nparts_gcta
+    part = part_gcta_job
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
     touch ${prefix}.part_${nparts}_${part}.grm.id
