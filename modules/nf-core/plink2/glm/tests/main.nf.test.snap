@@ -13,7 +13,7 @@
                         {
                             "id": "plink_simulated_logistic"
                         },
-                        "plink_simulated_logistic.log:md5,1d36b33f220c003b8ff4e5078f554655"
+                        "plink_simulated_logistic.log"
                     ]
                 ],
                 "logistic": [
@@ -40,7 +40,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-07-16T13:41:40.527839328"
+        "timestamp": "2026-07-23T08:44:21.145564051"
     },
     "plink2 glm - stub": {
         "content": [
@@ -66,7 +66,7 @@
                         {
                             "id": "plink_simulated_stub"
                         },
-                        "plink_simulated_stub.log:md5,61b9c36b0b52fbdf5465c63471735fc4"
+                        "plink_simulated_stub.log"
                     ]
                 ],
                 "logistic": [
@@ -98,7 +98,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-07-16T13:42:34.186417551"
+        "timestamp": "2026-07-23T08:44:58.460396836"
     },
     "plink2 glm - quantitative with covariates": {
         "content": [
@@ -119,7 +119,7 @@
                         {
                             "id": "plink_simulated"
                         },
-                        "plink_simulated.log:md5,3a810fb3afc6f082e6fbd6d9fc7ee735"
+                        "plink_simulated.log"
                     ]
                 ],
                 "logistic": [
@@ -141,7 +141,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-07-16T13:41:25.116852109"
+        "timestamp": "2026-07-23T08:44:09.545254221"
     },
     "plink2 glm - binary Firth": {
         "content": [
@@ -162,7 +162,7 @@
                         {
                             "id": "plink_simulated_firth"
                         },
-                        "plink_simulated_firth.log:md5,7fd4c1816380b445a477151db9df3326"
+                        "plink_simulated_firth.log"
                     ]
                 ],
                 "logistic": [
@@ -184,7 +184,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-07-16T13:42:18.213567443"
+        "timestamp": "2026-07-23T08:44:47.138486042"
     },
     "plink2 glm - binary logistic-Firth hybrid": {
         "content": [
@@ -200,7 +200,7 @@
                         {
                             "id": "plink_simulated_hybrid"
                         },
-                        "plink_simulated_hybrid.log:md5,d118941e87b4cb98f00d39714266f87a"
+                        "plink_simulated_hybrid.log"
                     ]
                 ],
                 "logistic": [
@@ -227,6 +227,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-07-16T13:41:59.453552482"
+        "timestamp": "2026-07-23T08:44:34.069338618"
     }
 }

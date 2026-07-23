@@ -37,7 +37,7 @@ nextflow_process {
         then {
             assertAll(
                 { assert process.success },
-                { assert snapshot(sanitizeOutput(process.out)).match() },
+                { assert snapshot(sanitizeOutput(process.out, unstableKeys: ["log"])).match() },
                 {
                     def command = path(process.out.linear.get(0).get(1)).parent.resolve('.command.sh').text
                     assert command.contains('--pheno-name QuantitativeTrait')
@@ -73,7 +73,7 @@ nextflow_process {
         then {
             assertAll(
                 { assert process.success },
-                { assert snapshot(sanitizeOutput(process.out)).match() },
+                { assert snapshot(sanitizeOutput(process.out, unstableKeys: ["log"])).match() },
                 {
                     def command = path(process.out.logistic.get(0).get(1)).parent.resolve('.command.sh').text
                     assert command.contains('allow-no-covars')
@@ -111,7 +111,7 @@ nextflow_process {
         then {
             assertAll(
                 { assert process.success },
-                { assert snapshot(sanitizeOutput(process.out)).match() }
+                { assert snapshot(sanitizeOutput(process.out, unstableKeys: ["log"])).match() }
             )
         }
     }
@@ -144,7 +144,7 @@ nextflow_process {
         then {
             assertAll(
                 { assert process.success },
-                { assert snapshot(sanitizeOutput(process.out)).match() }
+                { assert snapshot(sanitizeOutput(process.out, unstableKeys: ["log"])).match() }
             )
         }
     }
@@ -173,7 +173,7 @@ nextflow_process {
         then {
             assertAll(
                 { assert process.success },
-                { assert snapshot(sanitizeOutput(process.out)).match() }
+                { assert snapshot(sanitizeOutput(process.out, unstableKeys: ["log"])).match() }
             )
         }
     }

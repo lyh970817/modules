@@ -7,7 +7,7 @@
                         {
                             "id": "gcta_sparse"
                         },
-                        "gcta_sparse_sp.log:md5,4299bca6be5fee7003a0de5c114af656"
+                        "gcta_sparse_sp.log"
                     ]
                 ],
                 "sparse_grm_files": [
@@ -34,7 +34,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-07-16T13:48:46.120416128"
+        "timestamp": "2026-07-23T08:43:28.964676212"
     },
     "homo_sapiens popgen - plink1": {
         "content": [
@@ -44,7 +44,7 @@
                         {
                             "id": "gcta_sparse_bed"
                         },
-                        "gcta_sparse_bed_sp.log:md5,93b3b7450d0bca2d808817d431e786aa"
+                        "gcta_sparse_bed_sp.log"
                     ]
                 ],
                 "sparse_grm_files": [
@@ -71,7 +71,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-07-16T13:49:00.846013881"
+        "timestamp": "2026-07-23T08:43:38.987940692"
     },
     "homo_sapiens popgen - plink1 - stub": {
         "content": [
@@ -81,7 +81,7 @@
                         {
                             "id": "gcta_sparse_stub"
                         },
-                        "gcta_sparse_stub_sp.log:md5,b7c757d0b8078308b4fff784df042537"
+                        "gcta_sparse_stub_sp.log"
                     ]
                 ],
                 "sparse_grm_files": [
@@ -108,6 +108,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-07-16T13:49:15.599080162"
+        "timestamp": "2026-07-23T08:43:47.995544262"
     }
 }

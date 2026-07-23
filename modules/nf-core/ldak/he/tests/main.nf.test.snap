@@ -202,5 +202,87 @@
             "nextflow": "25.10.4"
         },
         "timestamp": "2026-07-16T15:26:37.563080163"
+    },
+    "homo_sapiens popgen - adjusted GRM without covariates": {
+        "content": [
+            {
+                "coeff": [
+                    [
+                        {
+                            "id": "he_no_covariates"
+                        },
+                        "he_no_covariates.coeff:md5,9b5d26afbcd8046434aa026f4640900d"
+                    ]
+                ],
+                "combined": [
+                    
+                ],
+                "cross": [
+                    [
+                        {
+                            "id": "he_no_covariates"
+                        },
+                        "he_no_covariates.cross"
+                    ]
+                ],
+                "cross_across": [
+                    
+                ],
+                "cross_within": [
+                    
+                ],
+                "he_across": [
+                    
+                ],
+                "he_compare": [
+                    
+                ],
+                "he_results": [
+                    [
+                        {
+                            "id": "he_no_covariates"
+                        },
+                        "he_no_covariates.he"
+                    ]
+                ],
+                "he_within": [
+                    
+                ],
+                "progress": [
+                    [
+                        {
+                            "id": "he_no_covariates"
+                        },
+                        "he_no_covariates.progress:md5,251cc747fb88a183c52f844bab5122f3"
+                    ]
+                ],
+                "share": [
+                    [
+                        {
+                            "id": "he_no_covariates"
+                        },
+                        "he_no_covariates.share:md5,01b0b07a8fc56e5ad02a43b20beafe6d"
+                    ]
+                ],
+                "share_across": [
+                    
+                ],
+                "share_within": [
+                    
+                ],
+                "versions_ldak6": [
+                    [
+                        "LDAK_HE",
+                        "ldak6",
+                        "6"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-23T08:45:39.583741976"
     }
 }

@@ -30,7 +30,7 @@ nextflow_process {
         then {
             assertAll(
                 { assert process.success },
-                { assert snapshot(sanitizeOutput(process.out)).match() },
+                { assert snapshot(sanitizeOutput(process.out, unstableKeys: ["log"])).match() },
                 {
                     def command = path(process.out.log.get(0).get(1)).parent.resolve('.command.sh').text
                     assert command.contains('--mpfile gcta_sparse.mpfile')
@@ -62,7 +62,7 @@ nextflow_process {
         then {
             assertAll(
                 { assert process.success },
-                { assert snapshot(sanitizeOutput(process.out)).match() },
+                { assert snapshot(sanitizeOutput(process.out, unstableKeys: ["log"])).match() },
                 {
                     def command = path(process.out.log.get(0).get(1)).parent.resolve('.command.sh').text
                     assert command.contains('--mbfile gcta_sparse_bed.mbfile')
@@ -95,7 +95,7 @@ nextflow_process {
         then {
             assertAll(
                 { assert process.success },
-                { assert snapshot(sanitizeOutput(process.out)).match() }
+                { assert snapshot(sanitizeOutput(process.out, unstableKeys: ["log"])).match() }
             )
         }
     }

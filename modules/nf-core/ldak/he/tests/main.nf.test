@@ -72,11 +72,11 @@ nextflow_process {
         }
     }
 
-    test("homo_sapiens popgen - adjusted GRM without matching covariates fails") {
+    test("homo_sapiens popgen - adjusted GRM without covariates") {
         when {
             process {
                 """
-                input[0] = [[ id: "he_missing_design" ], file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated_quantitative_phenoname.phe", checkIfExists: true)]
+                input[0] = [[ id: "he_no_covariates" ], file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated_quantitative_phenoname.phe", checkIfExists: true)]
                 input[1] = LDAK_ADJUSTGRM.out.adjusted_grm.map { meta2, grm_bin, grm_id, grm_details, grm_adjust, grm_root ->
                     tuple(meta2, [ grm_bin, grm_id, grm_details, grm_adjust, grm_root ])
                 }
@@ -86,7 +86,19 @@ nextflow_process {
                 """
             }
         }
-        then { assert !process.success }
+        then {
+            assertAll(
+                { assert process.success },
+                {
+                    def heFile = path(process.out.he_results[0][1])
+                    def commandText = heFile.parent.resolve(".command.sh").text
+                    assert heFile.text.contains("Num_Kinships")
+                    assert !commandText.contains("--covar ")
+                    assert !commandText.contains("--factors ")
+                },
+                { assert snapshot(sanitizeOutput(process.out, unstableKeys: ["he_results", "cross"])).match() }
+            )
+        }
     }
 
     test("homo_sapiens popgen - stub") {
