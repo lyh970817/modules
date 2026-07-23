@@ -1,0 +1,56 @@
+nextflow_workflow {
+    name "Test Subworkflow GCTA_PREPARE_GRM_LDMS"
+    script "../main.nf"
+    workflow "GCTA_PREPARE_GRM_LDMS"
+
+    tag "subworkflows"
+    tag "subworkflows_nfcore"
+    tag "subworkflows/gcta_prepare_grm_ldms"
+    tag "gcta"
+    tag "custom"
+    tag "gcta/calculateldscores"
+    tag "custom/gctastratifyldscores"
+    tag "gcta/makegrmpart"
+    tag "custom/gctamergegrmparts"
+    tag "custom/gctacreatemgrmmanifest"
+
+    test("GSMR fixture - compatible single LD-by-MAF stratum and two row parts") {
+        when {
+            workflow {
+                """
+                file('gsmr.mbfile').text = 'bfile\\n'
+                input[0] = Channel.of([
+                    [ id:'gsmr' ],
+                    file('gsmr.mbfile'),
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/gsmr/bfile/bfile.bed', checkIfExists:true),
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/gsmr/bfile/bfile.bim', checkIfExists:true),
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/gsmr/bfile/bfile.fam', checkIfExists:true)
+                ])
+                input[1] = Channel.value(50)
+                input[2] = Channel.value(1)
+                input[3] = Channel.value([0.0, 0.5])
+                input[4] = Channel.value(2)
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.mgrm_bundle.size() == 1 },
+                { assert workflow.out.strata.size() == 1 },
+                { assert workflow.out.mgrm_bundle.get(0).get(0).id == 'gsmr' },
+                { assert workflow.out.mgrm_bundle.get(0).get(2).size() == 3 },
+                {
+                    def provenance = workflow.out.strata.get(0)
+                    assert provenance.get(0).id == 'gsmr'
+                    assert provenance.get(1) == 'ldms'
+                    assert provenance.get(2) == 'ld01_maf01'
+                    assert provenance.get(3).predictor_count.toInteger() > 0
+                },
+                { assert workflow.out.versions.size() == 6 },
+                { assert snapshot(sanitizeOutput(workflow.out)).match() }
+            )
+        }
+    }
+}

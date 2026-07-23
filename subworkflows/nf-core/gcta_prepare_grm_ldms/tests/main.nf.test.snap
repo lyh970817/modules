@@ -1,0 +1,77 @@
+{
+    "GSMR fixture - compatible single LD-by-MAF stratum and two row parts": {
+        "content": [
+            {
+                "mgrm_bundle": [
+                    [
+                        {
+                            "id": "gsmr"
+                        },
+                        "gsmr.mgrm:md5,45075f91c4462e1f4a3deb4803e65694",
+                        [
+                            "gsmr.ldms.ld01_maf01.grm.N.bin:md5,fffffdea276052d789462de0a6fb80bd",
+                            "gsmr.ldms.ld01_maf01.grm.bin:md5,418306ffc6809523f8d4a485c178ab85",
+                            "gsmr.ldms.ld01_maf01.grm.id:md5,6437921d1ea7c1314d6964d3e624efb9"
+                        ]
+                    ]
+                ],
+                "strata": [
+                    [
+                        {
+                            "id": "gsmr"
+                        },
+                        "ldms",
+                        "ld01_maf01",
+                        {
+                            "model_key": "ldms",
+                            "stratum_key": "ld01_maf01",
+                            "ld_lower": "1",
+                            "ld_upper": "125.322",
+                            "maf_lower": "0",
+                            "maf_upper": "0.5",
+                            "predictor_count": "3327",
+                            "group_filename": "gsmr_snp_group_ld01_maf01.txt"
+                        }
+                    ]
+                ],
+                "versions": [
+                    [
+                        "GCTA_PREPARE_GRM_LDMS:CUSTOM_GCTACREATEMGRMMANIFEST",
+                        "custom_gctacreatemgrmmanifest",
+                        "1.0.0"
+                    ],
+                    [
+                        "GCTA_PREPARE_GRM_LDMS:CUSTOM_GCTAMERGEGRMPARTS",
+                        "gctamergegrmparts",
+                        "1.0.0"
+                    ],
+                    [
+                        "GCTA_PREPARE_GRM_LDMS:CUSTOM_GCTASTRATIFYLDSCORES",
+                        "gctastratifyldscores",
+                        "1.0.0"
+                    ],
+                    [
+                        "GCTA_PREPARE_GRM_LDMS:CUSTOM_GCTASTRATIFYLDSCORES",
+                        "r-base",
+                        "4.2.1"
+                    ],
+                    [
+                        "GCTA_PREPARE_GRM_LDMS:GCTA_CALCULATELDSCORES",
+                        "gcta",
+                        "1.94.1"
+                    ],
+                    [
+                        "GCTA_PREPARE_GRM_LDMS:GCTA_MAKEGRMPART",
+                        "gcta",
+                        "1.94.1"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T15:54:44.400731148"
+    }
+}

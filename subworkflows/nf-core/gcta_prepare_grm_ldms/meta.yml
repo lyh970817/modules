@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "gcta_prepare_grm_ldms"
+description: Build ordered LD-by-MAF-stratified GCTA GRMs and an MGRM manifest
+keywords:
+  - gcta
+  - ldms
+  - grm
+  - scatter gather
+components:
+  - gcta/calculateldscores
+  - custom/gctastratifyldscores
+  - gcta/makegrmpart
+  - custom/gctamergegrmparts
+  - custom/gctacreatemgrmmanifest
+input:
+  - ch_genotypes:
+      description: PLINK1 multi-file bundle with focal metadata
+      structure: [map meta, path mfile, path bed, path bim, path fam]
+      ontologies:
+        - edam: "http://edamontology.org/format_3003"
+        - edam: "http://edamontology.org/format_2330"
+  - val_ld_score_region_kb:
+      description: Positive LD-score region size in kilobases
+      type: integer
+  - val_ld_bins:
+      description: Positive number of LD-score quantile bins
+      type: integer
+  - val_maf_edges:
+      description: Strictly increasing MAF boundaries covering all observed derived MAF values
+      type: list
+  - val_n_parts:
+      description: Positive requested native GRM row-part count per stratum
+      type: integer
+output:
+  - mgrm_bundle:
+      description: Ordered MGRM manifest and all complete stratum GRMs
+      structure: [map meta, path mgrm_manifest, path grm_files]
+      ontologies:
+        - edam: "http://edamontology.org/format_2330"
+  - strata:
+      description: Per-model and per-stratum provenance parsed from the stratification manifest
+      structure: [map meta, string model_key, string stratum_key, map provenance]
+  - versions:
+      description: Combined component version contributions
+      structure: [versions]
+authors:
+  - "@andongni"
+maintainers:
+  - "@andongni"
