@@ -1,0 +1,106 @@
+{
+    "homo_sapiens popgen - quantitative phenotype without covariates": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "plink_simulated_quantitative_nocov"
+                    },
+                    "plink_simulated_quantitative_nocov.bolt.reml.log"
+                ]
+            ],
+            {
+                "versions_bolt": [
+                    [
+                        "BOLT_REML",
+                        "bolt",
+                        "2.5"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-08T12:04:11.787203616"
+    },
+    "homo_sapiens popgen - quantitative phenotype without covariates - stub": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "plink_simulated_quantitative_stub"
+                    },
+                    "plink_simulated_quantitative_stub.bolt.reml.log"
+                ]
+            ],
+            {
+                "versions_bolt": [
+                    [
+                        "BOLT_REML",
+                        "bolt",
+                        "2.5"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-08T12:04:52.554924875"
+    },
+    "homo_sapiens popgen - matched multi-pair bed bim inputs": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "plink_simulated_quantitative_multi_pair"
+                    },
+                    "plink_simulated_quantitative_multi_pair.bolt.reml.log"
+                ]
+            ],
+            {
+                "versions_bolt": [
+                    [
+                        "BOLT_REML",
+                        "bolt",
+                        "2.5"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-08T12:05:14.842742499"
+    },
+    "homo_sapiens popgen - quantitative phenotype with quantitative and categorical covariates": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "plink_simulated_quantitative_covar"
+                    },
+                    "plink_simulated_quantitative_covar.bolt.reml.log"
+                ]
+            ],
+            {
+                "versions_bolt": [
+                    [
+                        "BOLT_REML",
+                        "bolt",
+                        "2.5"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-08T12:04:33.0126378"
+    }
+}

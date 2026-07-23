@@ -1,0 +1,102 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "bolt_reml"
+description: Run BOLT-LMM REML heritability estimation on one phenotype using PLINK BED/BIM/FAM inputs
+keywords:
+  - bolt-lmm
+  - reml
+  - heritability
+  - gwas
+tools:
+  - "bolt":
+      description: "Bayesian mixed model methods for genetic association and REML heritability estimation."
+      homepage: "https://alkesgroup.broadinstitute.org/BOLT-LMM/"
+      documentation: "https://storage.googleapis.com/broad-alkesgroup-public/BOLT-LMM/BOLT-LMM_manual.html"
+      tool_dev_url: "https://alkesgroup.broadinstitute.org/BOLT-LMM/"
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy map containing PLINK genotype bundle metadata.
+          e.g. `[ id:'cohort_a' ]`
+    - bed:
+        type: file
+        description: |
+          One or more PLINK BED genotype files passed to repeated `--bed` arguments.
+          Entries must be matched by position to `bim` and must have distinct basenames after staging.
+        pattern: "*.bed"
+        ontologies: []
+    - bim:
+        type: file
+        description: |
+          One or more PLINK BIM variant files passed to repeated `--bim` arguments.
+          Entries must be matched by position to `bed` and must have distinct basenames after staging.
+        pattern: "*.bim"
+        ontologies: []
+    - fam:
+        type: file
+        description: |
+          Single PLINK FAM sample file shared by all matched `bed`/`bim` pairs and passed to `--fam`
+        pattern: "*.fam"
+        ontologies: []
+  - - meta2:
+        type: map
+        description: |
+          Groovy map containing phenotype metadata.
+          e.g. `[ id:'traits_table' ]`
+    - phenotypes_file:
+        type: file
+        description: |
+          Phenotype table with headers passed to `--phenoFile`. Select the phenotype
+          column with `--phenoCol` via `ext.args`, e.g. `ext.args = '--phenoCol=BMI'`.
+        pattern: "*.{phe,pheno,txt,tsv,csv}"
+        ontologies: []
+  - - meta3:
+        type: map
+        description: |
+          Groovy map containing covariate metadata.
+          e.g. `[ id:'covars' ]`
+    - covariates_file:
+        type: file
+        description: |
+          Covariate table passed to `--covarFile` when provided; pass `[]` when absent.
+          Select covariate columns via `ext.args` using `--covarCol` (categorical) and
+          `--qCovarCol` (quantitative), e.g. `ext.args = '--covarCol=sex --qCovarCol=age'`.
+        pattern: "*.{cov,covar,txt,tsv,csv}"
+        ontologies: []
+output:
+  reml_log:
+    - - meta:
+          type: map
+          description: |
+            Groovy map containing PLINK genotype bundle metadata.
+            e.g. `[ id:'cohort_a' ]`
+      - "${meta.id}.bolt.reml.log":
+          type: file
+          description: BOLT-LMM REML log file
+          pattern: "*.bolt.reml.log"
+          ontologies: []
+  versions_bolt:
+    - - ${task.process}:
+          type: string
+          description: The process the version was collected from
+      - bolt:
+          type: string
+          description: The tool name
+      - "bolt --version 2>&1 | grep -o 'BOLT-LMM, v[0-9][0-9.]*' | head -n1 | sed 's/BOLT-LMM, v//'":
+          type: eval
+          description: The command used to retrieve the BOLT-LMM version
+topics:
+  versions:
+    - - ${task.process}:
+          type: string
+          description: The process the version was collected from
+      - bolt:
+          type: string
+          description: The tool name
+      - "bolt --version 2>&1 | grep -o 'BOLT-LMM, v[0-9][0-9.]*' | head -n1 | sed 's/BOLT-LMM, v//'":
+          type: eval
+          description: The command used to retrieve the BOLT-LMM version
+authors:
+  - "@andongni"
+maintainers:
+  - "@andongni"
