@@ -1,0 +1,70 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "custom_gctastratifyldscores"
+description: Stratify GCTA individual-SNP LD scores into explicit LD-by-MAF predictor groups
+keywords:
+  - gcta
+  - greml-ldms
+  - ld score
+  - maf
+tools:
+  - custom:
+      description: Checked-in R adapter implementing deterministic GCTA GREML-LDMS stratification
+      homepage: "https://github.com/nf-core/modules"
+      documentation: "https://yanglab.westlake.edu.cn/software/gcta/#GREML-LDMS"
+      licence: ["MIT"]
+      identifier: ""
+input:
+  - - meta:
+        type: map
+        description: Groovy map containing analysis information, for example `[ id:'test' ]`
+    - ld_scores:
+        type: file
+        description: GCTA LD-score table containing SNP, native allele-frequency freq and individual-SNP ldscore_SNP columns; MAF is derived as min(freq, 1-freq)
+        pattern: "*.score.ld"
+        ontologies: []
+    - ld_bins:
+        type: integer
+        description: Positive number of quantile-based individual-SNP LD-score bins
+    - maf_edges:
+        type: list
+        description: Strictly increasing numeric MAF interval boundaries covering every predictor
+output:
+  snp_group_files:
+    - - meta:
+          type: map
+          description: Groovy map containing analysis information
+      - "${prefix}_snp_group*.txt":
+          type: file
+          description: Predictor identifiers for one non-empty LD-by-MAF stratum
+          pattern: "*_snp_group*.txt"
+          ontologies:
+            - edam: "http://edamontology.org/format_2330" # Textual format
+  strata_manifest:
+    - - meta:
+          type: map
+          description: Groovy map containing analysis information
+      - "${prefix}.strata.tsv":
+          type: file
+          description: Ordered LD-by-MAF stratum bounds, predictor counts and group filenames
+          pattern: "*.strata.tsv"
+          ontologies:
+            - edam: "http://edamontology.org/format_3475" # TSV
+  versions:
+    - versions.yml:
+        type: file
+        description: Adapter and R versions
+        pattern: "versions.yml"
+        ontologies:
+          - edam: "http://edamontology.org/format_3750" # YAML
+topics:
+  versions:
+    - versions.yml:
+        type: file
+        description: Adapter and R versions
+        pattern: "versions.yml"
+        ontologies:
+          - edam: "http://edamontology.org/format_3750" # YAML
+authors:
+  - "@andongni"
+maintainers:
+  - "@andongni"

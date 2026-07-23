@@ -1,0 +1,81 @@
+{
+    "gcta LD scores - stub": {
+        "content": [
+            {
+                "snp_group_files": [
+                    [
+                        {
+                            "id": "stub"
+                        },
+                        [
+                            "stub_snp_group_ld01_maf01.txt:md5,a48b3426cc201c1c0be8e11cf34e9365",
+                            "stub_snp_group_ld02_maf01.txt:md5,6d0959c8d45c313c024c6d3fa5c8c630"
+                        ]
+                    ]
+                ],
+                "strata_manifest": [
+                    [
+                        {
+                            "id": "stub"
+                        },
+                        "stub.strata.tsv:md5,b050bb402c12d398fb88f9d2cdb944ce"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,dfb31f6306d07de7089fb6d5eef6d9c6"
+                ]
+            },
+            {
+                "CUSTOM_GCTASTRATIFYLDSCORES": {
+                    "gctastratifyldscores": "1.0.0",
+                    "r-base": "4.2.1"
+                }
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T13:59:36.465636786"
+    },
+    "gcta LD scores - native fixture": {
+        "content": [
+            {
+                "snp_group_files": [
+                    [
+                        {
+                            "id": "bfile"
+                        },
+                        "bfile_snp_group_ld01_maf01.txt:md5,6bdcbb7863547924a351b6281f1f5810"
+                    ]
+                ],
+                "strata_manifest": [
+                    [
+                        {
+                            "id": "bfile"
+                        },
+                        "bfile.strata.tsv:md5,ed1a3828126e0705de98ddc2f3624f6d"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,dfb31f6306d07de7089fb6d5eef6d9c6"
+                ]
+            },
+            [
+                "model_key\tstratum_key\tld_lower\tld_upper\tmaf_lower\tmaf_upper\tpredictor_count\tgroup_filename",
+                "ldms\tld01_maf01\t1\t125.322\t0\t0.5\t3327\tbfile_snp_group_ld01_maf01.txt"
+            ],
+            {
+                "CUSTOM_GCTASTRATIFYLDSCORES": {
+                    "gctastratifyldscores": "1.0.0",
+                    "r-base": "4.2.1"
+                }
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T14:00:38.072190465"
+    }
+}
