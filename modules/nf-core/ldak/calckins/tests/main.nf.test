@@ -1,0 +1,103 @@
+nextflow_process {
+
+    name "Test Process LDAK_CALCKINS"
+    script "../main.nf"
+    process "LDAK_CALCKINS"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "ldak"
+    tag "ldak/calckins"
+
+    test("homo_sapiens popgen - human default equal weights") {
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id: "plink_simulated_human_default" ],
+                    file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.bed", checkIfExists: true),
+                    file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.bim", checkIfExists: true),
+                    file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.fam", checkIfExists: true),
+                    -0.25
+                ]
+                input[1] = [[:], []]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                {
+                    def grmTuple = process.out.ldak_grm[0]
+                    def workDir = path(grmTuple[1]).parent
+                    def commandText = workDir.resolve(".command.sh").text
+                    assert commandText.contains("--power -0.25")
+                    assert commandText.contains("--ignore-weights YES")
+                    assert !workDir.resolve("plink_simulated_human_default.grm.N.bin").exists()
+                    assert !workDir.resolve("plink_simulated_human_default.grm.root").exists()
+                },
+                { assert snapshot(sanitizeOutput(process.out)).match() }
+            )
+        }
+    }
+
+    test("homo_sapiens popgen - supplied weights") {
+
+        when {
+            process {
+                """
+                bed = file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.bed", checkIfExists: true)
+                bim = file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.bim", checkIfExists: true)
+                fam = file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.fam", checkIfExists: true)
+                weights = file("weights.txt")
+                weights.text = bim.readLines().collect { it.tokenize()[1] + " 1" }.join("\\n") + "\\n"
+                input[0] = [[ id: "plink_simulated_weighted" ], bed, bim, fam, -1.0]
+                input[1] = [[ id: "weights" ], weights]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                {
+                    def grmTuple = process.out.ldak_grm[0]
+                    def commandText = path(grmTuple[1]).parent.resolve(".command.sh").text
+                    assert commandText.contains("--power -1.0")
+                    assert commandText.contains("--weights weights.txt")
+                    assert !commandText.contains("--ignore-weights")
+                },
+                { assert snapshot(sanitizeOutput(process.out)).match() }
+            )
+        }
+    }
+
+    test("homo_sapiens popgen - stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id: "plink_simulated_stub" ],
+                    file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.bed", checkIfExists: true),
+                    file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.bim", checkIfExists: true),
+                    file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.fam", checkIfExists: true),
+                    -0.25
+                ]
+                input[1] = [[:], []]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(sanitizeOutput(process.out)).match() }
+            )
+        }
+    }
+}
