@@ -1,0 +1,113 @@
+{
+    "homo_sapiens popgen - plink2": {
+        "content": [
+            {
+                "log": [
+                    [
+                        {
+                            "id": "gcta_sparse"
+                        },
+                        "gcta_sparse_sp.log:md5,4299bca6be5fee7003a0de5c114af656"
+                    ]
+                ],
+                "sparse_grm_files": [
+                    [
+                        {
+                            "id": "gcta_sparse"
+                        },
+                        [
+                            "gcta_sparse_sp.grm.id:md5,4f9aa36c44a417ff6d7caa9841e66ad9",
+                            "gcta_sparse_sp.grm.sp:md5,1b78fe4b14c8690943d7687dd22ba85a"
+                        ]
+                    ]
+                ],
+                "versions_gcta": [
+                    [
+                        "GCTA_MAKEGRMSPARSE",
+                        "gcta",
+                        "1.94.1"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T13:48:46.120416128"
+    },
+    "homo_sapiens popgen - plink1": {
+        "content": [
+            {
+                "log": [
+                    [
+                        {
+                            "id": "gcta_sparse_bed"
+                        },
+                        "gcta_sparse_bed_sp.log:md5,93b3b7450d0bca2d808817d431e786aa"
+                    ]
+                ],
+                "sparse_grm_files": [
+                    [
+                        {
+                            "id": "gcta_sparse_bed"
+                        },
+                        [
+                            "gcta_sparse_bed_sp.grm.id:md5,4f9aa36c44a417ff6d7caa9841e66ad9",
+                            "gcta_sparse_bed_sp.grm.sp:md5,1b78fe4b14c8690943d7687dd22ba85a"
+                        ]
+                    ]
+                ],
+                "versions_gcta": [
+                    [
+                        "GCTA_MAKEGRMSPARSE",
+                        "gcta",
+                        "1.94.1"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T13:49:00.846013881"
+    },
+    "homo_sapiens popgen - plink1 - stub": {
+        "content": [
+            {
+                "log": [
+                    [
+                        {
+                            "id": "gcta_sparse_stub"
+                        },
+                        "gcta_sparse_stub_sp.log:md5,b7c757d0b8078308b4fff784df042537"
+                    ]
+                ],
+                "sparse_grm_files": [
+                    [
+                        {
+                            "id": "gcta_sparse_stub"
+                        },
+                        [
+                            "gcta_sparse_stub_sp.grm.id:md5,23f4ea450117d2b759fc89dfb016277c",
+                            "gcta_sparse_stub_sp.grm.sp:md5,9c1256f576632d254861b63586e7a3da"
+                        ]
+                    ]
+                ],
+                "versions_gcta": [
+                    [
+                        "GCTA_MAKEGRMSPARSE",
+                        "gcta",
+                        "1.94.1"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T13:49:15.599080162"
+    }
+}

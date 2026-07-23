@@ -1,0 +1,101 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "gcta_makegrmsparse"
+description: Compute a sparse genetic relationship matrix directly from PLINK genotype data with GCTA
+keywords:
+  - gcta
+  - genome-wide complex trait analysis
+  - grm
+  - sparse
+  - genetic relationship matrix
+tools:
+  - "gcta":
+      description: "Genome-wide Complex Trait Analysis (GCTA) estimates genetic relationships, variance components, and association statistics from genome-wide data."
+      homepage: "https://yanglab.westlake.edu.cn/software/gcta/"
+      documentation: "https://yanglab.westlake.edu.cn/software/gcta/static/gcta_doc_latest.pdf"
+      tool_dev_url: "https://github.com/jianyangqt/gcta"
+      licence: ["GPL-3.0-only"]
+      identifier: "biotools:gcta"
+
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy map containing genotype metadata
+          e.g. `[ id:'plink_simulated' ]`
+    - mfile:
+        type: file
+        description: GCTA multi-input manifest consumed by `--mbfile` or `--mpfile`
+        pattern: "*.{mbfile,mpfile,txt}"
+        ontologies:
+          - edam: "http://edamontology.org/format_2330" # Text
+    - bed_pgen:
+        type: file
+        description: Collection of PLINK primary genotype files referenced by the multi-input manifest
+        pattern: "*.{bed,pgen}"
+        ontologies:
+          - edam: "http://edamontology.org/format_3003" # BED
+    - bim_pvar:
+        type: file
+        description: Collection of PLINK variant metadata files referenced by the multi-input manifest
+        pattern: "*.{bim,pvar}"
+        ontologies: []
+    - fam_psam:
+        type: file
+        description: Collection of PLINK sample metadata files referenced by the multi-input manifest
+        pattern: "*.{fam,psam}"
+        ontologies: []
+  - sparse_cutoff:
+      type: float
+      description: Relationship cutoff passed to `--sparse-cutoff`
+
+output:
+  sparse_grm_files:
+    - - meta:
+          type: map
+          description: |
+            Groovy map containing the unchanged input metadata
+            e.g. `[ id:'plink_simulated' ]`
+      - ${sparse_prefix}.grm.*:
+          type: file
+          description: Sparse GRM matrix and sample identifier files
+          pattern: "*_sp.grm.{sp,id}"
+          ontologies: []
+  log:
+    - - meta:
+          type: map
+          description: |
+            Groovy map containing the unchanged input metadata
+            e.g. `[ id:'plink_simulated' ]`
+      - ${sparse_prefix}.log:
+          type: file
+          description: GCTA execution log
+          pattern: "*_sp.log"
+          ontologies:
+            - edam: "http://edamontology.org/format_2330" # Text
+  versions_gcta:
+    - - ${task.process}:
+          type: string
+          description: The process the version was collected from
+      - gcta:
+          type: string
+          description: The tool name
+      - "gcta --version | sed -En 's/^[*] version v([0-9.]*).*/\\1/p'":
+          type: eval
+          description: The command used to retrieve the GCTA version
+
+topics:
+  versions:
+    - - ${task.process}:
+          type: string
+          description: The process the version was collected from
+      - gcta:
+          type: string
+          description: The tool name
+      - "gcta --version | sed -En 's/^[*] version v([0-9.]*).*/\\1/p'":
+          type: eval
+          description: The command used to retrieve the GCTA version
+
+authors:
+  - "@andongni"
+maintainers:
+  - "@andongni"

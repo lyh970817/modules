@@ -1,0 +1,102 @@
+nextflow_process {
+
+    name "Test Process GCTA_MAKEGRMSPARSE"
+    script "../main.nf"
+    process "GCTA_MAKEGRMSPARSE"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "gcta"
+    tag "gcta/makegrmsparse"
+
+    test("homo_sapiens popgen - plink2") {
+        when {
+            process {
+                """
+                file('gcta_sparse.mpfile').text = 'plink_simulated plink_simulated.pgen plink_simulated.psam plink_simulated.pvar\\n'
+
+                input[0] = [
+                    [ id:'gcta_sparse' ],
+                    file('gcta_sparse.mpfile'),
+                    [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.pgen', checkIfExists: true)],
+                    [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.pvar', checkIfExists: true)],
+                    [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.psam', checkIfExists: true)]
+                ]
+                input[1] = 0.05
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(sanitizeOutput(process.out)).match() },
+                {
+                    def command = path(process.out.log.get(0).get(1)).parent.resolve('.command.sh').text
+                    assert command.contains('--mpfile gcta_sparse.mpfile')
+                    assert command.contains('--make-grm')
+                    assert command.contains('--sparse-cutoff 0.05')
+                }
+            )
+        }
+    }
+
+    test("homo_sapiens popgen - plink1") {
+        when {
+            process {
+                """
+                file('gcta_sparse_bed.mbfile').text = 'plink_simulated\\n'
+
+                input[0] = [
+                    [ id:'gcta_sparse_bed' ],
+                    file('gcta_sparse_bed.mbfile'),
+                    [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.bed', checkIfExists: true)],
+                    [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.bim', checkIfExists: true)],
+                    [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.fam', checkIfExists: true)]
+                ]
+                input[1] = 0.05
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(sanitizeOutput(process.out)).match() },
+                {
+                    def command = path(process.out.log.get(0).get(1)).parent.resolve('.command.sh').text
+                    assert command.contains('--mbfile gcta_sparse_bed.mbfile')
+                    assert command.contains('--sparse-cutoff 0.05')
+                }
+            )
+        }
+    }
+
+    test("homo_sapiens popgen - plink1 - stub") {
+        options "-stub"
+
+        when {
+            process {
+                """
+                file('gcta_sparse_stub.mbfile').text = 'plink_simulated\\n'
+
+                input[0] = [
+                    [ id:'gcta_sparse_stub' ],
+                    file('gcta_sparse_stub.mbfile'),
+                    [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.bed', checkIfExists: true)],
+                    [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.bim', checkIfExists: true)],
+                    [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.fam', checkIfExists: true)]
+                ]
+                input[1] = 0.05
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(sanitizeOutput(process.out)).match() }
+            )
+        }
+    }
+}
