@@ -1,0 +1,139 @@
+name: ldak_pcgc
+description: Run linkage disequilibrium-adjusted kinship (LDAK) phenotype correlation-genotype correlation (PCGC) regression for binary trait heritability on a precomputed genomic relationship matrix (GRM)
+keywords:
+  - ldak
+  - pcgc
+  - heritability
+tools:
+  - ldak6:
+      description: LDAK toolset for kinship, heritability, and association analyses
+      homepage: https://dougspeed.com/ldak/
+      documentation: https://dougspeed.com/ldak/
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing phenotype metadata.
+          Expected keys:
+            - id (string): Output prefix for PCGC artifacts.
+    - phenotype_file:
+        type: file
+        description: Headerless phenotype file passed to `--pheno`
+        ontologies: []
+    - prevalence:
+        type: float
+        description: Required population disease prevalence passed to `--prevalence`, strictly between zero and one
+  - - meta2:
+        type: map
+        description: |
+          Groovy Map containing GRM metadata.
+          Expected keys:
+            - id (string): GRM identifier.
+    - grm_files:
+        type: file
+        description: GRM bundle (`.grm.bin`, `.grm.id`, `.grm.details`, `.grm.adjust`, and optionally `.grm.root` for an adjusted GRM)
+        pattern: "*.{grm.bin,grm.id,grm.details,grm.adjust,grm.root}"
+        ontologies: []
+  - - meta3:
+        type: map
+        description: Metadata map paired with optional keep input.
+    - keep_file:
+        type: file
+        description: Optional keep file for sample filtering; pass [] when GRM is pre-filtered
+        ontologies: []
+  - - meta4:
+        type: map
+        description: Metadata map paired with optional quantitative covariates input.
+    - quant_covariates_file:
+        type: file
+        description: Optional quantitative covariates file passed to `--covar`; pass [] when absent
+        ontologies: []
+  - - meta5:
+        type: map
+        description: Metadata map paired with optional categorical covariates input.
+    - cat_covariates_file:
+        type: file
+        description: Optional categorical covariates file passed to `--factors`; pass [] when absent
+        ontologies: []
+output:
+  pcgc_results:
+    - - meta:
+          type: map
+          description: Metadata map propagated from input
+      - "${prefix}.pcgc":
+          type: file
+          description: PCGC summary output (`<prefix>.pcgc`)
+          ontologies: []
+  pcgc_marginal:
+    - - meta:
+          type: map
+          description: Metadata map propagated from input
+      - "${prefix}.pcgc.marginal":
+          type: file
+          description: Optional marginal PCGC output (`<prefix>.pcgc.marginal`)
+          ontologies: []
+  coeff:
+    - - meta:
+          type: map
+          description: Metadata map propagated from input
+      - "${prefix}.coeff":
+          type: file
+          description: Optional coefficient output (`<prefix>.coeff`)
+          ontologies: []
+  combined:
+    - - meta:
+          type: map
+          description: Metadata map propagated from input
+      - "${prefix}.combined":
+          type: file
+          description: Optional combined output (`<prefix>.combined`)
+          ontologies: []
+  cross:
+    - - meta:
+          type: map
+          description: Metadata map propagated from input
+      - "${prefix}.cross":
+          type: file
+          description: Optional cross output (`<prefix>.cross`)
+          ontologies: []
+  progress:
+    - - meta:
+          type: map
+          description: Metadata map propagated from input
+      - "${prefix}.progress":
+          type: file
+          description: Optional progress output (`<prefix>.progress`)
+          ontologies: []
+  share:
+    - - meta:
+          type: map
+          description: Metadata map propagated from input
+      - "${prefix}.share":
+          type: file
+          description: Optional share output (`<prefix>.share`)
+          ontologies: []
+  versions_ldak6:
+    - - ${task.process}:
+          type: string
+          description: The name of the process
+      - ldak6:
+          type: string
+          description: The tool name
+      - ldak6 --version 2>&1 | grep -oP '(?<=^Version )[0-9.]+':
+          type: eval
+          description: The expression used to obtain the version of the tool
+topics:
+  versions:
+    - - ${task.process}:
+          type: string
+          description: The name of the process
+      - ldak6:
+          type: string
+          description: The tool name
+      - ldak6 --version 2>&1 | grep -oP '(?<=^Version )[0-9.]+':
+          type: eval
+          description: The expression used to obtain the version of the tool
+authors:
+  - "@lyh970817"
+maintainers:
+  - "@lyh970817"

@@ -1,0 +1,145 @@
+{
+    "homo_sapiens popgen - stub": {
+        "content": [
+            {
+                "coeff": [
+                    [
+                        {
+                            "id": "pcgc_stub"
+                        },
+                        "pcgc_stub.coeff:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "combined": [
+                    [
+                        {
+                            "id": "pcgc_stub"
+                        },
+                        "pcgc_stub.combined:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "cross": [
+                    [
+                        {
+                            "id": "pcgc_stub"
+                        },
+                        "pcgc_stub.cross"
+                    ]
+                ],
+                "pcgc_marginal": [
+                    [
+                        {
+                            "id": "pcgc_stub"
+                        },
+                        "pcgc_stub.pcgc.marginal"
+                    ]
+                ],
+                "pcgc_results": [
+                    [
+                        {
+                            "id": "pcgc_stub"
+                        },
+                        "pcgc_stub.pcgc"
+                    ]
+                ],
+                "progress": [
+                    [
+                        {
+                            "id": "pcgc_stub"
+                        },
+                        "pcgc_stub.progress:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "share": [
+                    [
+                        {
+                            "id": "pcgc_stub"
+                        },
+                        "pcgc_stub.share:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions_ldak6": [
+                    [
+                        "LDAK_PCGC",
+                        "ldak6",
+                        "6"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T15:31:58.518619469"
+    },
+    "homo_sapiens popgen - binary liability PCGC": {
+        "content": [
+            {
+                "coeff": [
+                    [
+                        {
+                            "id": "pcgc_binary"
+                        },
+                        "pcgc_binary.coeff:md5,53f51c7f82ce9e6d3be52d8c7bcdad10"
+                    ]
+                ],
+                "combined": [
+                    
+                ],
+                "cross": [
+                    [
+                        {
+                            "id": "pcgc_binary"
+                        },
+                        "pcgc_binary.cross"
+                    ]
+                ],
+                "pcgc_marginal": [
+                    [
+                        {
+                            "id": "pcgc_binary"
+                        },
+                        "pcgc_binary.pcgc.marginal"
+                    ]
+                ],
+                "pcgc_results": [
+                    [
+                        {
+                            "id": "pcgc_binary"
+                        },
+                        "pcgc_binary.pcgc"
+                    ]
+                ],
+                "progress": [
+                    [
+                        {
+                            "id": "pcgc_binary"
+                        },
+                        "pcgc_binary.progress:md5,251cc747fb88a183c52f844bab5122f3"
+                    ]
+                ],
+                "share": [
+                    [
+                        {
+                            "id": "pcgc_binary"
+                        },
+                        "pcgc_binary.share:md5,01b0b07a8fc56e5ad02a43b20beafe6d"
+                    ]
+                ],
+                "versions_ldak6": [
+                    [
+                        "LDAK_PCGC",
+                        "ldak6",
+                        "6"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T15:31:40.414294692"
+    }
+}

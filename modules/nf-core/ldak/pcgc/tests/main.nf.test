@@ -1,0 +1,112 @@
+nextflow_process {
+    name "Test Process LDAK_PCGC"
+    script "../main.nf"
+    process "LDAK_PCGC"
+    config "./nextflow.config"
+    tag "modules"
+    tag "modules_nfcore"
+    tag "ldak"
+    tag "ldak/calckins"
+    tag "ldak/adjustgrm"
+    tag "ldak/pcgc"
+
+    setup {
+        run("LDAK_CALCKINS") {
+            script "../../calckins/main.nf"
+            process {
+                """
+                input[0] = [
+                    [ id: "plink_simulated_grm" ],
+                    file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.bed", checkIfExists: true),
+                    file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.bim", checkIfExists: true),
+                    file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.fam", checkIfExists: true),
+                    -0.25
+                ]
+                input[1] = [[:], []]
+                """
+            }
+        }
+        run("LDAK_ADJUSTGRM") {
+            script "../../adjustgrm/main.nf"
+            process {
+                """
+                input[0] = LDAK_CALCKINS.out.ldak_grm.map { meta, bin, ids, details, adjust -> tuple([ id: "plink_simulated_adjusted" ], [ bin, ids, details, adjust ]) }
+                input[1] = [[ id: "binary" ], file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated_binary_phenoname.phe", checkIfExists: true)]
+                input[2] = [[ id: "covariates" ], file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated_covariates.txt", checkIfExists: true)]
+                input[3] = [[:], []]
+                """
+            }
+        }
+    }
+
+    test("homo_sapiens popgen - binary liability PCGC") {
+        when {
+            params { module_args = "--mpheno 1 --covar-numbers 1,2" }
+            process {
+                """
+                input[0] = [[ id: "pcgc_binary" ], file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated_binary_phenoname.phe", checkIfExists: true), 0.2]
+                input[1] = LDAK_ADJUSTGRM.out.adjusted_grm.map { meta, grm_bin, grm_id, grm_details, grm_adjust, grm_root ->
+                    tuple(meta, [ grm_bin, grm_id, grm_details, grm_adjust, grm_root ])
+                }
+                input[2] = [[:], []]
+                input[3] = [[ id: "covariates" ], file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated_covariates.txt", checkIfExists: true)]
+                input[4] = [[:], []]
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                {
+                    def result = path(process.out.pcgc_results[0][1])
+                    def commandText = result.parent.resolve(".command.sh").text
+                    assert result.text.contains("Num_Kinships")
+                    assert commandText.contains("--prevalence 0.2")
+                    assert commandText.contains("--covar plink_simulated_covariates.txt")
+                    assert !result.parent.resolve("plink_simulated_adjusted.grm.N.bin").exists()
+                },
+                { assert snapshot(sanitizeOutput(process.out, unstableKeys: ["pcgc_results", "pcgc_marginal", "cross"])).match() }
+            )
+        }
+    }
+
+    test("homo_sapiens popgen - zero prevalence fails") {
+        when {
+            process {
+                """
+                input[0] = [[ id: "pcgc_zero" ], file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated_binary_phenoname.phe", checkIfExists: true), 0.0]
+                input[1] = LDAK_ADJUSTGRM.out.adjusted_grm.map { meta, grm_bin, grm_id, grm_details, grm_adjust, grm_root ->
+                    tuple(meta, [ grm_bin, grm_id, grm_details, grm_adjust, grm_root ])
+                }
+                input[2] = [[:], []]
+                input[3] = [[ id: "covariates" ], file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated_covariates.txt", checkIfExists: true)]
+                input[4] = [[:], []]
+                """
+            }
+        }
+        then { assert !process.success }
+    }
+
+    test("homo_sapiens popgen - stub") {
+        options "-stub"
+        when {
+            process {
+                """
+                input[0] = [[ id: "pcgc_stub" ], file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated_binary_phenoname.phe", checkIfExists: true), 0.2]
+                input[1] = LDAK_ADJUSTGRM.out.adjusted_grm.map { meta, grm_bin, grm_id, grm_details, grm_adjust, grm_root ->
+                    tuple(meta, [ grm_bin, grm_id, grm_details, grm_adjust, grm_root ])
+                }
+                input[2] = [[:], []]
+                input[3] = [[ id: "covariates" ], file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated_covariates.txt", checkIfExists: true)]
+                input[4] = [[:], []]
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(sanitizeOutput(process.out, unstableKeys: ["pcgc_results", "pcgc_marginal", "cross"])).match() }
+            )
+        }
+    }
+}
