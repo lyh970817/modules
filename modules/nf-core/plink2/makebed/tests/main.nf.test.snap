@@ -1,0 +1,64 @@
+{
+    "plink2 makebed - PGEN input": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "plink_simulated_bed"
+                    },
+                    "plink_simulated_bed.bed:md5,e1f17b70b8f213aa6d48dbde955451b4",
+                    "plink_simulated_bed.bim:md5,41351028a80a8cf5bec0ab2db04af6c9",
+                    "plink_simulated_bed.fam:md5,56314a08dc651daea82dd5b04da02d31"
+                ]
+            ],
+            [
+                [
+                    "PLINK2_MAKEBED",
+                    "plink2",
+                    "2.0.0-a.6.9LM"
+                ]
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T13:43:16.06470476"
+    },
+    "plink2 makebed - stub": {
+        "content": [
+            {
+                "bed": [
+                    [
+                        {
+                            "id": "plink_simulated_stub"
+                        },
+                        "plink_simulated_stub.bed:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "plink_simulated_stub.bim:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "plink_simulated_stub.fam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "log": [
+                    [
+                        {
+                            "id": "plink_simulated_stub"
+                        },
+                        "plink_simulated_stub.log:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions_plink2": [
+                    [
+                        "PLINK2_MAKEBED",
+                        "plink2",
+                        "2.0.0-a.6.9LM"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T13:38:08.50493587"
+    }
+}

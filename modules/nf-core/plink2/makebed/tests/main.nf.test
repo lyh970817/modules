@@ -1,0 +1,57 @@
+nextflow_process {
+
+    name "Test Process PLINK2_MAKEBED"
+    script "../main.nf"
+    process "PLINK2_MAKEBED"
+    tag "modules"
+    tag "modules_nfcore"
+    tag "plink2"
+    tag "plink2/makebed"
+
+    test("plink2 makebed - PGEN input") {
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id: 'plink_simulated_bed' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.pgen', checkIfExists: true),
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.psam', checkIfExists: true),
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.pvar', checkIfExists: true)
+                ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert process.out.log[0][1].toString().endsWith('plink_simulated_bed.log') },
+                { assert snapshot(process.out.bed, process.out.versions_plink2).match() }
+            )
+        }
+    }
+
+    test("plink2 makebed - stub") {
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id: 'plink_simulated_stub' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.pgen', checkIfExists: true),
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.psam', checkIfExists: true),
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.pvar', checkIfExists: true)
+                ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(sanitizeOutput(process.out)).match() }
+            )
+        }
+    }
+}
