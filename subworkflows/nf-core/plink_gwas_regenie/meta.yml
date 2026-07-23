@@ -1,0 +1,103 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: plink_gwas_regenie
+description: Run REGENIE Step 1 fitting and Step 2 GWAS from PLINK-format genotype bundles
+keywords:
+  - regenie
+  - gwas
+  - plink
+  - association
+  - genotype
+components:
+  - plink_fit_regenie
+  - regenie/step2
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. [ id:'test' ]. Step 2 genotype records may include additional shard metadata while sharing meta.id.
+  - step1_genotype_file:
+      type: file
+      description: PLINK-format genotype file used for Step 1 fitting, either PLINK 1 BED or PLINK 2 PGEN
+      pattern: "*.{bed,pgen}"
+      ontologies: []
+  - step1_variant_file:
+      type: file
+      description: PLINK-format variant file matching the Step 1 genotype file
+      pattern: "*.{bim,pvar}"
+      ontologies: []
+  - step1_sample_file:
+      type: file
+      description: PLINK-format sample file matching the Step 1 genotype file
+      pattern: "*.{fam,psam}"
+      ontologies: []
+  - step2_genotype_file:
+      type: file
+      description: PLINK-format genotype file used for Step 2 association testing, either PLINK 1 BED or PLINK 2 PGEN
+      pattern: "*.{bed,pgen}"
+      ontologies: []
+  - step2_variant_file:
+      type: file
+      description: PLINK-format variant file matching the Step 2 genotype file
+      pattern: "*.{bim,pvar}"
+      ontologies: []
+  - step2_sample_file:
+      type: file
+      description: PLINK-format sample file matching the Step 2 genotype file
+      pattern: "*.{fam,psam}"
+      ontologies: []
+  - pheno:
+      type: file
+      description: REGENIE phenotype file
+      pattern: "*"
+      ontologies: []
+  - covar:
+      type: file
+      description: Optional REGENIE covariate file. Use [] when absent.
+      pattern: "*"
+      ontologies: []
+  - step1_bsize:
+      type: integer
+      description: Required positive Step 1 block size
+  - step2_bsize:
+      type: integer
+      description: Required positive Step 2 block size propagated unchanged to every Step 2 shard
+  - step1_mode:
+      type: string
+      description: Step 1 execution mode. Must be "standard" or "chunked".
+  - n_l0_jobs:
+      type: integer
+      description: Native split request for chunked Step 1 mode; actual jobs derive from native outputs. Use [] for standard mode.
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. [ id:'test' ]
+  - results:
+      type: file
+      description: REGENIE Step 2 association results
+      pattern: "*.regenie.gz"
+      ontologies: []
+  - logs:
+      type: file
+      description: REGENIE log files from Step 1 fitting and Step 2 association testing
+      pattern: "*.log"
+      ontologies: []
+  - predictions:
+      type: file
+      description: REGENIE Step 1 prediction list
+      pattern: "*_pred.list"
+      ontologies: []
+  - loco:
+      type: file
+      description: REGENIE Step 1 leave-one-chromosome-out predictions
+      pattern: "*.loco.gz"
+      ontologies: []
+  - versions:
+      type: string
+      description: Combined version tuples from fitting and every Step 2 invocation
+authors:
+  - "@lyh970817"
+maintainers:
+  - "@lyh970817"
