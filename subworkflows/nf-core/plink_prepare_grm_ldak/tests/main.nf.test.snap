@@ -1,0 +1,410 @@
+{
+    "homo_sapiens popgen - direct GRM stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "plink_simulated_direct_stub"
+                        },
+                        "plink_simulated_direct_stub.grm.bin:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "plink_simulated_direct_stub.grm.id:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "plink_simulated_direct_stub.grm.details:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "plink_simulated_direct_stub.grm.adjust:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "plink_simulated_direct_stub"
+                        },
+                        "plink_simulated_direct_stub.grm.bin:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "plink_simulated_direct_stub.grm.id:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "plink_simulated_direct_stub.grm.details:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "plink_simulated_direct_stub.grm.adjust:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    
+                ],
+                "3": [
+                    
+                ],
+                "4": [
+                    [
+                        "PLINK_PREPARE_GRM_LDAK:LDAK_CALCKINS",
+                        "ldak6",
+                        "6"
+                    ]
+                ],
+                "analysis_grm": [
+                    [
+                        {
+                            "id": "plink_simulated_direct_stub"
+                        },
+                        "plink_simulated_direct_stub.grm.bin:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "plink_simulated_direct_stub.grm.id:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "plink_simulated_direct_stub.grm.details:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "plink_simulated_direct_stub.grm.adjust:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "filtered_list": [
+                    
+                ],
+                "maxrel": [
+                    
+                ],
+                "unfiltered_grm": [
+                    [
+                        {
+                            "id": "plink_simulated_direct_stub"
+                        },
+                        "plink_simulated_direct_stub.grm.bin:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "plink_simulated_direct_stub.grm.id:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "plink_simulated_direct_stub.grm.details:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "plink_simulated_direct_stub.grm.adjust:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    [
+                        "PLINK_PREPARE_GRM_LDAK:LDAK_CALCKINS",
+                        "ldak6",
+                        "6"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T15:49:10.773096388"
+    },
+    "homo_sapiens popgen - direct GRM": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "plink_simulated_direct"
+                        },
+                        "plink_simulated_direct.grm.bin:md5,ffcc9a23d394873683e7ff084c074a58",
+                        "plink_simulated_direct.grm.id:md5,aa346d8df9251f28144e8a6aa3912c5f",
+                        "plink_simulated_direct.grm.details:md5,82c37b3e673a1c85eb312d690b1ad931",
+                        "plink_simulated_direct.grm.adjust:md5,faa0f169d0e1c28a45c1576c7f598bf5"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "plink_simulated_direct"
+                        },
+                        "plink_simulated_direct.grm.bin:md5,ffcc9a23d394873683e7ff084c074a58",
+                        "plink_simulated_direct.grm.id:md5,aa346d8df9251f28144e8a6aa3912c5f",
+                        "plink_simulated_direct.grm.details:md5,82c37b3e673a1c85eb312d690b1ad931",
+                        "plink_simulated_direct.grm.adjust:md5,faa0f169d0e1c28a45c1576c7f598bf5"
+                    ]
+                ],
+                "2": [
+                    
+                ],
+                "3": [
+                    
+                ],
+                "4": [
+                    [
+                        "PLINK_PREPARE_GRM_LDAK:LDAK_CALCKINS",
+                        "ldak6",
+                        "6"
+                    ]
+                ],
+                "analysis_grm": [
+                    [
+                        {
+                            "id": "plink_simulated_direct"
+                        },
+                        "plink_simulated_direct.grm.bin:md5,ffcc9a23d394873683e7ff084c074a58",
+                        "plink_simulated_direct.grm.id:md5,aa346d8df9251f28144e8a6aa3912c5f",
+                        "plink_simulated_direct.grm.details:md5,82c37b3e673a1c85eb312d690b1ad931",
+                        "plink_simulated_direct.grm.adjust:md5,faa0f169d0e1c28a45c1576c7f598bf5"
+                    ]
+                ],
+                "filtered_list": [
+                    
+                ],
+                "maxrel": [
+                    
+                ],
+                "unfiltered_grm": [
+                    [
+                        {
+                            "id": "plink_simulated_direct"
+                        },
+                        "plink_simulated_direct.grm.bin:md5,ffcc9a23d394873683e7ff084c074a58",
+                        "plink_simulated_direct.grm.id:md5,aa346d8df9251f28144e8a6aa3912c5f",
+                        "plink_simulated_direct.grm.details:md5,82c37b3e673a1c85eb312d690b1ad931",
+                        "plink_simulated_direct.grm.adjust:md5,faa0f169d0e1c28a45c1576c7f598bf5"
+                    ]
+                ],
+                "versions": [
+                    [
+                        "PLINK_PREPARE_GRM_LDAK:LDAK_CALCKINS",
+                        "ldak6",
+                        "6"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T15:48:30.672220986"
+    },
+    "homo_sapiens popgen - unrelated-sample GRM stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "plink_simulated_filtered_stub"
+                        },
+                        "plink_simulated_filtered_stub.unrelated.grm.bin:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "plink_simulated_filtered_stub.unrelated.grm.id:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "plink_simulated_filtered_stub.unrelated.grm.details:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "plink_simulated_filtered_stub.unrelated.grm.adjust:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "plink_simulated_filtered_stub"
+                        },
+                        "plink_simulated_filtered_stub.grm.bin:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "plink_simulated_filtered_stub.grm.id:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "plink_simulated_filtered_stub.grm.details:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "plink_simulated_filtered_stub.grm.adjust:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "plink_simulated_filtered_stub"
+                        },
+                        "plink_simulated_filtered_stub.keep:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "plink_simulated_filtered_stub.lose:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "plink_simulated_filtered_stub"
+                        },
+                        "plink_simulated_filtered_stub.maxrel:md5,6808ca805661622ad65ae014a4b2a094"
+                    ]
+                ],
+                "4": [
+                    [
+                        "PLINK_PREPARE_GRM_LDAK:LDAK_CALCKINS",
+                        "ldak6",
+                        "6"
+                    ],
+                    [
+                        "PLINK_PREPARE_GRM_LDAK:LDAK_FILTER",
+                        "ldak6",
+                        "6"
+                    ],
+                    [
+                        "PLINK_PREPARE_GRM_LDAK:LDAK_SUBGRM",
+                        "ldak6",
+                        "6"
+                    ]
+                ],
+                "analysis_grm": [
+                    [
+                        {
+                            "id": "plink_simulated_filtered_stub"
+                        },
+                        "plink_simulated_filtered_stub.unrelated.grm.bin:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "plink_simulated_filtered_stub.unrelated.grm.id:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "plink_simulated_filtered_stub.unrelated.grm.details:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "plink_simulated_filtered_stub.unrelated.grm.adjust:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "filtered_list": [
+                    [
+                        {
+                            "id": "plink_simulated_filtered_stub"
+                        },
+                        "plink_simulated_filtered_stub.keep:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "plink_simulated_filtered_stub.lose:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "maxrel": [
+                    [
+                        {
+                            "id": "plink_simulated_filtered_stub"
+                        },
+                        "plink_simulated_filtered_stub.maxrel:md5,6808ca805661622ad65ae014a4b2a094"
+                    ]
+                ],
+                "unfiltered_grm": [
+                    [
+                        {
+                            "id": "plink_simulated_filtered_stub"
+                        },
+                        "plink_simulated_filtered_stub.grm.bin:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "plink_simulated_filtered_stub.grm.id:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "plink_simulated_filtered_stub.grm.details:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "plink_simulated_filtered_stub.grm.adjust:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    [
+                        "PLINK_PREPARE_GRM_LDAK:LDAK_CALCKINS",
+                        "ldak6",
+                        "6"
+                    ],
+                    [
+                        "PLINK_PREPARE_GRM_LDAK:LDAK_FILTER",
+                        "ldak6",
+                        "6"
+                    ],
+                    [
+                        "PLINK_PREPARE_GRM_LDAK:LDAK_SUBGRM",
+                        "ldak6",
+                        "6"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T15:49:22.55612184"
+    },
+    "homo_sapiens popgen - unrelated-sample GRM": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "plink_simulated_filtered"
+                        },
+                        "plink_simulated_filtered.unrelated.grm.bin:md5,fbc0a5f04bb7d35de77de4e4c738b026",
+                        "plink_simulated_filtered.unrelated.grm.id:md5,6ff9b7a06301800eed2b0f04bb4617a8",
+                        "plink_simulated_filtered.unrelated.grm.details:md5,877c65e50e6357f00bc3443c7528b387",
+                        "plink_simulated_filtered.unrelated.grm.adjust:md5,b0d5272aad5af927ccbd9222c5e2a5fb"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "plink_simulated_filtered"
+                        },
+                        "plink_simulated_filtered.grm.bin:md5,827f3c5aec5a58973ef1be9c40192c95",
+                        "plink_simulated_filtered.grm.id:md5,aa346d8df9251f28144e8a6aa3912c5f",
+                        "plink_simulated_filtered.grm.details:md5,877c65e50e6357f00bc3443c7528b387",
+                        "plink_simulated_filtered.grm.adjust:md5,98c2086a4fb046d4bf1400dc67301001"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "plink_simulated_filtered"
+                        },
+                        "plink_simulated_filtered.keep:md5,6ff9b7a06301800eed2b0f04bb4617a8",
+                        "plink_simulated_filtered.lose:md5,5edc7334f0b5990e25ad9aa5252a4db7"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "plink_simulated_filtered"
+                        },
+                        "plink_simulated_filtered.maxrel:md5,db392a080df5845046dab59aa8421406"
+                    ]
+                ],
+                "4": [
+                    [
+                        "PLINK_PREPARE_GRM_LDAK:LDAK_CALCKINS",
+                        "ldak6",
+                        "6"
+                    ],
+                    [
+                        "PLINK_PREPARE_GRM_LDAK:LDAK_FILTER",
+                        "ldak6",
+                        "6"
+                    ],
+                    [
+                        "PLINK_PREPARE_GRM_LDAK:LDAK_SUBGRM",
+                        "ldak6",
+                        "6"
+                    ]
+                ],
+                "analysis_grm": [
+                    [
+                        {
+                            "id": "plink_simulated_filtered"
+                        },
+                        "plink_simulated_filtered.unrelated.grm.bin:md5,fbc0a5f04bb7d35de77de4e4c738b026",
+                        "plink_simulated_filtered.unrelated.grm.id:md5,6ff9b7a06301800eed2b0f04bb4617a8",
+                        "plink_simulated_filtered.unrelated.grm.details:md5,877c65e50e6357f00bc3443c7528b387",
+                        "plink_simulated_filtered.unrelated.grm.adjust:md5,b0d5272aad5af927ccbd9222c5e2a5fb"
+                    ]
+                ],
+                "filtered_list": [
+                    [
+                        {
+                            "id": "plink_simulated_filtered"
+                        },
+                        "plink_simulated_filtered.keep:md5,6ff9b7a06301800eed2b0f04bb4617a8",
+                        "plink_simulated_filtered.lose:md5,5edc7334f0b5990e25ad9aa5252a4db7"
+                    ]
+                ],
+                "maxrel": [
+                    [
+                        {
+                            "id": "plink_simulated_filtered"
+                        },
+                        "plink_simulated_filtered.maxrel:md5,db392a080df5845046dab59aa8421406"
+                    ]
+                ],
+                "unfiltered_grm": [
+                    [
+                        {
+                            "id": "plink_simulated_filtered"
+                        },
+                        "plink_simulated_filtered.grm.bin:md5,827f3c5aec5a58973ef1be9c40192c95",
+                        "plink_simulated_filtered.grm.id:md5,aa346d8df9251f28144e8a6aa3912c5f",
+                        "plink_simulated_filtered.grm.details:md5,877c65e50e6357f00bc3443c7528b387",
+                        "plink_simulated_filtered.grm.adjust:md5,98c2086a4fb046d4bf1400dc67301001"
+                    ]
+                ],
+                "versions": [
+                    [
+                        "PLINK_PREPARE_GRM_LDAK:LDAK_CALCKINS",
+                        "ldak6",
+                        "6"
+                    ],
+                    [
+                        "PLINK_PREPARE_GRM_LDAK:LDAK_FILTER",
+                        "ldak6",
+                        "6"
+                    ],
+                    [
+                        "PLINK_PREPARE_GRM_LDAK:LDAK_SUBGRM",
+                        "ldak6",
+                        "6"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T15:48:44.408403205"
+    }
+}

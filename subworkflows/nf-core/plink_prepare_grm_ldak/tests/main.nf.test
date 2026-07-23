@@ -1,0 +1,149 @@
+nextflow_workflow {
+
+    name "Test Subworkflow PLINK_PREPARE_GRM_LDAK"
+    script "../main.nf"
+    workflow "PLINK_PREPARE_GRM_LDAK"
+
+    tag "subworkflows"
+    tag "subworkflows_nfcore"
+    tag "plink_prepare_grm_ldak"
+    tag "subworkflows/plink_prepare_grm_ldak"
+    tag "ldak/calckins"
+    tag "ldak/filter"
+    tag "ldak/subgrm"
+
+    test("homo_sapiens popgen - direct GRM") {
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.value([
+                    [ id: "plink_simulated_direct" ],
+                    file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.bed", checkIfExists: true),
+                    file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.bim", checkIfExists: true),
+                    file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.fam", checkIfExists: true),
+                    -0.25
+                ])
+                input[1] = Channel.value([[:], []])
+                input[2] = false
+                """
+            }
+        }
+
+        then {
+            def analysis = workflow.out.analysis_grm.get(0)
+            def unfiltered = workflow.out.unfiltered_grm.get(0)
+            assertAll(
+                { assert workflow.success },
+                { assert analysis[0].id == "plink_simulated_direct" },
+                { assert analysis[1..4].collect { path(it).fileName.toString() } == unfiltered[1..4].collect { path(it).fileName.toString() } },
+                { assert analysis[1..4].collect { path(it).fileName.toString() } == ["plink_simulated_direct.grm.bin", "plink_simulated_direct.grm.id", "plink_simulated_direct.grm.details", "plink_simulated_direct.grm.adjust"] },
+                { assert workflow.out.filtered_list.size() == 0 },
+                { assert workflow.out.maxrel.size() == 0 },
+                { assert workflow.out.versions.size() == 1 },
+                { assert workflow.out.versions.get(0)[2] == "6" },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("homo_sapiens popgen - unrelated-sample GRM") {
+
+        when {
+            workflow {
+                """
+                bed = file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.bed", checkIfExists: true)
+                bim = file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.bim", checkIfExists: true)
+                fam = file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.fam", checkIfExists: true)
+                weights = file("weights.txt")
+                weights.text = bim.readLines().collect { it.tokenize()[1] + " 1" }.join("\\n") + "\\n"
+                input[0] = Channel.value([[ id: "plink_simulated_filtered" ], bed, bim, fam, -1.0])
+                input[1] = Channel.value([[ id: "weights" ], weights])
+                input[2] = true
+                """
+            }
+        }
+
+        then {
+            def analysis = workflow.out.analysis_grm.get(0)
+            def unfiltered = workflow.out.unfiltered_grm.get(0)
+            def filtered = workflow.out.filtered_list.get(0)
+            assertAll(
+                { assert workflow.success },
+                { assert analysis[0].id == "plink_simulated_filtered" },
+                { assert unfiltered[0].id == "plink_simulated_filtered" },
+                { assert filtered[0].id == "plink_simulated_filtered" },
+                { assert analysis[1..4].collect { path(it).fileName.toString() } == ["plink_simulated_filtered.unrelated.grm.bin", "plink_simulated_filtered.unrelated.grm.id", "plink_simulated_filtered.unrelated.grm.details", "plink_simulated_filtered.unrelated.grm.adjust"] },
+                { assert path(filtered[1]).fileName.toString() == "plink_simulated_filtered.keep" },
+                { assert path(filtered[2]).fileName.toString() == "plink_simulated_filtered.lose" },
+                { assert workflow.out.maxrel.size() <= 1 },
+                { assert workflow.out.versions.size() == 3 },
+                { assert workflow.out.versions.collect { it[2] }.unique() == ["6"] },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("homo_sapiens popgen - direct GRM stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.value([
+                    [ id: "plink_simulated_direct_stub" ],
+                    file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.bed", checkIfExists: true),
+                    file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.bim", checkIfExists: true),
+                    file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.fam", checkIfExists: true),
+                    -0.25
+                ])
+                input[1] = Channel.value([[:], []])
+                input[2] = false
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.analysis_grm.get(0)[0].id == "plink_simulated_direct_stub" },
+                { assert workflow.out.filtered_list.size() == 0 },
+                { assert workflow.out.maxrel.size() == 0 },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("homo_sapiens popgen - unrelated-sample GRM stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.value([
+                    [ id: "plink_simulated_filtered_stub" ],
+                    file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.bed", checkIfExists: true),
+                    file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.bim", checkIfExists: true),
+                    file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.fam", checkIfExists: true),
+                    -0.25
+                ])
+                input[1] = Channel.value([[:], []])
+                input[2] = true
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.analysis_grm.get(0)[0].id == "plink_simulated_filtered_stub" },
+                { assert workflow.out.unfiltered_grm.get(0)[0].id == "plink_simulated_filtered_stub" },
+                { assert workflow.out.filtered_list.get(0)[0].id == "plink_simulated_filtered_stub" },
+                { assert workflow.out.maxrel.size() == 1 },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+}

@@ -1,0 +1,55 @@
+name: plink_prepare_grm_ldak
+description: Calculate an LDAK GRM and optionally select unrelated samples and subset the GRM
+keywords:
+  - ldak
+  - grm
+  - relatedness
+  - plink
+components:
+  - ldak/calckins
+  - ldak/filter
+  - ldak/subgrm
+input:
+  - ch_genotypes:
+      type: file
+      description: PLINK binary files and the LDAK power parameter
+      structure: [meta, bed, bim, fam, power]
+      ontologies: []
+  - ch_weights:
+      type: file
+      description: Optional LDAK predictor weights file
+      structure: [meta2, weights]
+      ontologies: []
+  - val_filter_relatedness:
+      type: boolean
+      description: Whether to select unrelated samples and subset the GRM
+output:
+  - analysis_grm:
+      type: file
+      description: GRM selected for downstream analysis
+      structure: [meta, grm_bin, grm_id, grm_details, grm_adjust]
+      ontologies: []
+  - unfiltered_grm:
+      type: file
+      description: GRM calculated from all input samples
+      structure: [meta, grm_bin, grm_id, grm_details, grm_adjust]
+      ontologies: []
+  - filtered_list:
+      type: file
+      description: Relatedness-filter sample lists; empty when filtering is disabled
+      structure: [meta, keep, lose]
+      ontologies: []
+  - maxrel:
+      type: file
+      description: Optional diagnostic for the adaptive maximum-relatedness threshold
+      structure: [meta, maxrel]
+      ontologies: []
+  - versions:
+      type: file
+      description: File containing software versions
+      structure: [versions]
+      ontologies: []
+authors:
+  - "@andongni"
+maintainers:
+  - "@andongni"
