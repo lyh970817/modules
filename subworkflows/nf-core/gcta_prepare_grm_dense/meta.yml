@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "gcta_prepare_grm_dense"
+description: Scatter GCTA dense-GRM row construction, validate returned native keys and merge parts numerically
+keywords:
+  - gcta
+  - grm
+  - scatter gather
+components:
+  - gcta/makegrmpart
+  - custom/gctamergegrmparts
+input:
+  - ch_genotypes:
+      description: PLINK multi-file bundle with focal metadata
+      structure: [map meta, path mfile, path bed_pgen, path bim_pvar, path fam_psam]
+      ontologies:
+        - edam: "http://edamontology.org/format_3003"
+        - edam: "http://edamontology.org/format_2330"
+  - ch_snp_group_file:
+      description: Optional SNP group keyed to the focal identity
+      structure: [map meta2, path snp_group_file]
+      ontologies:
+        - edam: "http://edamontology.org/format_2330"
+  - val_n_parts:
+      description: Positive requested native row-part count
+      type: integer
+output:
+  - grm_files:
+      description: Complete merged dense-GRM bundle
+      structure: [map meta, path grm_files]
+      ontologies: []
+  - effective_parts:
+      description: Validated returned row-part cardinality
+      structure: [map meta, integer effective_parts]
+  - versions:
+      description: Combined component version contributions
+      structure: [versions]
+authors:
+  - "@andongni"
+maintainers:
+  - "@andongni"

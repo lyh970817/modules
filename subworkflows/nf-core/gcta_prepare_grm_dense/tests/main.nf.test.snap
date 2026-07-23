@@ -1,0 +1,88 @@
+{
+    "dense GRM - one part": {
+        "content": [
+            {
+                "effective_parts": [
+                    [
+                        {
+                            "id": "one_part"
+                        },
+                        1
+                    ]
+                ],
+                "grm_files": [
+                    [
+                        {
+                            "id": "one_part"
+                        },
+                        [
+                            "one_part.grm.N.bin:md5,acaa43bbbf2253d392537a178ecf09a4",
+                            "one_part.grm.bin:md5,45f8dff14bda17d50009a21050572228",
+                            "one_part.grm.id:md5,4f9aa36c44a417ff6d7caa9841e66ad9"
+                        ]
+                    ]
+                ],
+                "versions": [
+                    [
+                        "GCTA_PREPARE_GRM_DENSE:CUSTOM_GCTAMERGEGRMPARTS",
+                        "gctamergegrmparts",
+                        "1.0.0"
+                    ],
+                    [
+                        "GCTA_PREPARE_GRM_DENSE:GCTA_MAKEGRMPART",
+                        "gcta",
+                        "1.94.1"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T15:56:49.989902361"
+    },
+    "dense GRM - three parts": {
+        "content": [
+            {
+                "effective_parts": [
+                    [
+                        {
+                            "id": "three_parts"
+                        },
+                        3
+                    ]
+                ],
+                "grm_files": [
+                    [
+                        {
+                            "id": "three_parts"
+                        },
+                        [
+                            "three_parts.grm.N.bin:md5,acaa43bbbf2253d392537a178ecf09a4",
+                            "three_parts.grm.bin:md5,45f8dff14bda17d50009a21050572228",
+                            "three_parts.grm.id:md5,4f9aa36c44a417ff6d7caa9841e66ad9"
+                        ]
+                    ]
+                ],
+                "versions": [
+                    [
+                        "GCTA_PREPARE_GRM_DENSE:CUSTOM_GCTAMERGEGRMPARTS",
+                        "gctamergegrmparts",
+                        "1.0.0"
+                    ],
+                    [
+                        "GCTA_PREPARE_GRM_DENSE:GCTA_MAKEGRMPART",
+                        "gcta",
+                        "1.94.1"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T15:57:14.128484155"
+    }
+}

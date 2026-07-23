@@ -1,0 +1,55 @@
+nextflow_workflow {
+    name "Test Subworkflow GCTA_PREPARE_GRM_DENSE"
+    script "../main.nf"
+    workflow "GCTA_PREPARE_GRM_DENSE"
+
+    tag "subworkflows"
+    tag "subworkflows_nfcore"
+    tag "subworkflows/gcta_prepare_grm_dense"
+    tag "gcta"
+    tag "gcta/makegrmpart"
+    tag "custom"
+    tag "custom/gctamergegrmparts"
+
+    test("dense GRM - one part") {
+        when {
+            workflow {
+                """
+                file('gcta_grm.mbfile').text = 'plink_simulated\\n'
+                input[0] = Channel.of([[id:'one_part'], file('gcta_grm.mbfile'), [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.bed', checkIfExists:true)], [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.bim', checkIfExists:true)], [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.fam', checkIfExists:true)]])
+                input[1] = Channel.of([[id:'one_part'], []])
+                input[2] = Channel.value(1)
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.versions.size() == 2 },
+                { assert workflow.out.versions.every { version -> version.size() == 3 } },
+                { assert snapshot(sanitizeOutput(workflow.out)).match() }
+            )
+        }
+    }
+
+    test("dense GRM - three parts") {
+        when {
+            workflow {
+                """
+                file('gcta_grm.mbfile').text = 'plink_simulated\\n'
+                input[0] = Channel.of([[id:'three_parts'], file('gcta_grm.mbfile'), [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.bed', checkIfExists:true)], [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.bim', checkIfExists:true)], [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.fam', checkIfExists:true)]])
+                input[1] = Channel.of([[id:'three_parts'], []])
+                input[2] = Channel.value(3)
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.versions.size() == 2 },
+                { assert workflow.out.versions.every { version -> version.size() == 3 } },
+                { assert snapshot(sanitizeOutput(workflow.out)).match() }
+            )
+        }
+    }
+}
