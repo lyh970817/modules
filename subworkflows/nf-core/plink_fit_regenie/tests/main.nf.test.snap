@@ -1,0 +1,338 @@
+{
+    "homo_sapiens popgen - chunked quantitative plink1 with covariates": {
+        "content": [
+            {
+                "predictions": [
+                    [
+                        {
+                            "id": "plink_simulated"
+                        },
+                        "plink_simulated_pred.list"
+                    ]
+                ],
+                "loco": [
+                    [
+                        {
+                            "id": "plink_simulated"
+                        },
+                        "plink_simulated_1.loco.gz"
+                    ]
+                ],
+                "logs": [
+                    [
+                        {
+                            "id": "plink_simulated"
+                        },
+                        "plink_simulated.log"
+                    ],
+                    [
+                        {
+                            "id": "plink_simulated"
+                        },
+                        "plink_simulated.log"
+                    ],
+                    [
+                        {
+                            "id": "plink_simulated"
+                        },
+                        "plink_simulated_job1.log"
+                    ],
+                    [
+                        {
+                            "id": "plink_simulated"
+                        },
+                        "plink_simulated_job2.log"
+                    ]
+                ],
+                "versions": [
+                    [
+                        "PLINK_FIT_REGENIE:REGENIE_RUNL0",
+                        "regenie",
+                        "4.1.2"
+                    ],
+                    [
+                        "PLINK_FIT_REGENIE:REGENIE_RUNL0",
+                        "regenie",
+                        "4.1.2"
+                    ],
+                    [
+                        "PLINK_FIT_REGENIE:REGENIE_RUNL1",
+                        "regenie",
+                        "4.1.2"
+                    ],
+                    [
+                        "PLINK_FIT_REGENIE:REGENIE_SPLITL0",
+                        "regenie",
+                        "4.1.2"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T14:48:05.089967338"
+    },
+    "homo_sapiens popgen - chunked binary plink2 without covariates uses native jobs": {
+        "content": [
+            {
+                "predictions": [
+                    [
+                        {
+                            "id": "plink_simulated"
+                        },
+                        "plink_simulated_pred.list"
+                    ]
+                ],
+                "loco": [
+                    [
+                        {
+                            "id": "plink_simulated"
+                        },
+                        "plink_simulated_1.loco.gz"
+                    ]
+                ],
+                "logs": [
+                    [
+                        {
+                            "id": "plink_simulated"
+                        },
+                        "plink_simulated.log"
+                    ],
+                    [
+                        {
+                            "id": "plink_simulated"
+                        },
+                        "plink_simulated.log"
+                    ],
+                    [
+                        {
+                            "id": "plink_simulated"
+                        },
+                        "plink_simulated_job1.log"
+                    ]
+                ],
+                "versions": [
+                    [
+                        "PLINK_FIT_REGENIE:REGENIE_RUNL0",
+                        "regenie",
+                        "4.1.2"
+                    ],
+                    [
+                        "PLINK_FIT_REGENIE:REGENIE_RUNL1",
+                        "regenie",
+                        "4.1.2"
+                    ],
+                    [
+                        "PLINK_FIT_REGENIE:REGENIE_SPLITL0",
+                        "regenie",
+                        "4.1.2"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T14:48:33.59978677"
+    },
+    "homo_sapiens popgen - standard plink1 - stub": {
+        "content": [
+            {
+                "predictions": [
+                    [
+                        {
+                            "id": "plink_simulated"
+                        },
+                        "plink_simulated_pred.list"
+                    ]
+                ],
+                "loco": [
+                    [
+                        {
+                            "id": "plink_simulated"
+                        },
+                        "plink_simulated_1.loco.gz"
+                    ]
+                ],
+                "logs": [
+                    [
+                        {
+                            "id": "plink_simulated"
+                        },
+                        "plink_simulated.log"
+                    ]
+                ],
+                "versions": [
+                    [
+                        "PLINK_FIT_REGENIE:REGENIE_STEP1",
+                        "regenie",
+                        "4.1.2"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T14:45:39.443354648"
+    },
+    "homo_sapiens popgen - standard quantitative plink2 without covariates": {
+        "content": [
+            {
+                "predictions": [
+                    [
+                        {
+                            "id": "plink_simulated"
+                        },
+                        "plink_simulated_pred.list"
+                    ]
+                ],
+                "loco": [
+                    [
+                        {
+                            "id": "plink_simulated"
+                        },
+                        "plink_simulated_1.loco.gz"
+                    ]
+                ],
+                "logs": [
+                    [
+                        {
+                            "id": "plink_simulated"
+                        },
+                        "plink_simulated.log"
+                    ]
+                ],
+                "versions": [
+                    
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-06-09T18:15:21.502142966"
+    },
+    "homo_sapiens popgen - chunked plink1 - stub": {
+        "content": [
+            {
+                "predictions": [
+                    [
+                        {
+                            "id": "plink_simulated"
+                        },
+                        "plink_simulated_pred.list"
+                    ]
+                ],
+                "loco": [
+                    [
+                        {
+                            "id": "plink_simulated"
+                        },
+                        "plink_simulated_1.loco.gz"
+                    ]
+                ],
+                "logs": [
+                    [
+                        {
+                            "id": "plink_simulated"
+                        },
+                        "plink_simulated.log"
+                    ],
+                    [
+                        {
+                            "id": "plink_simulated"
+                        },
+                        "plink_simulated.log"
+                    ],
+                    [
+                        {
+                            "id": "plink_simulated"
+                        },
+                        "plink_simulated_job1.log"
+                    ],
+                    [
+                        {
+                            "id": "plink_simulated"
+                        },
+                        "plink_simulated_job2.log"
+                    ]
+                ],
+                "versions": [
+                    [
+                        "PLINK_FIT_REGENIE:REGENIE_RUNL0",
+                        "regenie",
+                        "4.1.2"
+                    ],
+                    [
+                        "PLINK_FIT_REGENIE:REGENIE_RUNL0",
+                        "regenie",
+                        "4.1.2"
+                    ],
+                    [
+                        "PLINK_FIT_REGENIE:REGENIE_RUNL1",
+                        "regenie",
+                        "4.1.2"
+                    ],
+                    [
+                        "PLINK_FIT_REGENIE:REGENIE_SPLITL0",
+                        "regenie",
+                        "4.1.2"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T14:54:37.478552223"
+    },
+    "homo_sapiens popgen - standard quantitative plink1 with covariates": {
+        "content": [
+            {
+                "predictions": [
+                    [
+                        {
+                            "id": "plink_simulated"
+                        },
+                        "plink_simulated_pred.list"
+                    ]
+                ],
+                "loco": [
+                    [
+                        {
+                            "id": "plink_simulated"
+                        },
+                        "plink_simulated_1.loco.gz"
+                    ]
+                ],
+                "logs": [
+                    [
+                        {
+                            "id": "plink_simulated"
+                        },
+                        "plink_simulated.log"
+                    ]
+                ],
+                "versions": [
+                    [
+                        "PLINK_FIT_REGENIE:REGENIE_STEP1",
+                        "regenie",
+                        "4.1.2"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T14:44:47.554536551"
+    }
+}
