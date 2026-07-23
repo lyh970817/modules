@@ -7,33 +7,88 @@ nextflow_process {
     tag "modules_nfcore"
     tag "plink2"
     tag "plink2/vcf"
+    tag "gunzip"
 
-    test("plink2_vcf") {
+    test("plink2 vcf - compressed VCF with explicit dosage field") {
         config "./nextflow.config"
+
         when {
             params {
-                outdir   = "$outputDir"
+                module_args = "dosage=DS"
             }
             process {
                 """
                 input[0] = [
-                    [ id: 'test', single_end:false ],
-                    [
-                        file(params.modules_testdata_base_path + 'genomics/sarscov2/illumina/vcf/test.vcf.gz', checkIfExists: true)
-                    ]
+                    [ id: 'plink_simulated_gz' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.vcf.gz', checkIfExists: true)
                 ]
                 """
             }
         }
 
         then {
-            assertAll (
+            assertAll(
                 { assert process.success },
-                { assert process.out.pgen.get(0).get(1) ==~ ".*.pgen" },
-                { assert process.out.psam.get(0).get(1) ==~ ".*.psam" },
-                { assert process.out.pvar.get(0).get(1) ==~ ".*.pvar" },
-                { assert snapshot(process.out.versions).match("versions") },
-                { assert snapshot(process.out).match() }
+                { assert snapshot(sanitizeOutput(process.out, unstableKeys: ["log"])).match() },
+                {
+                    def command = path(process.out.pgen.get(0).get(1)).parent.resolve('.command.sh').text
+                    assert command.contains('--vcf plink_simulated.vcf.gz')
+                    assert command.contains('dosage=DS')
+                    assert command.contains('--make-pgen')
+                }
+            )
+        }
+    }
+
+    test("plink2 vcf - uncompressed VCF") {
+        setup {
+            run("GUNZIP") {
+                script "modules/nf-core/gunzip/main.nf"
+                process {
+                    """
+                    input[0] = [
+                        [ id: 'plink_simulated_plain' ],
+                        file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.vcf.gz', checkIfExists: true)
+                    ]
+                    """
+                }
+            }
+        }
+
+        when {
+            process {
+                """
+                input[0] = GUNZIP.out.gunzip
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(sanitizeOutput(process.out, unstableKeys: ["log"])).match() }
+            )
+        }
+    }
+
+    test("plink2 vcf - stub") {
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id: 'plink_simulated_stub' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.vcf.gz', checkIfExists: true)
+                ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(sanitizeOutput(process.out, unstableKeys: ["log"])).match() }
             )
         }
     }

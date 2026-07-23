@@ -1,83 +1,110 @@
 {
-    "versions": {
-        "content": [
-            [
-                "versions.yml:md5,721368f447c7183ff0d8e49cfab9467c"
-            ]
-        ],
-        "timestamp": "2023-10-19T17:23:30.923556"
-    },
-    "plink2_vcf": {
+    "plink2 vcf - compressed VCF with explicit dosage field": {
         "content": [
             {
-                "0": [
+                "log": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "plink_simulated_gz"
                         },
-                        "test.pgen:md5,d66d3cd4a6c9cca1a4073d7f4b277041"
+                        "plink_simulated_gz.log"
                     ]
-                ],
-                "1": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test.psam:md5,f39f07c2507336388a8a6450ffa86bca"
-                    ]
-                ],
-                "2": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test.pvar:md5,d61e53f847a6335138b584216b4e45d0"
-                    ]
-                ],
-                "3": [
-                    
-                ],
-                "4": [
-                    "versions.yml:md5,721368f447c7183ff0d8e49cfab9467c"
                 ],
                 "pgen": [
                     [
                         {
-                            "id": "test",
-                            "single_end": false
+                            "id": "plink_simulated_gz"
                         },
-                        "test.pgen:md5,d66d3cd4a6c9cca1a4073d7f4b277041"
+                        "plink_simulated_gz.pgen:md5,d37c6d0aa92f788705e98813907d197a",
+                        "plink_simulated_gz.psam:md5,7eaf6159e5a01467476f0ee5999c54f2",
+                        "plink_simulated_gz.pvar:md5,02b389b2c51cf6b414cfefd135f8d41c"
                     ]
                 ],
-                "psam": [
+                "versions_plink2": [
                     [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test.psam:md5,f39f07c2507336388a8a6450ffa86bca"
+                        "PLINK2_VCF",
+                        "plink2",
+                        "2.0.0-a.6.9LM"
                     ]
-                ],
-                "pvar": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test.pvar:md5,d61e53f847a6335138b584216b4e45d0"
-                    ]
-                ],
-                "pvar_zst": [
-                    
-                ],
-                "versions": [
-                    "versions.yml:md5,721368f447c7183ff0d8e49cfab9467c"
                 ]
             }
         ],
-        "timestamp": "2023-10-19T17:23:30.932435"
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T13:38:46.590351512"
+    },
+    "plink2 vcf - stub": {
+        "content": [
+            {
+                "log": [
+                    [
+                        {
+                            "id": "plink_simulated_stub"
+                        },
+                        "plink_simulated_stub.log"
+                    ]
+                ],
+                "pgen": [
+                    [
+                        {
+                            "id": "plink_simulated_stub"
+                        },
+                        "plink_simulated_stub.pgen:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "plink_simulated_stub.psam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "plink_simulated_stub.pvar:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions_plink2": [
+                    [
+                        "PLINK2_VCF",
+                        "plink2",
+                        "2.0.0-a.6.9LM"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T13:49:20.050949987"
+    },
+    "plink2 vcf - uncompressed VCF": {
+        "content": [
+            {
+                "log": [
+                    [
+                        {
+                            "id": "plink_simulated_plain"
+                        },
+                        "plink_simulated_plain.log"
+                    ]
+                ],
+                "pgen": [
+                    [
+                        {
+                            "id": "plink_simulated_plain"
+                        },
+                        "plink_simulated_plain.pgen:md5,d37c6d0aa92f788705e98813907d197a",
+                        "plink_simulated_plain.psam:md5,7eaf6159e5a01467476f0ee5999c54f2",
+                        "plink_simulated_plain.pvar:md5,02b389b2c51cf6b414cfefd135f8d41c"
+                    ]
+                ],
+                "versions_plink2": [
+                    [
+                        "PLINK2_VCF",
+                        "plink2",
+                        "2.0.0-a.6.9LM"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T13:38:59.313195129"
     }
 }
