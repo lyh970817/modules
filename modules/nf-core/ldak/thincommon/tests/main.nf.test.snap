@@ -1,0 +1,70 @@
+{
+    "homo_sapiens popgen - plink1": {
+        "content": [
+            {
+                "predictors": [
+                    [
+                        {
+                            "id": "plink_simulated"
+                        },
+                        "plink_simulated.in:md5,127248de349af5a0ad0497e7c8eeac1d"
+                    ]
+                ],
+                "progress": [
+                    [
+                        {
+                            "id": "plink_simulated"
+                        },
+                        "plink_simulated.progress:md5,81c02605c545dfa8853126e12a35f7ca"
+                    ]
+                ],
+                "versions_ldak6": [
+                    [
+                        "LDAK_THINCOMMON",
+                        "ldak6",
+                        "6"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T14:46:35.065059933"
+    },
+    "homo_sapiens popgen - stub": {
+        "content": [
+            {
+                "predictors": [
+                    [
+                        {
+                            "id": "plink_simulated"
+                        },
+                        "plink_simulated.in:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "progress": [
+                    [
+                        {
+                            "id": "plink_simulated"
+                        },
+                        "plink_simulated.progress:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions_ldak6": [
+                    [
+                        "LDAK_THINCOMMON",
+                        "ldak6",
+                        "6"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T14:46:47.7316658"
+    }
+}
