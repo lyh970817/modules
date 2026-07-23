@@ -10,7 +10,7 @@ nextflow_process {
     tag "ldak"
     tag "ldak/calckins"
     tag "ldak/addgrms"
-    tag "ldak/filterrelatedness"
+    tag "ldak/filter"
     tag "ldak/reml"
 
     setup {
@@ -68,8 +68,8 @@ nextflow_process {
             }
         }
 
-        run("LDAK_FILTERRELATEDNESS") {
-            script "../../filterrelatedness/main.nf"
+        run("LDAK_FILTER") {
+            script "../../filter/main.nf"
             process {
                 """
                 input[0] = LDAK_ADDGRMS.out.combined_grm.map { meta, grm_bin, grm_id, grm_details, grm_adjust ->
@@ -96,7 +96,7 @@ nextflow_process {
                 input[1] = LDAK_ADDGRMS.out.combined_grm.map { meta, grm_bin, grm_id, grm_details, grm_adjust ->
                     tuple(meta, [grm_bin, grm_id, grm_details, grm_adjust])
                 }
-                input[2] = LDAK_FILTERRELATEDNESS.out.filtered_list.map { meta, keep_file, lose_file, maxrel_file ->
+                input[2] = LDAK_FILTER.out.filtered_list.map { meta, keep_file, lose_file ->
                     tuple([ id: "keep" ], keep_file)
                 }
                 input[3] = [
@@ -187,7 +187,7 @@ nextflow_process {
                 input[1] = LDAK_ADDGRMS.out.combined_grm.map { meta, grm_bin, grm_id, grm_details, grm_adjust ->
                     tuple(meta, [grm_bin, grm_id, grm_details, grm_adjust])
                 }
-                input[2] = LDAK_FILTERRELATEDNESS.out.filtered_list.map { meta, keep_file, lose_file, maxrel_file ->
+                input[2] = LDAK_FILTER.out.filtered_list.map { meta, keep_file, lose_file ->
                     tuple([ id: "keep" ], keep_file)
                 }
                 input[3] = [[:], []]
@@ -231,7 +231,7 @@ nextflow_process {
                 input[1] = LDAK_ADDGRMS.out.combined_grm.map { meta, grm_bin, grm_id, grm_details, grm_adjust ->
                     tuple(meta, [grm_bin, grm_id, grm_details, grm_adjust])
                 }
-                input[2] = LDAK_FILTERRELATEDNESS.out.filtered_list.map { meta, keep_file, lose_file, maxrel_file ->
+                input[2] = LDAK_FILTER.out.filtered_list.map { meta, keep_file, lose_file ->
                     tuple([ id: "keep" ], keep_file)
                 }
                 input[3] = [[:], []]
