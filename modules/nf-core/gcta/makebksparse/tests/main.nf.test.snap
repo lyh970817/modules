@@ -28,17 +28,17 @@
         },
         "timestamp": "2026-07-06T20:41:18.116750739"
     },
-    "homo_sapiens popgen - create sparse GRM - stub": {
+    "homo_sapiens popgen - dense GRM basename is independent of metadata id": {
         "content": [
             {
                 "sparse_grm_files": [
                     [
                         {
-                            "id": "stub_dense"
+                            "id": "contract_dense_mismatch"
                         },
                         [
-                            "stub_dense_sp.grm.id:md5,d41d8cd98f00b204e9800998ecf8427e",
-                            "stub_dense_sp.grm.sp:md5,d41d8cd98f00b204e9800998ecf8427e"
+                            "contract_dense_mismatch_sp.grm.id:md5,4f9aa36c44a417ff6d7caa9841e66ad9",
+                            "contract_dense_mismatch_sp.grm.sp:md5,1b78fe4b14c8690943d7687dd22ba85a"
                         ]
                     ]
                 ],
@@ -55,6 +55,35 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-07-06T20:42:04.783735782"
+        "timestamp": "2026-07-16T14:16:18.545103734"
+    },
+    "homo_sapiens popgen - create sparse GRM - stub": {
+        "content": [
+            {
+                "sparse_grm_files": [
+                    [
+                        {
+                            "id": "stub_dense"
+                        },
+                        [
+                            "stub_dense_sp.grm.id:md5,23f4ea450117d2b759fc89dfb016277c",
+                            "stub_dense_sp.grm.sp:md5,9c1256f576632d254861b63586e7a3da"
+                        ]
+                    ]
+                ],
+                "versions_gcta": [
+                    [
+                        "GCTA_MAKEBKSPARSE",
+                        "gcta",
+                        "1.94.1"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T14:13:28.905846011"
     }
 }

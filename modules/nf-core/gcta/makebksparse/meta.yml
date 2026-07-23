@@ -23,8 +23,7 @@ input:
         description: |
           Groovy map containing dense GRM metadata
           e.g. `[ id:'plink_simulated' ]`
-          `meta.id` is required and is the dense GRM basename contract used by `gcta --grm`.
-          Input files must therefore be staged as `<meta.id>.grm.id`, `<meta.id>.grm.bin`, and `<meta.id>.grm.N.bin`.
+          The dense GRM basename passed to `gcta --grm` is taken from the staged `.grm.bin` file.
     - grm_files:
         type: file
         description: Dense GRM sidecar files
@@ -42,7 +41,7 @@ output:
             Groovy map containing the unchanged input metadata
             e.g. `[ id:'plink_simulated' ]`
             The sparse GRM basename is represented by the emitted file names, typically `<prefix>_sp.grm.id` and `<prefix>_sp.grm.sp`.
-      - "*_sp.grm.*":
+      - ${sparse_prefix}.grm.*:
           type: file
           description: Sparse GRM sidecar files
           pattern: "*_sp.grm.{id,sp}"

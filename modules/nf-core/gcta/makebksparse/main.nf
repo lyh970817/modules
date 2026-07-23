@@ -11,7 +11,7 @@ process GCTA_MAKEBKSPARSE {
     val cutoff
 
     output:
-    tuple val(meta), path("*_sp.grm.*"), emit: sparse_grm_files
+    tuple val(meta), path("${sparse_prefix}.grm.*"), emit: sparse_grm_files
     tuple val("${task.process}"), val("gcta"), eval("gcta --version | sed -En 's/^[*] version v([0-9.]*).*/\\1/p'"), emit: versions_gcta, topic: versions
 
     when:
@@ -20,8 +20,9 @@ process GCTA_MAKEBKSPARSE {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def dense_prefix = meta.id
-    def sparse_prefix = "${prefix}_sp"
+    def dense_grm_file = grm_files.find { grm_file -> grm_file.name.endsWith('.grm.bin') }
+    def dense_prefix = dense_grm_file.name - '.grm.bin'
+    sparse_prefix = "${prefix}_sp"
     """
     gcta \\
         --grm ${dense_prefix} \\
@@ -33,9 +34,9 @@ process GCTA_MAKEBKSPARSE {
 
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def sparse_prefix = "${prefix}_sp"
+    sparse_prefix = "${prefix}_sp"
     """
-    touch ${sparse_prefix}.grm.id
-    touch ${sparse_prefix}.grm.sp
+    echo -e "FID\tIID" > ${sparse_prefix}.grm.id
+    echo -e "0\t0\t1" > ${sparse_prefix}.grm.sp
     """
 }

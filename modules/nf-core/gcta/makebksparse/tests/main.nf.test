@@ -78,7 +78,7 @@ nextflow_process {
         }
     }
 
-    test("homo_sapiens popgen - fail when meta id does not match dense GRM basename") {
+    test("homo_sapiens popgen - dense GRM basename is independent of metadata id") {
         when {
             process {
                 """
@@ -92,8 +92,10 @@ nextflow_process {
 
         then {
             assertAll(
-                { assert !process.success },
-                { assert process.exitStatus != 0 }
+                { assert process.success },
+                { assert process.out.sparse_grm_files.get(0).get(0).id == "contract_dense_mismatch" },
+                { assert path(process.out.sparse_grm_files.get(0).get(1)[0]).parent.resolve('.command.sh').text.contains('--grm contract_dense') },
+                { assert snapshot(sanitizeOutput(process.out)).match() }
             )
         }
     }
