@@ -1,51 +1,5 @@
 {
-    "homo_sapiens gsmr - plink1 - GREML-LDMS SNP groups - stub": {
-        "content": [
-            {
-                "ld_scores": [
-                    [
-                        {
-                            "id": "bfile"
-                        },
-                        "bfile_gcta_ld.score.ld:md5,89db5507ddfa8aa2990509aa70dfc5f2"
-                    ]
-                ],
-                "snp_group_files": [
-                    [
-                        {
-                            "id": "bfile"
-                        },
-                        [
-                            "bfile_snp_group1.txt:md5,a48b3426cc201c1c0be8e11cf34e9365",
-                            "bfile_snp_group2.txt:md5,6d0959c8d45c313c024c6d3fa5c8c630",
-                            "bfile_snp_group3.txt:md5,931517470f35d95b31209c555bd159cf",
-                            "bfile_snp_group4.txt:md5,cce7bf7b3cf0a016872193a1283153ab"
-                        ]
-                    ]
-                ],
-                "versions_gcta": [
-                    [
-                        "GCTA_CALCULATELDSCORES",
-                        "gcta",
-                        "1.94.1"
-                    ]
-                ],
-                "versions_rbase": [
-                    [
-                        "GCTA_CALCULATELDSCORES",
-                        "r-base",
-                        "4.3.1"
-                    ]
-                ]
-            }
-        ],
-        "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-06-18T19:46:18.473038895"
-    },
-    "homo_sapiens gsmr - plink1 - GREML-LDMS SNP groups": {
+    "homo_sapiens gsmr - native LD scores": {
         "content": [
             {
                 "ld_scores": [
@@ -56,17 +10,35 @@
                         "bfile_gcta_ld.score.ld:md5,ccfd5ff1898853f1c02e7572aaa335cf"
                     ]
                 ],
-                "snp_group_files": [
+                "versions_gcta": [
+                    [
+                        "GCTA_CALCULATELDSCORES",
+                        "gcta",
+                        "1.94.1"
+                    ]
+                ]
+            },
+            [
+                "SNP chr bp freq mean_rsq snp_num max_rsq ldscore_SNP ldscore_region",
+                "6:160530504:T:C 6 160530504 0 0 3326 0 1 4.90193",
+                "6:160530515:C:T 6 160530515 0 0 3326 0 1 4.90193"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T14:06:05.026094797"
+    },
+    "homo_sapiens gsmr - native LD scores - stub": {
+        "content": [
+            {
+                "ld_scores": [
                     [
                         {
                             "id": "bfile"
                         },
-                        [
-                            "bfile_snp_group1.txt",
-                            "bfile_snp_group2.txt",
-                            "bfile_snp_group3.txt",
-                            "bfile_snp_group4.txt"
-                        ]
+                        "bfile_gcta_ld.score.ld:md5,4c8bdfaec662d9f299756105e212f067"
                     ]
                 ],
                 "versions_gcta": [
@@ -75,20 +47,18 @@
                         "gcta",
                         "1.94.1"
                     ]
-                ],
-                "versions_rbase": [
-                    [
-                        "GCTA_CALCULATELDSCORES",
-                        "r-base",
-                        "4.3.1"
-                    ]
                 ]
-            }
+            },
+            [
+                "SNP chr bp freq mean_rsq snp_num max_rsq ldscore_SNP ldscore_region",
+                "stub_snp1 1 100 0.10 0.01 10 0.20 1.10 1.20",
+                "stub_snp2 1 200 0.20 0.02 10 0.30 1.20 1.30"
+            ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-06-18T19:48:46.433716794"
+        "timestamp": "2026-07-16T14:06:16.875320987"
     }
 }
