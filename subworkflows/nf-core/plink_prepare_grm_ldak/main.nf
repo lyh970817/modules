@@ -19,13 +19,16 @@ workflow PLINK_PREPARE_GRM_LDAK {
     ch_versions = LDAK_CALCKINS.out.versions_ldak6
 
     if (val_filter_relatedness) {
-        LDAK_FILTER(ch_unfiltered_grm)
+        ch_filter_input = ch_unfiltered_grm.map { meta, grm_bin, grm_id, grm_details, grm_adjust ->
+            tuple(meta, [grm_bin, grm_id, grm_details, grm_adjust])
+        }
+        LDAK_FILTER(ch_filter_input)
 
         ch_subgrm_input = ch_unfiltered_grm
             .join(LDAK_FILTER.out.filtered_list)
             .map { meta, grm_bin, grm_id, grm_details, grm_adjust, keep, _lose ->
                 def work_meta = meta + [id: "${meta.id}.unrelated", focal_meta: meta]
-                tuple(work_meta, grm_bin, grm_id, grm_details, grm_adjust, keep)
+                tuple(work_meta, [grm_bin, grm_id, grm_details, grm_adjust], keep)
             }
 
         LDAK_SUBGRM(ch_subgrm_input)
