@@ -1,0 +1,176 @@
+nextflow_workflow {
+
+    name "Test Workflow PLINK_ASSOCIATION_LDAK_KVIK"
+    script "../main.nf"
+    workflow "PLINK_ASSOCIATION_LDAK_KVIK"
+    config "./nextflow.config"
+
+    tag "subworkflows"
+    tag "subworkflows_nfcore"
+    tag "subworkflows/plink_association_ldak_kvik"
+    tag "ldak"
+    tag "ldak/thincommon"
+    tag "ldak/kvikstep1"
+    tag "ldak/kvikstep2"
+
+    test("quantitative all predictors - two Step 2 shards") {
+        when {
+            params { step_args = "--mpheno 1" }
+            workflow {
+                """
+                sourceBed = file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.bed", checkIfExists: true)
+                sourceBim = file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.bim", checkIfExists: true)
+                sourceFam = file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.fam", checkIfExists: true)
+                bimLines = sourceBim.readLines()
+                split = (int) Math.ceil(bimLines.size() / 2.0)
+
+                fullBed = file("plink_multichr.bed"); fullBed.bytes = sourceBed.bytes
+                fullFam = file("plink_multichr.fam"); fullFam.bytes = sourceFam.bytes
+                fullBim = file("plink_multichr.bim")
+                fullBim.text = bimLines.withIndex().collect { line, idx -> fields = line.tokenize(); fields[0] = idx < split ? "21" : "22"; fields.join("\\t") }.join("\\n") + "\\n"
+
+                shard21Bed = file("plink_multichr.chr21.bed"); shard21Bed.bytes = sourceBed.bytes
+                shard21Fam = file("plink_multichr.chr21.fam"); shard21Fam.bytes = sourceFam.bytes
+                shard21Bim = file("plink_multichr.chr21.bim"); shard21Bim.text = bimLines.collect { line -> fields = line.tokenize(); fields[0] = "21"; fields.join("\\t") }.join("\\n") + "\\n"
+                shard22Bed = file("plink_multichr.chr22.bed"); shard22Bed.bytes = sourceBed.bytes
+                shard22Fam = file("plink_multichr.chr22.fam"); shard22Fam.bytes = sourceFam.bytes
+                shard22Bim = file("plink_multichr.chr22.bim"); shard22Bim.text = bimLines.collect { line -> fields = line.tokenize(); fields[0] = "22"; fields.join("\\t") }.join("\\n") + "\\n"
+
+                input[0] = Channel.value([[ id: "plink_multichr" ], fullBed, fullBim, fullFam])
+                input[1] = Channel.of(
+                    [[ id: "plink_multichr_chr21", chr: "21" ], shard21Bed, shard21Bim, shard21Fam],
+                    [[ id: "plink_multichr_chr22", chr: "22" ], shard22Bed, shard22Bim, shard22Fam]
+                )
+                input[2] = Channel.value([[ id: "quantitative" ], file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated_quantitative_phenoname.phe", checkIfExists: true), false])
+                input[3] = Channel.value([[ id: "covariates" ], file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated_covariates.txt", checkIfExists: true)])
+                input[4] = Channel.value([[:], []])
+                input[5] = Channel.value([[:], []])
+                input[6] = Channel.value([[:], []])
+                input[7] = "all"
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.results.size() == 2 },
+                { assert workflow.out.results.collect { path(it[1]).getFileName().toString() }.toSet() == ["quantitative.step2.chr21.assoc", "quantitative.step2.chr22.assoc"] as Set },
+                { assert workflow.out.predictions.size() == 1 },
+                { assert workflow.out.versions.collect { it[1] }.toSet() == ["ldak6"] as Set },
+                { assert snapshot(sanitizeOutput(workflow.out, unstableKeys: ["logs", "predictions"])).match() }
+            )
+        }
+    }
+
+    test("binary thin-common - native Step 2 shard") {
+        when {
+            workflow {
+                """
+                sourceBed = file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.bed", checkIfExists: true)
+                sourceBim = file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.bim", checkIfExists: true)
+                sourceFam = file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.fam", checkIfExists: true)
+                lines = sourceBim.readLines(); split = (int) Math.ceil(lines.size() / 2.0)
+                fullBed = file("binary_multichr.bed"); fullBed.bytes = sourceBed.bytes
+                fullFam = file("binary_multichr.fam"); fullFam.bytes = sourceFam.bytes
+                fullBim = file("binary_multichr.bim"); fullBim.text = lines.withIndex().collect { line, idx -> f = line.tokenize(); f[0] = idx < split ? "21" : "22"; f.join("\\t") }.join("\\n") + "\\n"
+                shardBed = file("binary_multichr.chr21.bed"); shardBed.bytes = sourceBed.bytes
+                shardFam = file("binary_multichr.chr21.fam"); shardFam.bytes = sourceFam.bytes
+                shardBim = file("binary_multichr.chr21.bim"); shardBim.text = lines.collect { line -> f = line.tokenize(); f[0] = "21"; f.join("\\t") }.join("\\n") + "\\n"
+                input[0] = Channel.value([[ id: "binary_multichr" ], fullBed, fullBim, fullFam])
+                input[1] = Channel.of([[ id: "binary_chr21", chr: "21" ], shardBed, shardBim, shardFam])
+                input[2] = Channel.value([[ id: "binary" ], file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated_binary_phenoname.phe", checkIfExists: true), true])
+                input[3] = Channel.value([[ id: "covariates" ], file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated_covariates.txt", checkIfExists: true)])
+                input[4] = Channel.value([[:], []])
+                input[5] = Channel.value([[:], []])
+                input[6] = Channel.value([[:], []])
+                input[7] = "thin_common"
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert path(workflow.out.results[0][1]).getFileName().toString() == "binary.step2.chr21.assoc" },
+                { assert path(workflow.out.results[0][1]).readLines().size() == 221 },
+                {
+                    def prediction = path(workflow.out.predictions[0][1])
+                    assert prediction.parent.resolve(".command.sh").text.contains("--extract binary_multichr.in")
+                },
+                { assert workflow.out.versions.size() == 3 },
+                { assert snapshot(sanitizeOutput(workflow.out, unstableKeys: ["logs", "predictions"])).match() }
+            )
+        }
+    }
+
+    test("provided two-chromosome subset - Step 2 tests all predictors") {
+        when {
+            workflow {
+                """
+                sourceBed = file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.bed", checkIfExists: true)
+                sourceBim = file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.bim", checkIfExists: true)
+                sourceFam = file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.fam", checkIfExists: true)
+                lines = sourceBim.readLines(); split = (int) Math.ceil(lines.size() / 2.0)
+                fullBed = file("provided_multichr.bed"); fullBed.bytes = sourceBed.bytes
+                fullFam = file("provided_multichr.fam"); fullFam.bytes = sourceFam.bytes
+                fullBim = file("provided_multichr.bim"); fullBim.text = lines.withIndex().collect { line, idx -> f = line.tokenize(); f[0] = idx < split ? "21" : "22"; f.join("\\t") }.join("\\n") + "\\n"
+                shardBed = file("provided_multichr.chr22.bed"); shardBed.bytes = sourceBed.bytes
+                shardFam = file("provided_multichr.chr22.fam"); shardFam.bytes = sourceFam.bytes
+                shardBim = file("provided_multichr.chr22.bim"); shardBim.text = lines.collect { line -> f = line.tokenize(); f[0] = "22"; f.join("\\t") }.join("\\n") + "\\n"
+                extract = file("provided.in"); extract.text = (lines.take(20) + lines.drop(split).take(20)).collect { it.tokenize()[1] }.join("\\n") + "\\n"
+                input[0] = Channel.value([[ id: "provided_multichr" ], fullBed, fullBim, fullFam])
+                input[1] = Channel.of([[ id: "provided_chr22", chr: "22" ], shardBed, shardBim, shardFam])
+                input[2] = Channel.value([[ id: "provided_quantitative" ], file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated_quantitative_phenoname.phe", checkIfExists: true), false])
+                input[3] = Channel.value([[ id: "covariates" ], file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated_covariates.txt", checkIfExists: true)])
+                input[4] = Channel.value([[:], []])
+                input[5] = Channel.value([[ id: "provided" ], extract])
+                input[6] = Channel.value([[:], []])
+                input[7] = "provided"
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.results.size() == 1 },
+                { assert path(workflow.out.results[0][1]).readLines().size() == 221 },
+                {
+                    def prediction = path(workflow.out.predictions[0][1])
+                    assert prediction.readLines().find { it.startsWith("Num_Predictors_Used") }.tokenize()[1].toInteger() == 40
+                    assert prediction.parent.resolve(".command.sh").text.contains("--extract provided.in")
+                },
+                { assert workflow.out.versions.size() == 2 },
+                { assert snapshot(sanitizeOutput(workflow.out, unstableKeys: ["logs", "predictions"])).match() }
+            )
+        }
+    }
+
+    test("provided one-chromosome subset fails") {
+        options "-stub"
+        when {
+            workflow {
+                """
+                bed = file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.bed", checkIfExists: true)
+                bimSource = file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.bim", checkIfExists: true)
+                fam = file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.fam", checkIfExists: true)
+                lines = bimSource.readLines(); split = (int) Math.ceil(lines.size() / 2.0)
+                bim = file("invalid_multichr.bim"); bim.text = lines.withIndex().collect { line, idx -> f = line.tokenize(); f[0] = idx < split ? "21" : "22"; f.join("\\t") }.join("\\n") + "\\n"
+                extract = file("one_chr.in"); extract.text = lines.take(20).collect { it.tokenize()[1] }.join("\\n") + "\\n"
+                input[0] = Channel.value([[ id: "invalid" ], bed, bim, fam])
+                input[1] = Channel.of([[ id: "invalid_chr21" ], bed, bim, fam])
+                input[2] = Channel.value([[ id: "invalid" ], file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated_quantitative_phenoname.phe", checkIfExists: true), false])
+                input[3] = Channel.value([[ id: "covariates" ], file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated_covariates.txt", checkIfExists: true)])
+                input[4] = Channel.value([[:], []])
+                input[5] = Channel.value([[ id: "provided" ], extract])
+                input[6] = Channel.value([[:], []])
+                input[7] = "provided"
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.failed },
+                { assert workflow.errorReport.contains("must span at least two chromosomes") }
+            )
+        }
+    }
+}

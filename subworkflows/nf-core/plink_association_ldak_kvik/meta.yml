@@ -1,0 +1,72 @@
+name: plink_association_ldak_kvik
+description: Run LDAK-KVIK Step 1 once on a multi-chromosome PLINK 1 bundle and Step 2 across PLINK 1 genotype shards
+keywords:
+  - ldak
+  - kvik
+  - gwas
+  - association
+components:
+  - ldak/thincommon
+  - ldak/kvikstep1
+  - ldak/kvikstep2
+input:
+  - ch_step1_genotypes:
+      type: file
+      description: Multi-chromosome PLINK 1 bundle `[meta, bed, bim, fam]` used by KVIK Step 1
+      ontologies: []
+  - ch_genotype_shards:
+      type: file
+      description: PLINK 1 chromosome shards `[meta, bed, bim, fam]` tested by KVIK Step 2
+      ontologies: []
+  - ch_pheno:
+      type: file
+      description: Phenotype role `[meta, phenotype_file, is_binary]`
+      ontologies: []
+  - ch_qcovar:
+      type: file
+      description: Optional quantitative covariate role
+      ontologies: []
+  - ch_covar:
+      type: file
+      description: Optional categorical covariate role
+      ontologies: []
+  - ch_step1_extract:
+      type: file
+      description: Optional provided Step 1 predictor subset
+      ontologies: []
+  - ch_keep:
+      type: file
+      description: Optional Step 2 sample keep role
+      ontologies: []
+  - subset_policy:
+      type: string
+      description: Exactly one of `all`, `thin_common`, or `provided`
+output:
+  - results:
+      type: file
+      description: Native shard-level LDAK-KVIK association results
+      ontologies: []
+  - summaries:
+      type: file
+      description: Native shard-level summary statistics
+      ontologies: []
+  - pvalues:
+      type: file
+      description: Native shard-level p-values
+      ontologies: []
+  - predictions:
+      type: file
+      description: KVIK Step 1 prediction bundle
+      ontologies: []
+  - logs:
+      type: file
+      description: Step 1 and Step 2 logs
+      ontologies: []
+  - versions:
+      type: file
+      description: Normalised component version records
+      ontologies: []
+authors:
+  - "@andongni"
+maintainers:
+  - "@andongni"

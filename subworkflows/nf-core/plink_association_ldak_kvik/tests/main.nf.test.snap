@@ -1,0 +1,260 @@
+{
+    "quantitative all predictors - two Step 2 shards": {
+        "content": [
+            {
+                "logs": [
+                    [
+                        {
+                            "chr": "21",
+                            "id": "plink_multichr_chr21"
+                        },
+                        "quantitative.step2.log"
+                    ],
+                    [
+                        {
+                            "chr": "22",
+                            "id": "plink_multichr_chr22"
+                        },
+                        "quantitative.step2.log"
+                    ],
+                    [
+                        {
+                            "id": "plink_multichr"
+                        },
+                        "quantitative.step1.log"
+                    ]
+                ],
+                "predictions": [
+                    [
+                        {
+                            "id": "plink_multichr"
+                        },
+                        "quantitative.step1.root",
+                        "quantitative.step1.loco.details",
+                        "quantitative.step1.loco.prs"
+                    ]
+                ],
+                "pvalues": [
+                    [
+                        {
+                            "id": "plink_multichr_chr21",
+                            "chr": "21"
+                        },
+                        "quantitative.step2.chr21.pvalues:md5,9d108d5a8588e8487a96daf14e00a4d4"
+                    ],
+                    [
+                        {
+                            "id": "plink_multichr_chr22",
+                            "chr": "22"
+                        },
+                        "quantitative.step2.chr22.pvalues:md5,9d108d5a8588e8487a96daf14e00a4d4"
+                    ]
+                ],
+                "results": [
+                    [
+                        {
+                            "id": "plink_multichr_chr21",
+                            "chr": "21"
+                        },
+                        "quantitative.step2.chr21.assoc:md5,aaa78c50b1e0d94231fde7b0349fed3a"
+                    ],
+                    [
+                        {
+                            "id": "plink_multichr_chr22",
+                            "chr": "22"
+                        },
+                        "quantitative.step2.chr22.assoc:md5,d362924e5b63f7227e6f5c4d9a90fce5"
+                    ]
+                ],
+                "summaries": [
+                    [
+                        {
+                            "id": "plink_multichr_chr21",
+                            "chr": "21"
+                        },
+                        "quantitative.step2.chr21.summaries:md5,bd7bb693468089d870782d888f57606a"
+                    ],
+                    [
+                        {
+                            "id": "plink_multichr_chr22",
+                            "chr": "22"
+                        },
+                        "quantitative.step2.chr22.summaries:md5,bd7bb693468089d870782d888f57606a"
+                    ]
+                ],
+                "versions": [
+                    [
+                        "PLINK_ASSOCIATION_LDAK_KVIK:LDAK_KVIKSTEP1",
+                        "ldak6",
+                        "6"
+                    ],
+                    [
+                        "PLINK_ASSOCIATION_LDAK_KVIK:LDAK_KVIKSTEP2",
+                        "ldak6",
+                        "6"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T15:43:26.64355262"
+    },
+    "provided two-chromosome subset - Step 2 tests all predictors": {
+        "content": [
+            {
+                "logs": [
+                    [
+                        {
+                            "chr": "22",
+                            "id": "provided_chr22"
+                        },
+                        "provided_quantitative.step2.log"
+                    ],
+                    [
+                        {
+                            "id": "provided_multichr"
+                        },
+                        "provided_quantitative.step1.log"
+                    ]
+                ],
+                "predictions": [
+                    [
+                        {
+                            "id": "provided_multichr"
+                        },
+                        "provided_quantitative.step1.root",
+                        "provided_quantitative.step1.loco.details",
+                        "provided_quantitative.step1.loco.prs"
+                    ]
+                ],
+                "pvalues": [
+                    [
+                        {
+                            "id": "provided_chr22",
+                            "chr": "22"
+                        },
+                        "provided_quantitative.step2.chr22.pvalues:md5,9d108d5a8588e8487a96daf14e00a4d4"
+                    ]
+                ],
+                "results": [
+                    [
+                        {
+                            "id": "provided_chr22",
+                            "chr": "22"
+                        },
+                        "provided_quantitative.step2.chr22.assoc:md5,d362924e5b63f7227e6f5c4d9a90fce5"
+                    ]
+                ],
+                "summaries": [
+                    [
+                        {
+                            "id": "provided_chr22",
+                            "chr": "22"
+                        },
+                        "provided_quantitative.step2.chr22.summaries:md5,bd7bb693468089d870782d888f57606a"
+                    ]
+                ],
+                "versions": [
+                    [
+                        "PLINK_ASSOCIATION_LDAK_KVIK:LDAK_KVIKSTEP1",
+                        "ldak6",
+                        "6"
+                    ],
+                    [
+                        "PLINK_ASSOCIATION_LDAK_KVIK:LDAK_KVIKSTEP2",
+                        "ldak6",
+                        "6"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T15:43:39.789439062"
+    },
+    "binary thin-common - native Step 2 shard": {
+        "content": [
+            {
+                "logs": [
+                    [
+                        {
+                            "chr": "21",
+                            "id": "binary_chr21"
+                        },
+                        "binary.step2.log"
+                    ],
+                    [
+                        {
+                            "id": "binary_multichr"
+                        },
+                        "binary.step1.log"
+                    ]
+                ],
+                "predictions": [
+                    [
+                        {
+                            "id": "binary_multichr"
+                        },
+                        "binary.step1.root",
+                        "binary.step1.loco.details",
+                        "binary.step1.loco.prs"
+                    ]
+                ],
+                "pvalues": [
+                    [
+                        {
+                            "id": "binary_chr21",
+                            "chr": "21"
+                        },
+                        "binary.step2.chr21.pvalues:md5,543365c1fba4deb7257b4c302ddf066a"
+                    ]
+                ],
+                "results": [
+                    [
+                        {
+                            "id": "binary_chr21",
+                            "chr": "21"
+                        },
+                        "binary.step2.chr21.assoc:md5,d6ebf8217166ebf3456b1ae43cd80509"
+                    ]
+                ],
+                "summaries": [
+                    [
+                        {
+                            "id": "binary_chr21",
+                            "chr": "21"
+                        },
+                        "binary.step2.chr21.summaries:md5,08286a71d7022d83fa72b05698f10bfb"
+                    ]
+                ],
+                "versions": [
+                    [
+                        "PLINK_ASSOCIATION_LDAK_KVIK:LDAK_KVIKSTEP1",
+                        "ldak6",
+                        "6"
+                    ],
+                    [
+                        "PLINK_ASSOCIATION_LDAK_KVIK:LDAK_KVIKSTEP2",
+                        "ldak6",
+                        "6"
+                    ],
+                    [
+                        "PLINK_ASSOCIATION_LDAK_KVIK:LDAK_THINCOMMON",
+                        "ldak6",
+                        "6"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T15:43:33.510437054"
+    }
+}
