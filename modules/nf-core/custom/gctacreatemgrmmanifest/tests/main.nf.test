@@ -1,0 +1,147 @@
+nextflow_process {
+
+    name "Test Process CUSTOM_GCTACREATEMGRMMANIFEST"
+    script "../main.nf"
+    process "CUSTOM_GCTACREATEMGRMMANIFEST"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "custom"
+    tag "custom/gctacreatemgrmmanifest"
+    tag "gcta/makegrm"
+
+    setup {
+        run("GCTA_MAKEGRM", alias: "GCTA_MAKEGRM_A") {
+            script "../../../gcta/makegrm/main.nf"
+            process {
+                """
+                file('grm_a.mbfile').text = 'plink_simulated\\n'
+                input[0] = [
+                    [ id:'grm_a' ],
+                    file('grm_a.mbfile'),
+                    [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.bed', checkIfExists: true)],
+                    [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.bim', checkIfExists: true)],
+                    [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.fam', checkIfExists: true)]
+                ]
+                """
+            }
+        }
+
+        run("GCTA_MAKEGRM", alias: "GCTA_MAKEGRM_B") {
+            script "../../../gcta/makegrm/main.nf"
+            process {
+                """
+                file('grm_b.mbfile').text = 'plink_simulated\\n'
+                input[0] = [
+                    [ id:'grm_b' ],
+                    file('grm_b.mbfile'),
+                    [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.bed', checkIfExists: true)],
+                    [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.bim', checkIfExists: true)],
+                    [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.fam', checkIfExists: true)]
+                ]
+                """
+            }
+        }
+    }
+
+    test("custom gctacreatemgrmmanifest - ordered complete GRMs") {
+        when {
+            process {
+                """
+                input[0] = GCTA_MAKEGRM_A.out.grm_files
+                    .combine(GCTA_MAKEGRM_B.out.grm_files)
+                    .map { meta_a, files_a, meta_b, files_b ->
+                        [[ id:'analysis1' ], files_a + files_b, ['grm_b', 'grm_a']]
+                    }
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert file(process.out.mgrm_bundle[0][1]).text == 'grm_b\ngrm_a\n' },
+                { assert snapshot(sanitizeOutput(process.out)).match() }
+            )
+        }
+    }
+
+    test("custom gctacreatemgrmmanifest - duplicate requested root fails") {
+        when {
+            process {
+                """
+                input[0] = GCTA_MAKEGRM_A.out.grm_files.map { meta, files ->
+                    [[ id:'duplicate' ], files, ['grm_a', 'grm_a']]
+                }
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert !process.success },
+                { assert process.exitStatus != 0 }
+            )
+        }
+    }
+
+    test("custom gctacreatemgrmmanifest - missing requested root fails") {
+        when {
+            process {
+                """
+                input[0] = GCTA_MAKEGRM_A.out.grm_files.map { meta, files ->
+                    [[ id:'missing' ], files, ['grm_a', 'grm_missing']]
+                }
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert !process.success },
+                { assert process.exitStatus != 0 }
+            )
+        }
+    }
+
+    test("custom gctacreatemgrmmanifest - incomplete GRM fails") {
+        when {
+            process {
+                """
+                input[0] = GCTA_MAKEGRM_A.out.grm_files.map { meta, files ->
+                    incomplete_files = files.findAll { !it.name.endsWith('.grm.N.bin') }
+                    [[ id:'incomplete' ], incomplete_files, ['grm_a']]
+                }
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert !process.success },
+                { assert process.exitStatus != 0 }
+            )
+        }
+    }
+
+    test("custom gctacreatemgrmmanifest - stub") {
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = GCTA_MAKEGRM_A.out.grm_files.map { meta, files ->
+                    [[ id:'stub' ], files, ['grm_a']]
+                }
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(sanitizeOutput(process.out)).match() }
+            )
+        }
+    }
+}
