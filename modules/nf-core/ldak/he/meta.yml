@@ -1,0 +1,184 @@
+name: ldak_he
+description: Run linkage disequilibrium-adjusted kinship (LDAK) Haseman-Elston regression on a possibly adjusted genomic relationship matrix (GRM) and phenotype
+keywords:
+  - ldak
+  - he
+  - heritability
+tools:
+  - ldak6:
+      description: LDAK toolset for kinship, heritability, and association analyses
+      homepage: https://dougspeed.com/ldak/
+      documentation: https://dougspeed.com/ldak/
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing phenotype metadata.
+          Expected keys:
+            - id (string): Output prefix for Haseman-Elston (HE) artifacts.
+    - phenotype_file:
+        type: file
+        description: Headerless phenotype file passed to `--pheno`
+        ontologies: []
+  - - meta2:
+        type: map
+        description: |
+          Groovy Map containing GRM metadata.
+          Expected keys:
+            - id (string): GRM identifier.
+    - grm_files:
+        type: file
+        description: GRM bundle (`.grm.bin`, `.grm.id`, `.grm.details`, `.grm.adjust`, `.grm.root`) produced by `ldak/adjustgrm`
+        pattern: "*.{grm.bin,grm.id,grm.details,grm.adjust,grm.root}"
+        ontologies: []
+  - - meta3:
+        type: map
+        description: Metadata map paired with optional keep input.
+    - keep_file:
+        type: file
+        description: Optional keep file for sample filtering; pass [] when GRM is pre-filtered
+        ontologies: []
+  - - meta4:
+        type: map
+        description: Metadata map paired with optional quantitative covariates input.
+    - quant_covariates_file:
+        type: file
+        description: Optional quantitative covariates file passed to `--covar`; pass [] when absent
+        ontologies: []
+  - - meta5:
+        type: map
+        description: Metadata map paired with optional categorical covariates input.
+    - cat_covariates_file:
+        type: file
+        description: Optional categorical covariates file passed to `--factors`; pass [] when absent
+        ontologies: []
+output:
+  he_results:
+    - - meta:
+          type: map
+          description: Metadata map propagated from input
+      - "${prefix}.he":
+          type: file
+          description: HE summary output (`<prefix>.he`)
+          ontologies: []
+  coeff:
+    - - meta:
+          type: map
+          description: Metadata map propagated from input
+      - "${prefix}.coeff":
+          type: file
+          description: Optional coefficient output (`<prefix>.coeff`)
+          ontologies: []
+  combined:
+    - - meta:
+          type: map
+          description: Metadata map propagated from input
+      - "${prefix}.combined":
+          type: file
+          description: Optional combined output (`<prefix>.combined`)
+          ontologies: []
+  cross:
+    - - meta:
+          type: map
+          description: Metadata map propagated from input
+      - "${prefix}.cross":
+          type: file
+          description: Optional cross output (`<prefix>.cross`)
+          ontologies: []
+  progress:
+    - - meta:
+          type: map
+          description: Metadata map propagated from input
+      - "${prefix}.progress":
+          type: file
+          description: Optional progress output (`<prefix>.progress`)
+          ontologies: []
+  share:
+    - - meta:
+          type: map
+          description: Metadata map propagated from input
+      - "${prefix}.share":
+          type: file
+          description: Optional share output (`<prefix>.share`)
+          ontologies: []
+  he_within:
+    - - meta:
+          type: map
+          description: Metadata map propagated from input
+      - "${prefix}.he.within":
+          type: file
+          description: Optional within-subset HE output (`<prefix>.he.within`)
+          ontologies: []
+  he_across:
+    - - meta:
+          type: map
+          description: Metadata map propagated from input
+      - "${prefix}.he.across":
+          type: file
+          description: Optional across-subset HE output (`<prefix>.he.across`)
+          ontologies: []
+  he_compare:
+    - - meta:
+          type: map
+          description: Metadata map propagated from input
+      - "${prefix}.he.compare":
+          type: file
+          description: Optional subset comparison output (`<prefix>.he.compare`)
+          ontologies: []
+  cross_within:
+    - - meta:
+          type: map
+          description: Metadata map propagated from input
+      - "${prefix}.cross.within":
+          type: file
+          description: Optional within-subset cross output (`<prefix>.cross.within`)
+          ontologies: []
+  cross_across:
+    - - meta:
+          type: map
+          description: Metadata map propagated from input
+      - "${prefix}.cross.across":
+          type: file
+          description: Optional across-subset cross output (`<prefix>.cross.across`)
+          ontologies: []
+  share_within:
+    - - meta:
+          type: map
+          description: Metadata map propagated from input
+      - "${prefix}.share.within":
+          type: file
+          description: Optional within-subset share output (`<prefix>.share.within`)
+          ontologies: []
+  share_across:
+    - - meta:
+          type: map
+          description: Metadata map propagated from input
+      - "${prefix}.share.across":
+          type: file
+          description: Optional across-subset share output (`<prefix>.share.across`)
+          ontologies: []
+  versions_ldak6:
+    - - ${task.process}:
+          type: string
+          description: The name of the process
+      - ldak6:
+          type: string
+          description: The tool name
+      - ldak6 --version 2>&1 | grep -oP '(?<=^Version )[0-9.]+':
+          type: eval
+          description: The expression used to obtain the version of the tool
+topics:
+  versions:
+    - - ${task.process}:
+          type: string
+          description: The name of the process
+      - ldak6:
+          type: string
+          description: The tool name
+      - ldak6 --version 2>&1 | grep -oP '(?<=^Version )[0-9.]+':
+          type: eval
+          description: The expression used to obtain the version of the tool
+authors:
+  - "@lyh970817"
+maintainers:
+  - "@lyh970817"
