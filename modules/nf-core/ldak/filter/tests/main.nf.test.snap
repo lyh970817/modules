@@ -1,0 +1,102 @@
+{
+    "homo_sapiens popgen - stub": {
+        "content": [
+            {
+                "filtered_list": [
+                    [
+                        {
+                            "id": "ldak_grm_subset_stub"
+                        },
+                        "ldak_grm_subset_stub.keep:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "ldak_grm_subset_stub.lose:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "maxrel": [
+                    [
+                        {
+                            "id": "ldak_grm_subset_stub"
+                        },
+                        "ldak_grm_subset_stub.maxrel:md5,6808ca805661622ad65ae014a4b2a094"
+                    ]
+                ],
+                "versions_ldak6": [
+                    [
+                        "LDAK_FILTER",
+                        "ldak6",
+                        "6"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T15:17:55.556131053"
+    },
+    "homo_sapiens popgen - explicit maximum relatedness": {
+        "content": [
+            {
+                "filtered_list": [
+                    [
+                        {
+                            "id": "ldak_grm_maxrel"
+                        },
+                        "ldak_grm_maxrel.keep:md5,11a3a9acb8bd7a8ad41cc6949e02e635",
+                        "ldak_grm_maxrel.lose:md5,53adda15d6739a7cf1ad0362ca64800c"
+                    ]
+                ],
+                "maxrel": [
+                    
+                ],
+                "versions_ldak6": [
+                    [
+                        "LDAK_FILTER",
+                        "ldak6",
+                        "6"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T15:17:35.591351378"
+    },
+    "homo_sapiens popgen - filter related individuals": {
+        "content": [
+            {
+                "filtered_list": [
+                    [
+                        {
+                            "id": "ldak_grm_subset"
+                        },
+                        "ldak_grm_subset.keep:md5,c8c14b946089b7f16c1179f37fcdb8bf",
+                        "ldak_grm_subset.lose:md5,ac7d6cbbf2def728c2a05bd8359c5fad"
+                    ]
+                ],
+                "maxrel": [
+                    [
+                        {
+                            "id": "ldak_grm_subset"
+                        },
+                        "ldak_grm_subset.maxrel:md5,de3165b9e5105201924a076ea72ec7ca"
+                    ]
+                ],
+                "versions_ldak6": [
+                    [
+                        "LDAK_FILTER",
+                        "ldak6",
+                        "6"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T15:17:17.24730366"
+    }
+}
