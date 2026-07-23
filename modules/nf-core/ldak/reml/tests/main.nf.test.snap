@@ -10,6 +10,9 @@
                         "reml_quantitative.coeff:md5,a7a5b2b62a0f452658790859dc6d4b50"
                     ]
                 ],
+                "coeff_liability": [
+                    
+                ],
                 "combined": [
                     
                 ],
@@ -29,6 +32,9 @@
                         "reml_quantitative.indi.blp:md5,7f71e6fc7b8a65bd39efcf522484b413"
                     ]
                 ],
+                "indi_blp_liability": [
+                    
+                ],
                 "indi_res": [
                     [
                         {
@@ -37,6 +43,9 @@
                         "reml_quantitative.indi.res:md5,ab0964688d1ca68161369420b87ce0a5"
                     ]
                 ],
+                "liability_factor": [
+                    
+                ],
                 "progress": [
                     [
                         {
@@ -44,6 +53,9 @@
                         },
                         "reml_quantitative.progress:md5,cc2eab4890a7a8bc3b0286b2bb896660"
                     ]
+                ],
+                "reml_liability": [
+                    
                 ],
                 "reml_results": [
                     [
@@ -82,7 +94,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-07-16T15:23:49.287559139"
+        "timestamp": "2026-07-23T08:49:08.526972318"
     },
     "homo_sapiens popgen - binary observed scale": {
         "content": [
@@ -94,6 +106,9 @@
                         },
                         "reml_binary_observed.coeff:md5,494493469ec8acee9a98f7b1977ec519"
                     ]
+                ],
+                "coeff_liability": [
+                    
                 ],
                 "combined": [
                     
@@ -114,6 +129,9 @@
                         "reml_binary_observed.indi.blp:md5,ef77e77225fc669b8c1218b18c3d69ec"
                     ]
                 ],
+                "indi_blp_liability": [
+                    
+                ],
                 "indi_res": [
                     [
                         {
@@ -122,6 +140,9 @@
                         "reml_binary_observed.indi.res:md5,ddf5131774a2db8854ea722d743abd2c"
                     ]
                 ],
+                "liability_factor": [
+                    
+                ],
                 "progress": [
                     [
                         {
@@ -129,6 +150,9 @@
                         },
                         "reml_binary_observed.progress:md5,5adb53c3e9bc242385967888a9c107b1"
                     ]
+                ],
+                "reml_liability": [
+                    
                 ],
                 "reml_results": [
                     [
@@ -167,7 +191,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-07-16T15:24:11.373816315"
+        "timestamp": "2026-07-23T08:49:24.995732074"
     },
     "homo_sapiens popgen - stub": {
         "content": [
@@ -297,6 +321,14 @@
                         "reml_binary.coeff:md5,c216c8baff0528c4dfea778a55adcbba"
                     ]
                 ],
+                "coeff_liability": [
+                    [
+                        {
+                            "id": "reml_binary"
+                        },
+                        "reml_binary.coeff.liab:md5,0f9d68741c1cfb6563dd0802a669a05c"
+                    ]
+                ],
                 "combined": [
                     
                 ],
@@ -316,6 +348,14 @@
                         "reml_binary.indi.blp:md5,25ced35b8dd72608a4fcd70065960d1a"
                     ]
                 ],
+                "indi_blp_liability": [
+                    [
+                        {
+                            "id": "reml_binary"
+                        },
+                        "reml_binary.indi.blp.liab:md5,86cb26fd8229d60cb2b7836dfbad3f1c"
+                    ]
+                ],
                 "indi_res": [
                     [
                         {
@@ -324,12 +364,28 @@
                         "reml_binary.indi.res:md5,656be57004f3504cd729eb44af365df6"
                     ]
                 ],
+                "liability_factor": [
+                    [
+                        {
+                            "id": "reml_binary"
+                        },
+                        "reml_binary.factor:md5,f42cb199d804124e006d9c9fe8db169d"
+                    ]
+                ],
                 "progress": [
                     [
                         {
                             "id": "reml_binary"
                         },
                         "reml_binary.progress:md5,8a6fc9dada85c840f73b36c70289a7fc"
+                    ]
+                ],
+                "reml_liability": [
+                    [
+                        {
+                            "id": "reml_binary"
+                        },
+                        "reml_binary.reml.liab:md5,6cbab3b886e226b890692328ede38a40"
                     ]
                 ],
                 "reml_results": [
@@ -369,6 +425,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-07-16T15:24:34.901266637"
+        "timestamp": "2026-07-23T08:49:43.240334199"
     }
 }

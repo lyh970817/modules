@@ -19,10 +19,10 @@ nextflow_process {
                     [ id: "chr01.vcf" ],
                     file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.bed", checkIfExists: true),
                     file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.bim", checkIfExists: true),
-                    file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.fam", checkIfExists: true)
+                    file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.fam", checkIfExists: true),
+                    "-0.25"
                 ]
                 input[1] = [[:], []]
-                input[2] = "-0.25"
                 """
             }
         }
@@ -35,10 +35,10 @@ nextflow_process {
                     [ id: "chr02.vcf" ],
                     file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.bed", checkIfExists: true),
                     file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.bim", checkIfExists: true),
-                    file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.fam", checkIfExists: true)
+                    file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.fam", checkIfExists: true),
+                    "-0.25"
                 ]
                 input[1] = [[:], []]
-                input[2] = "-0.25"
                 """
             }
         }

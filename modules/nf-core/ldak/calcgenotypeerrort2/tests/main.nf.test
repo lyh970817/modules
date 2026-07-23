@@ -22,10 +22,10 @@ nextflow_process {
                     [ id: "plink_simulated_chr21" ],
                     file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.bed", checkIfExists: true),
                     file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.bim", checkIfExists: true),
-                    file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.fam", checkIfExists: true)
+                    file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.fam", checkIfExists: true),
+                    "-0.25"
                 ]
                 input[1] = [[:], []]
-                input[2] = "-0.25"
                 """
             }
         }
@@ -38,10 +38,10 @@ nextflow_process {
                     [ id: "plink_simulated_chr22" ],
                     file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.bed", checkIfExists: true),
                     file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.bim", checkIfExists: true),
-                    file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.fam", checkIfExists: true)
+                    file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.fam", checkIfExists: true),
+                    "-0.25"
                 ]
                 input[1] = [[:], []]
-                input[2] = "-0.25"
                 """
             }
         }
@@ -77,13 +77,13 @@ nextflow_process {
                 }
                 input[1] = [
                     [ id: "plink_simulated_quantitative_phenoname" ],
-                    file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated_quantitative_phenoname.phe", checkIfExists: true),
-                1
+                    file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated_quantitative_phenoname.phe", checkIfExists: true)
                 ]
                 input[2] = [
                     [ id: "covariates" ],
                     file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated_covariates.txt", checkIfExists: true)
                 ]
+                input[3] = [[:], []]
                 """
             }
         }
@@ -94,17 +94,14 @@ nextflow_process {
                 """
                 input[0] = [
                     [ id: "he_Y1_ldak_grm_adj" ],
-                    file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated_quantitative_phenoname.phe", checkIfExists: true),
-                    1
+                    file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated_quantitative_phenoname.phe", checkIfExists: true)
                 ]
-                input[1] = LDAK_ADJUSTGRM.out.adjusted_grm.map { meta, meta2, grm_bin, grm_id, grm_details, grm_adjust, grm_root ->
+                input[1] = LDAK_ADJUSTGRM.out.adjusted_grm.map { meta, grm_bin, grm_id, grm_details, grm_adjust, grm_root ->
                     tuple([ id: meta.id ], [ grm_bin, grm_id, grm_details, grm_adjust, grm_root ])
                 }
                 input[2] = [[:], []]
                 input[3] = [[:], []]
                 input[4] = [[:], []]
-                input[5] = ''
-                input[6] = 0
                 """
             }
         }
