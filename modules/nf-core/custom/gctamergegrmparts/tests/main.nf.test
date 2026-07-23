@@ -1,0 +1,56 @@
+nextflow_process {
+    name "Test Process CUSTOM_GCTAMERGEGRMPARTS"
+    script "../main.nf"
+    process "CUSTOM_GCTAMERGEGRMPARTS"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "custom"
+    tag "custom/gctamergegrmparts"
+    tag "gcta"
+    tag "gcta/makegrmpart"
+
+    test("merge two native GCTA GRM row parts") {
+        setup {
+            run("GCTA_MAKEGRMPART", alias: "GCTA_PART1") {
+                script "../../../gcta/makegrmpart/main.nf"
+                process {
+                    """
+                    file('parts.mbfile').text = 'plink_simulated\\n'
+                    input[0] = [[id:'merged'], 2, 1, file('parts.mbfile'), [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.bed', checkIfExists:true)], [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.bim', checkIfExists:true)], [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.fam', checkIfExists:true)]]
+                    input[1] = [[:], []]
+                    """
+                }
+            }
+            run("GCTA_MAKEGRMPART", alias: "GCTA_PART2") {
+                script "../../../gcta/makegrmpart/main.nf"
+                process {
+                    """
+                    file('parts.mbfile').text = 'plink_simulated\\n'
+                    input[0] = [[id:'merged'], 2, 2, file('parts.mbfile'), [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.bed', checkIfExists:true)], [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.bim', checkIfExists:true)], [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.fam', checkIfExists:true)]]
+                    input[1] = [[:], []]
+                    """
+                }
+            }
+        }
+        when {
+            process {
+                """
+                input[0] = GCTA_PART1.out.grm_files.concat(GCTA_PART2.out.grm_files)
+                    .map { meta, files, expected, part -> tuple(meta.id, files, part) }
+                    .groupTuple()
+                    .map { id, fileLists, parts ->
+                    def files = fileLists.flatten()
+                    tuple([id:id], files.findAll { file -> file.name.endsWith('.grm.bin') && !file.name.endsWith('.N.bin') }, files.findAll { file -> file.name.endsWith('.grm.N.bin') }, files.findAll { file -> file.name.endsWith('.grm.id') }, parts, 2)
+                }
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(sanitizeOutput(process.out), path(process.out.versions[0]).yaml).match() }
+            )
+        }
+    }
+}

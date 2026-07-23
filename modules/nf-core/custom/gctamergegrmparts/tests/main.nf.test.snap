@@ -1,0 +1,33 @@
+{
+    "merge two native GCTA GRM row parts": {
+        "content": [
+            {
+                "grm_files": [
+                    [
+                        {
+                            "id": "merged"
+                        },
+                        [
+                            "merged.grm.N.bin:md5,acaa43bbbf2253d392537a178ecf09a4",
+                            "merged.grm.bin:md5,45f8dff14bda17d50009a21050572228",
+                            "merged.grm.id:md5,4f9aa36c44a417ff6d7caa9841e66ad9"
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,18b70afe4aa4b89e5fc56dd4bbeb257b"
+                ]
+            },
+            {
+                "CUSTOM_GCTAMERGEGRMPARTS": {
+                    "gctamergegrmparts": "1.0.0"
+                }
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T14:34:52.189698748"
+    }
+}
