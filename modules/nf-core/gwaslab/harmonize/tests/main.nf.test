@@ -1,0 +1,159 @@
+nextflow_process {
+
+    name "Test Process GWASLAB_HARMONIZE"
+    script "../main.nf"
+    process "GWASLAB_HARMONIZE"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "gwaslab"
+    tag "gwaslab/harmonize"
+
+    test("homo_sapiens gsmr - explicit mapping without references") {
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'gsmr' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/gsmr/sumstats.tsv', checkIfExists: true),
+                    '{"snpid":"SNP","ea":"A1","nea":"A2","eaf":"freq","beta":"b","se":"se","p":"p","n":"N"}',
+                    'GRCh37'
+                ]
+                input[1] = [ [:], [], [] ]
+                input[2] = [ [:], [], [] ]
+                input[3] = [ [:], [], [] ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert process.out.sumstats.size() == 1 },
+                { assert process.out.log.size() == 1 },
+                {
+                    def output = path(process.out.sumstats.get(0).get(1))
+                    def header = "gzip -cd ${output}".execute().text.readLines().get(0).split('\\t') as List
+                    assert header.containsAll(['SNPID', 'CHR', 'POS', 'EA', 'NEA', 'STATUS', 'BETA', 'SE', 'P'])
+                },
+                {
+                    assert snapshot(
+                        process.out.sumstats,
+                        process.out.findAll { key, val -> key.startsWith("versions") }
+                    ).match()
+                }
+            )
+        }
+    }
+
+    test("homo_sapiens - FASTA check and rsID assignment using existing fixtures") {
+        when {
+            process {
+                """
+                reference_sumstats = Channel.of(
+                    'CHR\\tPOS\\tEA\\tNEA\\tEAF\\tBETA\\tSE\\tP\\n' +
+                    'chr22\\t66\\tG\\tA\\t0.000599\\t0.1\\t0.01\\t1e-8\\n' +
+                    'chr22\\t68\\tC\\tA\\t0.000599\\t-0.1\\t0.02\\t2e-7\\n' +
+                    'chr22\\t1769\\tA\\tT\\t0.0001997\\t0.2\\t0.03\\t3e-6\\n'
+                ).collectFile(name: 'reference_sumstats.tsv')
+
+                input[0] = reference_sumstats.map { sumstats ->
+                    [
+                        [ id:'reference' ],
+                        sumstats,
+                        '{"chrom":"CHR","pos":"POS","ea":"EA","nea":"NEA","eaf":"EAF","beta":"BETA","se":"SE","p":"P"}',
+                        'GRCh38'
+                    ]
+                }
+                input[1] = [
+                    [ id:'genome', assembly:'GRCh38' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/genome.fasta', checkIfExists: true),
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/genome.fasta.fai', checkIfExists: true)
+                ]
+                input[2] = [
+                    [ id:'dbsnp', assembly:'GRCh38' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/vcf/dbsnp_146.hg38.vcf.gz', checkIfExists: true),
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/vcf/dbsnp_146.hg38.vcf.gz.tbi', checkIfExists: true)
+                ]
+                input[3] = [ [:], [], [] ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                {
+                    def output = path(process.out.sumstats.get(0).get(1))
+                    def rows = "gzip -cd ${output}".execute().text.readLines()
+                    assert rows.get(0).split('\\t').contains('rsID')
+                    def text = rows.join('\n')
+                    assert ['rs568512106', 'rs536054182', 'rs570132427'].every { text.contains(it) }
+                },
+                {
+                    def log = path(process.out.log.get(0).get(1)).text
+                    assert log.contains('Raw Matching rate :  100.00%')
+                    assert log.contains('Annotated 3 rsID successfully')
+                },
+                {
+                    assert snapshot(
+                        process.out.sumstats,
+                        process.out.findAll { key, val -> key.startsWith("versions") }
+                    ).match()
+                }
+            )
+        }
+    }
+
+    test("homo_sapiens gsmr - unsupported build fails") {
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'gsmr' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/gsmr/sumstats.tsv', checkIfExists: true),
+                    '{"snpid":"SNP","ea":"A1","nea":"A2","eaf":"freq","beta":"b","se":"se","p":"p","n":"N"}',
+                    'hg19'
+                ]
+                input[1] = [ [:], [], [] ]
+                input[2] = [ [:], [], [] ]
+                input[3] = [ [:], [], [] ]
+                """
+            }
+        }
+
+        then {
+            assert process.failed
+            assert process.errorReport.contains('genome_build must be GRCh37 or GRCh38')
+        }
+    }
+
+    test("homo_sapiens gsmr - stub") {
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'gsmr' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/gsmr/sumstats.tsv', checkIfExists: true),
+                    'gwaslab',
+                    'GRCh37'
+                ]
+                input[1] = [ [:], [], [] ]
+                input[2] = [ [:], [], [] ]
+                input[3] = [ [:], [], [] ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert process.out.sumstats.size() == 1 },
+                { assert process.out.log.size() == 1 },
+                { assert snapshot(sanitizeOutput(process.out)).match() }
+            )
+        }
+    }
+}

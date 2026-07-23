@@ -1,0 +1,76 @@
+{
+    "homo_sapiens gsmr - stub": {
+        "content": [
+            {
+                "log": [
+                    [
+                        {
+                            "id": "gsmr"
+                        },
+                        "gsmr.gwaslab.log:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "sumstats": [
+                    [
+                        {
+                            "id": "gsmr"
+                        },
+                        "gsmr.gwaslab.tsv.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,94bb8c861d43030eaf455effd4934340"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T14:56:39.715335533"
+    },
+    "homo_sapiens - FASTA check and rsID assignment using existing fixtures": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "reference"
+                    },
+                    "reference.gwaslab.tsv.gz:md5,136e007e1b825be7f787353b056029c8"
+                ]
+            ],
+            {
+                "versions": [
+                    "versions.yml:md5,94bb8c861d43030eaf455effd4934340"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T15:05:18.439173461"
+    },
+    "homo_sapiens gsmr - explicit mapping without references": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "gsmr"
+                    },
+                    "gsmr.gwaslab.tsv.gz:md5,f99ba0cb34d14e252694d6162080cb7c"
+                ]
+            ],
+            {
+                "versions": [
+                    "versions.yml:md5,94bb8c861d43030eaf455effd4934340"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T15:04:59.506512351"
+    }
+}
