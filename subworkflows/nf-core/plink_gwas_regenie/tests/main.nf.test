@@ -52,8 +52,7 @@ nextflow_workflow {
 
                 input[2] = Channel.of([
                     [ id:'plink_simulated' ],
-                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated_quantitative_phenoname.phe', checkIfExists: true),
-                    false
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated_quantitative_phenoname.phe', checkIfExists: true)
                 ])
 
                 input[3] = Channel.of([
@@ -130,8 +129,7 @@ nextflow_workflow {
 
                 input[2] = Channel.of([
                     [ id:'plink_simulated' ],
-                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated_quantitative_phenoname.phe', checkIfExists: true),
-                    false
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated_quantitative_phenoname.phe', checkIfExists: true)
                 ])
 
                 input[3] = Channel.of([
@@ -180,7 +178,7 @@ nextflow_workflow {
 
         when {
             params {
-                module_args = "--phenoColList BinaryTrait"
+                module_args = "--phenoColList BinaryTrait --bt"
             }
             workflow {
                 """
@@ -200,8 +198,7 @@ nextflow_workflow {
 
                 input[2] = Channel.of([
                     [ id:'plink_simulated' ],
-                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated_binary_phenoname.phe', checkIfExists: true),
-                    true
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated_binary_phenoname.phe', checkIfExists: true)
                 ])
 
                 input[3] = Channel.of([
@@ -268,8 +265,7 @@ nextflow_workflow {
 
                 input[2] = Channel.of([
                     [ id:'plink_simulated' ],
-                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated_quantitative_phenoname.phe', checkIfExists: true),
-                    false
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated_quantitative_phenoname.phe', checkIfExists: true)
                 ])
 
                 input[3] = Channel.of([
@@ -337,8 +333,7 @@ nextflow_workflow {
 
                 input[2] = Channel.of([
                     [ id:'plink_simulated' ],
-                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated_quantitative_phenoname.phe', checkIfExists: true),
-                    false
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated_quantitative_phenoname.phe', checkIfExists: true)
                 ])
 
                 input[3] = Channel.of([
@@ -396,8 +391,7 @@ nextflow_workflow {
 
                 input[2] = Channel.of([
                     [ id:'plink_simulated' ],
-                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated_quantitative_phenoname.phe', checkIfExists: true),
-                    false
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated_quantitative_phenoname.phe', checkIfExists: true)
                 ])
 
                 input[3] = Channel.of([

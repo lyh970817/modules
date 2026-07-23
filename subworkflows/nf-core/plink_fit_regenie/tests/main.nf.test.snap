@@ -180,44 +180,6 @@
         },
         "timestamp": "2026-07-16T14:45:39.443354648"
     },
-    "homo_sapiens popgen - standard quantitative plink2 without covariates": {
-        "content": [
-            {
-                "predictions": [
-                    [
-                        {
-                            "id": "plink_simulated"
-                        },
-                        "plink_simulated_pred.list"
-                    ]
-                ],
-                "loco": [
-                    [
-                        {
-                            "id": "plink_simulated"
-                        },
-                        "plink_simulated_1.loco.gz"
-                    ]
-                ],
-                "logs": [
-                    [
-                        {
-                            "id": "plink_simulated"
-                        },
-                        "plink_simulated.log"
-                    ]
-                ],
-                "versions": [
-                    
-                ]
-            }
-        ],
-        "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-06-09T18:15:21.502142966"
-    },
     "homo_sapiens popgen - chunked plink1 - stub": {
         "content": [
             {
