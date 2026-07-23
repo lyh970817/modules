@@ -25,7 +25,7 @@ workflow GCTA_PREPARE_GRM_DENSE {
     )
 
     ch_inputs = ch_joined.multiMap { key, meta, n_parts, part, mfile, bed_pgen, bim_pvar, fam_psam, meta2, snp_group_file ->
-        genotypes: tuple(meta, n_parts, part, mfile, bed_pgen, bim_pvar, fam_psam)
+        genotypes: tuple(meta, mfile, bed_pgen, bim_pvar, fam_psam, n_parts, part)
         snp_group: tuple(meta2, snp_group_file)
     }
 

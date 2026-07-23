@@ -67,7 +67,7 @@ workflow GCTA_PREPARE_GRM_LDMS {
         }
 
     ch_make_inputs = ch_jobs.multiMap { work_meta, n_parts, part, mfile, bed, bim, fam, group_file ->
-        genotypes: tuple(work_meta, n_parts, part, mfile, bed, bim, fam)
+        genotypes: tuple(work_meta, mfile, bed, bim, fam, n_parts, part)
         snp_group: tuple(work_meta, group_file)
     }
     GCTA_MAKEGRMPART(ch_make_inputs.genotypes, ch_make_inputs.snp_group)

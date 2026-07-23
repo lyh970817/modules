@@ -17,7 +17,7 @@ nextflow_process {
                 process {
                     """
                     file('parts.mbfile').text = 'plink_simulated\\n'
-                    input[0] = [[id:'merged'], 2, 1, file('parts.mbfile'), [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.bed', checkIfExists:true)], [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.bim', checkIfExists:true)], [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.fam', checkIfExists:true)]]
+                    input[0] = [[id:'merged'], file('parts.mbfile'), [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.bed', checkIfExists:true)], [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.bim', checkIfExists:true)], [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.fam', checkIfExists:true)], 2, 1]
                     input[1] = [[:], []]
                     """
                 }
@@ -27,7 +27,7 @@ nextflow_process {
                 process {
                     """
                     file('parts.mbfile').text = 'plink_simulated\\n'
-                    input[0] = [[id:'merged'], 2, 2, file('parts.mbfile'), [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.bed', checkIfExists:true)], [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.bim', checkIfExists:true)], [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.fam', checkIfExists:true)]]
+                    input[0] = [[id:'merged'], file('parts.mbfile'), [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.bed', checkIfExists:true)], [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.bim', checkIfExists:true)], [file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated.fam', checkIfExists:true)], 2, 2]
                     input[1] = [[:], []]
                     """
                 }
