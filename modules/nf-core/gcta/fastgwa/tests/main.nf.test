@@ -42,6 +42,20 @@ nextflow_process {
             }
         }
 
+        run("GAWK", alias: "GAWK_BINARY_PHENO") {
+            script "../../../gawk/main.nf"
+            process {
+                """
+                input[0] = [
+                    [ id:'BinaryTrait' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/popgen/plink_simulated_binary_phenoname.phe', checkIfExists: true)
+                ]
+                input[1] = Channel.of('FNR == 1 { next } { print \$1, \$2, \$3 }').collectFile(name:'binary_phenotype.awk')
+                input[2] = false
+                """
+            }
+        }
+
         run("GAWK", alias: "GAWK_QUANTITATIVE_COVARIATES") {
             script "../../../gawk/main.nf"
             process {
@@ -118,7 +132,7 @@ nextflow_process {
                     file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.fam", checkIfExists: true)
                 ]
                 input[1] = GAWK_QUANTITATIVE_PHENO.out.output.map { generated_meta, phenotype_file ->
-                    [[ id:"plink_simulated" ], phenotype_file]
+                    [[ id:"plink_simulated" ], phenotype_file, false]
                 }
                 input[2] = GAWK_QUANTITATIVE_COVARIATES.out.output.map { generated_meta, covariates_file ->
                     [[ id:"plink_simulated" ], covariates_file]
@@ -167,7 +181,7 @@ nextflow_process {
                     file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.fam", checkIfExists: true)
                 ]
                 input[1] = GAWK_MULTI_PHENO.out.output.map { generated_meta, phenotype_file ->
-                    [[ id:"plink_simulated" ], phenotype_file]
+                    [[ id:"plink_simulated" ], phenotype_file, false]
                 }
                 input[2] = GAWK_QUANTITATIVE_COVARIATES.out.output.map { generated_meta, covariates_file ->
                     [[ id:"plink_simulated" ], covariates_file]
@@ -211,7 +225,7 @@ nextflow_process {
                     file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.fam", checkIfExists: true)
                 ]
                 input[1] = GAWK_QUANTITATIVE_PHENO.out.output.map { generated_meta, phenotype_file ->
-                    [[ id:"plink_simulated" ], phenotype_file]
+                    [[ id:"plink_simulated" ], phenotype_file, false]
                 }
                 input[2] = GAWK_QUANTITATIVE_COVARIATES.out.output.map { generated_meta, covariates_file ->
                     [[ id:"plink_simulated" ], covariates_file]
@@ -259,7 +273,7 @@ nextflow_process {
                     file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.psam", checkIfExists: true)
                 ]
                 input[1] = GAWK_QUANTITATIVE_PHENO.out.output.map { generated_meta, phenotype_file ->
-                    [[ id:"plink_simulated" ], phenotype_file]
+                    [[ id:"plink_simulated" ], phenotype_file, false]
                 }
                 input[2] = [[ id:"plink_simulated" ], []]
                 input[3] = [[ id:"plink_simulated" ], []]
@@ -288,26 +302,24 @@ nextflow_process {
         }
     }
 
-    test("homo_sapiens popgen - non-binary fails when sparse GRM prefix mismatches files") {
+    test("homo_sapiens popgen - plink1 with sparse GRM and binary phenotype") {
         when {
             process {
                 """
-                sparse_grm_bad_prefix = GCTA_MAKEBKSPARSE_DENSE.out.sparse_grm_files.map { meta, sparse_grm_files ->
-                    [[ id:'incorrect_sparse_prefix' ], sparse_grm_files]
-                }
-
                 input[0] = [
                     [ id:"plink_simulated" ],
                     file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.bed", checkIfExists: true),
                     file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.bim", checkIfExists: true),
                     file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.fam", checkIfExists: true)
                 ]
-                input[1] = GAWK_QUANTITATIVE_PHENO.out.output.map { generated_meta, phenotype_file ->
-                    [[ id:"plink_simulated" ], phenotype_file]
+                input[1] = GAWK_BINARY_PHENO.out.output.map { generated_meta, phenotype_file ->
+                    [[ id:"plink_simulated" ], phenotype_file, true]
                 }
                 input[2] = [[ id:"plink_simulated" ], []]
                 input[3] = [[ id:"plink_simulated" ], []]
-                input[4] = sparse_grm_bad_prefix
+                input[4] = GCTA_MAKEBKSPARSE_DENSE.out.sparse_grm_files.map { meta, sparse_grm_files ->
+                    [[ id:"plink_simulated" ], sparse_grm_files]
+                }
                 """
             }
         }
@@ -315,9 +327,10 @@ nextflow_process {
         then {
             assertAll(
                 { assert !process.success },
-                { assert process.exitStatus != 0 },
-                { assert process.stdout.toString().contains("incorrect_sparse_prefix") },
-                { assert process.stdout.toString().contains("incorrect_sparse_prefix.grm.id") }
+                { assert process.exitStatus == 1 },
+                { assert process.stdout.toString().contains("--fastGWA-mlm-binary") },
+                { assert process.stdout.toString().contains("--grm-sparse plink_simulated_dense_sp") },
+                { assert process.stdout.toString().contains("can't read 2000 SNPs from the autosomes for tuning") }
             )
         }
     }
@@ -338,7 +351,7 @@ nextflow_process {
                     file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.psam", checkIfExists: true)
                 ]
                 input[1] = GAWK_QUANTITATIVE_PHENO.out.output.map { generated_meta, phenotype_file ->
-                    [[ id:"plink_simulated" ], phenotype_file]
+                    [[ id:"plink_simulated" ], phenotype_file, false]
                 }
                 input[2] = [[ id:"plink_simulated" ], []]
                 input[3] = [[ id:"plink_simulated" ], []]

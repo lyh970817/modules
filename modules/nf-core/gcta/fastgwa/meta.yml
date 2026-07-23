@@ -51,6 +51,9 @@ input:
         pattern: "*.{phe,pheno,txt,tsv}"
         ontologies:
           - edam: "http://edamontology.org/format_3475"
+    - is_binary:
+        type: boolean
+        description: Select `--fastGWA-mlm-binary` when true and `--fastGWA-mlm` when false
   - - meta3:
         type: map
         description: |
@@ -77,8 +80,8 @@ input:
         type: map
         description: |
           Groovy map containing sparse GRM metadata
-          e.g. `[ id:'plink_simulated_sp' ]`
-          Used as the sparse GRM basename for `--grm-sparse` when sparse GRM files are supplied
+          e.g. `[ id:'plink_simulated' ]`
+          The sparse GRM basename is taken from the staged `.grm.sp` and `.grm.id` files
     - sparse_grm_files:
         type: file
         description: Sparse GRM sidecar files
@@ -93,7 +96,7 @@ output:
             e.g. `[ id:'plink_simulated' ]`
       - "*.fastGWA":
           type: file
-          description: FastGWA association results
+          description: Quantitative or binary fastGWA mixed-model association results; quantitative results report BETA and SE, while binary results report OR and SE
           pattern: "*.fastGWA"
           ontologies:
             - edam: "http://edamontology.org/format_2330"

@@ -15,7 +15,7 @@
                         {
                             "id": "plink_simulated"
                         },
-                        "plink_simulated.fastGWA:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "plink_simulated.fastGWA:md5,639542373250780b4b8a0c2e592ca943"
                     ]
                 ],
                 "versions_gcta": [
@@ -31,7 +31,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-05-26T21:52:28.104060693"
+        "timestamp": "2026-07-16T14:00:39.704321904"
     },
     "homo_sapiens popgen - plink1 with sparse GRM and quantitative phenotype": {
         "content": [
