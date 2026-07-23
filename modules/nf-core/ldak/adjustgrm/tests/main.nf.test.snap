@@ -1,0 +1,68 @@
+{
+    "homo_sapiens popgen - stub": {
+        "content": [
+            {
+                "adjusted_grm": [
+                    [
+                        {
+                            "id": "plink_simulated_adjusted_stub"
+                        },
+                        "plink_simulated_adjusted_stub.grm.bin:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "plink_simulated_adjusted_stub.grm.id:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "plink_simulated_adjusted_stub.grm.details:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "plink_simulated_adjusted_stub.grm.adjust:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "plink_simulated_adjusted_stub.grm.root:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions_ldak6": [
+                    [
+                        "LDAK_ADJUSTGRM",
+                        "ldak6",
+                        "6"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T15:20:31.050464723"
+    },
+    "homo_sapiens popgen - quantitative covariate adjustment": {
+        "content": [
+            {
+                "adjusted_grm": [
+                    [
+                        {
+                            "id": "plink_simulated_adjusted"
+                        },
+                        "plink_simulated_adjusted.grm.bin",
+                        "plink_simulated_adjusted.grm.id",
+                        "plink_simulated_adjusted.grm.details",
+                        "plink_simulated_adjusted.grm.adjust",
+                        "plink_simulated_adjusted.grm.root"
+                    ]
+                ],
+                "versions_ldak6": [
+                    [
+                        "LDAK_ADJUSTGRM",
+                        "ldak6",
+                        "6"
+                    ]
+                ]
+            },
+            [
+                "Kinship plink_simulated_grm",
+                "Covariates plink_simulated_covariates.txt",
+                "Top_Predictors none",
+                "Environments none"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-16T15:20:52.392349774"
+    }
+}

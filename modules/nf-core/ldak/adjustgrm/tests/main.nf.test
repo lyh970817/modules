@@ -1,0 +1,103 @@
+nextflow_process {
+
+    name "Test Process LDAK_ADJUSTGRM"
+    script "../main.nf"
+    process "LDAK_ADJUSTGRM"
+    config "./nextflow.config"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "ldak"
+    tag "ldak/calckins"
+    tag "ldak/adjustgrm"
+
+    setup {
+        run("LDAK_CALCKINS") {
+            script "../../calckins/main.nf"
+            process {
+                """
+                input[0] = [
+                    [ id: "plink_simulated_grm" ],
+                    file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.bed", checkIfExists: true),
+                    file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.bim", checkIfExists: true),
+                    file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.fam", checkIfExists: true),
+                    -0.25
+                ]
+                input[1] = [[:], []]
+                """
+            }
+        }
+    }
+
+    test("homo_sapiens popgen - quantitative covariate adjustment") {
+
+        when {
+            params { module_args = "--mpheno 1 --covar-numbers 1,2" }
+            process {
+                """
+                input[0] = LDAK_CALCKINS.out.ldak_grm.map { meta, bin, ids, details, adjust -> tuple([ id: "plink_simulated_adjusted" ], [ bin, ids, details, adjust ]) }
+                input[1] = [[ id: "quantitative" ], file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated_quantitative_phenoname.phe", checkIfExists: true)]
+                input[2] = [[ id: "covariates" ], file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated_covariates.txt", checkIfExists: true)]
+                input[3] = [[:], []]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                {
+                    def adjusted = process.out.adjusted_grm[0]
+                    def workDir = path(adjusted[1]).parent
+                    def commandText = workDir.resolve(".command.sh").text
+                    assert commandText.contains("--covar plink_simulated_covariates.txt")
+                    assert commandText.contains("--mpheno 1 --covar-numbers 1,2")
+                    assert workDir.resolve("plink_simulated_adjusted.grm.root").exists()
+                    assert !workDir.resolve("plink_simulated_adjusted.grm.N.bin").exists()
+                },
+                { assert snapshot(sanitizeOutput(process.out, unstableKeys: ["adjusted_grm"]), path(process.out.adjusted_grm[0][5]).readLines()).match() }
+            )
+        }
+    }
+
+    test("homo_sapiens popgen - non-numerical covariate fails") {
+
+        when {
+            process {
+                """
+                badCovar = file("categorical.covar")
+                badCovar.text = file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated.fam", checkIfExists: true).readLines().collect { line ->
+                    fields = line.tokenize()
+                    fields[0] + " " + fields[1] + " category"
+                }.join("\\n") + "\\n"
+                input[0] = LDAK_CALCKINS.out.ldak_grm.map { meta, bin, ids, details, adjust -> tuple([ id: "plink_simulated_bad_adjustment" ], [ bin, ids, details, adjust ]) }
+                input[1] = [[ id: "quantitative" ], file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated_quantitative_phenoname.phe", checkIfExists: true)]
+                input[2] = [[ id: "categorical" ], badCovar]
+                input[3] = [[:], []]
+                """
+            }
+        }
+
+        then { assert !process.success }
+    }
+
+    test("homo_sapiens popgen - stub") {
+        options "-stub"
+        when {
+            process {
+                """
+                input[0] = LDAK_CALCKINS.out.ldak_grm.map { meta, bin, ids, details, adjust -> tuple([ id: "plink_simulated_adjusted_stub" ], [ bin, ids, details, adjust ]) }
+                input[1] = [[ id: "quantitative" ], file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated_quantitative_phenoname.phe", checkIfExists: true)]
+                input[2] = [[ id: "covariates" ], file(params.modules_testdata_base_path + "genomics/homo_sapiens/popgen/plink_simulated_covariates.txt", checkIfExists: true)]
+                input[3] = [[:], []]
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(sanitizeOutput(process.out)).match() }
+            )
+        }
+    }
+}

@@ -1,0 +1,100 @@
+name: ldak_adjustgrm
+description: Adjust a precomputed linkage disequilibrium-adjusted kinship (LDAK) genomic relationship matrix (GRM) for covariates to produce `.grm.root` for Haseman-Elston (HE) or phenotype correlation-genotype correlation (PCGC) analyses
+keywords:
+  - ldak
+  - grm
+  - heritability
+tools:
+  - ldak6:
+      description: LDAK toolset for kinship, heritability, and association analyses
+      homepage: https://dougspeed.com/ldak/
+      documentation: https://dougspeed.com/ldak/
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing GRM context.
+          Expected keys:
+            - id (string): Output prefix for adjusted GRM files.
+    - grm_files:
+        type: file
+        description: Input GRM bundle containing binary matrix, sample identifiers,
+          details, and adjustment factors files
+        pattern: "*.{grm.bin,grm.id,grm.details,grm.adjust}"
+        ontologies: []
+  - - meta2:
+        type: map
+        description: |
+          Groovy Map containing phenotype metadata.
+          Expected keys:
+            - id (string): Phenotype identifier propagated in outputs.
+    - phenotype_file:
+        type: file
+        description: Headerless phenotype file passed to `--pheno`
+        ontologies: []
+  - - meta3:
+        type: map
+        description: Metadata map paired with quantitative covariates input.
+    - quant_covariates_file:
+        type: file
+        optional: true
+        description: Optional numerical covariate design passed to `--covar`; provide `[]` when absent
+        ontologies: []
+  - - meta4:
+        type: map
+        description: Metadata map paired with categorical covariates input
+    - cat_covariates_file:
+        type: file
+        optional: true
+        description: Optional categorical factor design passed to `--factors`; provide `[]` when absent
+        ontologies: []
+output:
+  adjusted_grm:
+    - - meta:
+          type: map
+          description: GRM metadata map propagated from input
+      - "${prefix}.grm.bin":
+          type: file
+          description: Adjusted GRM binary matrix
+          ontologies: []
+      - "${prefix}.grm.id":
+          type: file
+          description: Adjusted GRM sample identifiers
+          ontologies: []
+      - "${prefix}.grm.details":
+          type: file
+          description: Adjusted GRM details
+          ontologies: []
+      - "${prefix}.grm.adjust":
+          type: file
+          description: Adjusted GRM adjustment factors
+          ontologies: []
+      - "${prefix}.grm.root":
+          type: file
+          description: Adjusted GRM root file required by LDAK HE and PCGC
+          ontologies: []
+  versions_ldak6:
+    - - ${task.process}:
+          type: string
+          description: The name of the process
+      - ldak6:
+          type: string
+          description: The tool name
+      - ldak6 --version 2>&1 | grep -oP '(?<=^Version )[0-9.]+':
+          type: eval
+          description: The expression used to obtain the version of the tool
+topics:
+  versions:
+    - - ${task.process}:
+          type: string
+          description: The name of the process
+      - ldak6:
+          type: string
+          description: The tool name
+      - ldak6 --version 2>&1 | grep -oP '(?<=^Version )[0-9.]+':
+          type: eval
+          description: The expression used to obtain the version of the tool
+authors:
+  - "@lyh970817"
+maintainers:
+  - "@lyh970817"
