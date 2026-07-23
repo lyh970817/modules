@@ -12,11 +12,12 @@ process LDAK_KVIKSTEP1 {
     tuple val(meta2), path(phenotype_file), val(is_binary)
     tuple val(meta3), path(quant_covariates_file)
     tuple val(meta4), path(cat_covariates_file)
+    tuple val(meta5), path(extract_file)
 
     output:
-    tuple val(meta2), path("${prefix}.step1.root"), path("${prefix}.step1.loco.details"), path("${prefix}.step1.loco.prs"), emit: predictions
-    tuple val(meta2), path("${prefix}.step1.effects"), emit: effects, optional: true
-    tuple val(meta2), path("${prefix}.step1.log"), emit: log
+    tuple val(meta), path("${prefix}.step1.root"), path("${prefix}.step1.loco.details"), path("${prefix}.step1.loco.prs"), emit: predictions
+    tuple val(meta), path("${prefix}.step1.effects"), emit: effects, optional: true
+    tuple val(meta), path("${prefix}.step1.log"), emit: log
     tuple val("${task.process}"), val("ldak6"), eval("ldak6 --version 2>&1 | grep -oP '(?<=^Version )[0-9.]+'"), emit: versions_ldak6, topic: versions
 
     when:
@@ -29,6 +30,7 @@ process LDAK_KVIKSTEP1 {
     def covar_arg = quant_covariates_file ? "--covar ${quant_covariates_file}" : ""
     def factors_arg = cat_covariates_file ? "--factors ${cat_covariates_file}" : ""
     def binary_arg = is_binary ? "--binary YES" : ""
+    def extract_arg = extract_file ? "--extract ${extract_file}" : ""
     """
     ldak6 --kvik-step1 ${prefix} \\
         --bfile ${bfile_prefix} \\
@@ -36,6 +38,7 @@ process LDAK_KVIKSTEP1 {
         ${covar_arg} \\
         ${factors_arg} \\
         ${binary_arg} \\
+        ${extract_arg} \\
         --max-threads ${task.cpus} \\
         ${args} \\
         2>&1 | tee ${prefix}.step1.log

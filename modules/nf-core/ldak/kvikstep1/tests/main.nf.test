@@ -54,6 +54,7 @@ nextflow_process {
                 ]
 
                 input[3] = [[:], []]
+                input[4] = [[:], []]
                 """
             }
         }
@@ -68,6 +69,7 @@ nextflow_process {
                     def predictionTuple = process.out.predictions.get(0)
                     def commandText = path(predictionTuple.get(1)).parent.resolve(".command.sh").text
                     assert commandText.contains("--mpheno 1")
+                    assert !commandText.contains("--extract")
                     assert snapshot(
                         sanitizeOutput(process.out, unstableKeys: ["predictions", "effects", "log"]),
                         path(predictionTuple.get(1)).readLines(),
@@ -119,6 +121,11 @@ nextflow_process {
                 ]
 
                 input[3] = [[:], []]
+
+                extractFile = file("thin_common.in")
+                extractLines = multiBim.readLines()
+                extractFile.text = (extractLines.take(50) + extractLines.drop(chrSplit).take(50)).collect { it.tokenize()[1] }.join("\\n") + "\\n"
+                input[4] = [[ id: "thin_common" ], extractFile]
                 """
             }
         }
@@ -131,6 +138,7 @@ nextflow_process {
                     def commandText = path(predictionTuple.get(1)).parent.resolve(".command.sh").text
                     assert !commandText.contains("--mpheno")
                     assert commandText.contains("--binary YES")
+                    assert commandText.contains("--extract thin_common.in")
                     assert snapshot(
                         sanitizeOutput(process.out, unstableKeys: ["predictions", "effects", "log"]),
                         path(predictionTuple.get(1)).readLines(),
@@ -184,6 +192,7 @@ nextflow_process {
                 ]
 
                 input[3] = [[:], []]
+                input[4] = [[:], []]
                 """
             }
         }

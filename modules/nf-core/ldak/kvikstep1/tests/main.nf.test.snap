@@ -5,7 +5,7 @@
                 "effects": [
                     [
                         {
-                            "id": "plink_simulated_quantitative_phenoname"
+                            "id": "plink_multichr"
                         },
                         "plink_simulated_quantitative_phenoname.step1.effects"
                     ]
@@ -13,7 +13,7 @@
                 "log": [
                     [
                         {
-                            "id": "plink_simulated_quantitative_phenoname"
+                            "id": "plink_multichr"
                         },
                         "plink_simulated_quantitative_phenoname.step1.log"
                     ]
@@ -21,7 +21,7 @@
                 "predictions": [
                     [
                         {
-                            "id": "plink_simulated_quantitative_phenoname"
+                            "id": "plink_multichr"
                         },
                         "plink_simulated_quantitative_phenoname.step1.root",
                         "plink_simulated_quantitative_phenoname.step1.loco.details",
@@ -257,7 +257,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-07-08T13:13:00.238698342"
+        "timestamp": "2026-07-16T14:50:28.707637376"
     },
     "homo_sapiens popgen - stub": {
         "content": [
@@ -265,7 +265,7 @@
                 "effects": [
                     [
                         {
-                            "id": "plink_simulated_quantitative_phenoname_stub"
+                            "id": "plink_multichr"
                         },
                         "plink_simulated_quantitative_phenoname_stub.step1.effects"
                     ]
@@ -273,7 +273,7 @@
                 "log": [
                     [
                         {
-                            "id": "plink_simulated_quantitative_phenoname_stub"
+                            "id": "plink_multichr"
                         },
                         "plink_simulated_quantitative_phenoname_stub.step1.log"
                     ]
@@ -281,7 +281,7 @@
                 "predictions": [
                     [
                         {
-                            "id": "plink_simulated_quantitative_phenoname_stub"
+                            "id": "plink_multichr"
                         },
                         "plink_simulated_quantitative_phenoname_stub.step1.root",
                         "plink_simulated_quantitative_phenoname_stub.step1.loco.details",
@@ -301,7 +301,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-07-08T13:13:29.53535367"
+        "timestamp": "2026-07-16T14:50:45.691515273"
     },
     "homo_sapiens popgen - binary with default phenotype": {
         "content": [
@@ -309,7 +309,7 @@
                 "effects": [
                     [
                         {
-                            "id": "plink_simulated_binary_phenoname"
+                            "id": "plink_multichr"
                         },
                         "plink_simulated_binary_phenoname.step1.effects"
                     ]
@@ -317,7 +317,7 @@
                 "log": [
                     [
                         {
-                            "id": "plink_simulated_binary_phenoname"
+                            "id": "plink_multichr"
                         },
                         "plink_simulated_binary_phenoname.step1.log"
                     ]
@@ -325,7 +325,7 @@
                 "predictions": [
                     [
                         {
-                            "id": "plink_simulated_binary_phenoname"
+                            "id": "plink_multichr"
                         },
                         "plink_simulated_binary_phenoname.step1.root",
                         "plink_simulated_binary_phenoname.step1.loco.details",
@@ -350,7 +350,7 @@
                 "Factors none",
                 "Phenotype_Number 1",
                 "Num_Samples_Used 200",
-                "Num_Predictors_Used 220",
+                "Num_Predictors_Used 100",
                 "Num_Chromosomes 2"
             ],
             [
@@ -561,6 +561,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-07-10T16:30:32.890430906"
+        "timestamp": "2026-07-16T14:53:43.133383967"
     }
 }
