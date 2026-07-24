@@ -44,14 +44,14 @@ nextflow_process {
         }
     }
 
-    test("custom gctacreatemgrmmanifest - ordered complete GRMs") {
+    test("custom gctacreatemgrmmanifest - natural-sorted GRM roots") {
         when {
             process {
                 """
                 input[0] = GCTA_MAKEGRM_A.out.grm_files
                     .combine(GCTA_MAKEGRM_B.out.grm_files)
                     .map { meta_a, files_a, meta_b, files_b ->
-                        [[ id:'analysis1' ], files_a + files_b, ['grm_b', 'grm_a']]
+                        [[ id:'analysis1' ], files_a + files_b]
                     }
                 """
             }
@@ -60,66 +60,8 @@ nextflow_process {
         then {
             assertAll(
                 { assert process.success },
-                { assert file(process.out.mgrm_bundle[0][1]).text == 'grm_b\ngrm_a\n' },
+                { assert file(process.out.mgrm_bundle[0][1]).text == 'grm_a\ngrm_b\n' },
                 { assert snapshot(sanitizeOutput(process.out)).match() }
-            )
-        }
-    }
-
-    test("custom gctacreatemgrmmanifest - duplicate requested root fails") {
-        when {
-            process {
-                """
-                input[0] = GCTA_MAKEGRM_A.out.grm_files.map { meta, files ->
-                    [[ id:'duplicate' ], files, ['grm_a', 'grm_a']]
-                }
-                """
-            }
-        }
-
-        then {
-            assertAll(
-                { assert !process.success },
-                { assert process.exitStatus != 0 }
-            )
-        }
-    }
-
-    test("custom gctacreatemgrmmanifest - missing requested root fails") {
-        when {
-            process {
-                """
-                input[0] = GCTA_MAKEGRM_A.out.grm_files.map { meta, files ->
-                    [[ id:'missing' ], files, ['grm_a', 'grm_missing']]
-                }
-                """
-            }
-        }
-
-        then {
-            assertAll(
-                { assert !process.success },
-                { assert process.exitStatus != 0 }
-            )
-        }
-    }
-
-    test("custom gctacreatemgrmmanifest - incomplete GRM fails") {
-        when {
-            process {
-                """
-                input[0] = GCTA_MAKEGRM_A.out.grm_files.map { meta, files ->
-                    incomplete_files = files.findAll { !it.name.endsWith('.grm.N.bin') }
-                    [[ id:'incomplete' ], incomplete_files, ['grm_a']]
-                }
-                """
-            }
-        }
-
-        then {
-            assertAll(
-                { assert !process.success },
-                { assert process.exitStatus != 0 }
             )
         }
     }
@@ -131,7 +73,7 @@ nextflow_process {
             process {
                 """
                 input[0] = GCTA_MAKEGRM_A.out.grm_files.map { meta, files ->
-                    [[ id:'stub' ], files, ['grm_a']]
+                    [[ id:'stub' ], files]
                 }
                 """
             }

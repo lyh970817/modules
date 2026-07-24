@@ -37,18 +37,13 @@
                 "versions": [
                     [
                         "GCTA_PREPARE_GRM_LDMS:CUSTOM_GCTACREATEMGRMMANIFEST",
-                        "custom_gctacreatemgrmmanifest",
-                        "1.0.0"
+                        "coreutils",
+                        "9.5"
                     ],
                     [
                         "GCTA_PREPARE_GRM_LDMS:CUSTOM_GCTAMERGEGRMPARTS",
-                        "gctamergegrmparts",
-                        "1.0.0"
-                    ],
-                    [
-                        "GCTA_PREPARE_GRM_LDMS:CUSTOM_GCTASTRATIFYLDSCORES",
-                        "gctastratifyldscores",
-                        "1.0.0"
+                        "coreutils",
+                        "9.5"
                     ],
                     [
                         "GCTA_PREPARE_GRM_LDMS:CUSTOM_GCTASTRATIFYLDSCORES",
@@ -72,6 +67,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-07-16T15:54:44.400731148"
+        "timestamp": "2026-07-23T20:20:00.341977294"
     }
 }

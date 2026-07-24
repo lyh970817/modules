@@ -67,60 +67,21 @@ workflow GCTA_PREPARE_GRM_LDMS {
         }
 
     ch_make_inputs = ch_jobs.multiMap { work_meta, n_parts, part, mfile, bed, bim, fam, group_file ->
-        genotypes: tuple(work_meta, mfile, bed, bim, fam, n_parts, part)
+        genotypes: tuple(work_meta, n_parts, part, mfile, bed, bim, fam)
         snp_group: tuple(work_meta, group_file)
     }
     GCTA_MAKEGRMPART(ch_make_inputs.genotypes, ch_make_inputs.snp_group)
 
     ch_gathered_parts = GCTA_MAKEGRMPART.out.grm_files
-        .map { meta, files, n_parts, part ->
-            tuple("${meta.focal_meta.id}|${meta.model_key}|${meta.stratum_key}", meta, files, n_parts, part)
-        }
+        .map { meta, files, n_parts, part -> tuple("${meta.focal_meta.id}|${meta.model_key}|${meta.stratum_key}", meta, files) }
         .groupTuple(by: 0)
-        .map { key, metas, file_lists, expected_values, returned_parts ->
-            def meta = metas.first()
-            def expected = expected_values.first() as Integer
-            def parts = returned_parts.collect { it as Integer }.sort()
-            if (expected_values.any { it as Integer != expected } || parts != (1..expected).toList()) {
-                throw new IllegalStateException("Invalid returned part keys for ${key}: ${parts}; expected 1..${expected}")
-            }
-            def files = file_lists.flatten()
-            tuple(
-                meta,
-                files.findAll { it.name.endsWith('.grm.bin') && !it.name.endsWith('.N.bin') },
-                files.findAll { it.name.endsWith('.grm.N.bin') },
-                files.findAll { it.name.endsWith('.grm.id') },
-                parts,
-                expected,
-            )
-        }
+        .map { key, metas, file_lists -> tuple(metas.first(), file_lists.flatten()) }
     CUSTOM_GCTAMERGEGRMPARTS(ch_gathered_parts)
 
     ch_manifest_inputs = CUSTOM_GCTAMERGEGRMPARTS.out.grm_files
-        .map { meta, files ->
-            tuple(meta.focal_meta.id, meta.focal_meta, meta.model_key, meta.stratum_key, files)
-        }
+        .map { meta, files -> tuple(meta.focal_meta.id, meta.focal_meta, files) }
         .groupTuple(by: 0)
-        .map { focal_key, focal_metas, model_keys, stratum_keys, file_lists ->
-            def focal_meta = focal_metas.first()
-            def records = (0..<model_keys
-                .size())
-                .collect { index ->
-                    [model_key: model_keys[index], stratum_key: stratum_keys[index], files: file_lists[index]]
-                }
-                .sort { left, right ->
-                    left.model_key <=> right.model_key ?: left.stratum_key <=> right.stratum_key
-                }
-            def grm_files = records.collectMany { it.files }
-            def grm_order = records.collect { record ->
-                def id_file = record.files.find { it.name.endsWith('.grm.id') }
-                if (!id_file) {
-                    throw new IllegalStateException("Merged GRM lacks .grm.id for ${record.model_key}/${record.stratum_key}")
-                }
-                id_file.name.substring(0, id_file.name.length() - '.grm.id'.length())
-            }
-            tuple(focal_meta, grm_files, grm_order)
-        }
+        .map { focal_key, focal_metas, file_lists -> tuple(focal_metas.first(), file_lists.flatten()) }
     CUSTOM_GCTACREATEMGRMMANIFEST(ch_manifest_inputs)
 
     ch_versions = GCTA_CALCULATELDSCORES.out.versions_gcta

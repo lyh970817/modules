@@ -1,4 +1,45 @@
 {
+    "merge two native GCTA GRM row parts - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "merged"
+                        },
+                        [
+                            "merged.grm.N.bin:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "merged.grm.bin:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "merged.grm.id:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        ]
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,3af0ab83d8f594cf84e116f6b93acab9"
+                ],
+                "grm_files": [
+                    [
+                        {
+                            "id": "merged"
+                        },
+                        [
+                            "merged.grm.N.bin:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "merged.grm.bin:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "merged.grm.id:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,3af0ab83d8f594cf84e116f6b93acab9"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-23T20:02:23.892685763"
+    },
     "merge two native GCTA GRM row parts": {
         "content": [
             {
@@ -15,12 +56,12 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,18b70afe4aa4b89e5fc56dd4bbeb257b"
+                    "versions.yml:md5,3af0ab83d8f594cf84e116f6b93acab9"
                 ]
             },
             {
                 "CUSTOM_GCTAMERGEGRMPARTS": {
-                    "gctamergegrmparts": "1.0.0"
+                    "coreutils": 9.5
                 }
             }
         ],
@@ -28,6 +69,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-07-16T14:34:52.189698748"
+        "timestamp": "2026-07-23T20:02:10.332750809"
     }
 }

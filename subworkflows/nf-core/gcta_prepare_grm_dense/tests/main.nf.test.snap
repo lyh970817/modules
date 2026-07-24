@@ -25,8 +25,8 @@
                 "versions": [
                     [
                         "GCTA_PREPARE_GRM_DENSE:CUSTOM_GCTAMERGEGRMPARTS",
-                        "gctamergegrmparts",
-                        "1.0.0"
+                        "coreutils",
+                        "9.5"
                     ],
                     [
                         "GCTA_PREPARE_GRM_DENSE:GCTA_MAKEGRMPART",
@@ -40,7 +40,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-07-16T15:56:49.989902361"
+        "timestamp": "2026-07-23T20:19:19.502588688"
     },
     "dense GRM - three parts": {
         "content": [
@@ -68,8 +68,8 @@
                 "versions": [
                     [
                         "GCTA_PREPARE_GRM_DENSE:CUSTOM_GCTAMERGEGRMPARTS",
-                        "gctamergegrmparts",
-                        "1.0.0"
+                        "coreutils",
+                        "9.5"
                     ],
                     [
                         "GCTA_PREPARE_GRM_DENSE:GCTA_MAKEGRMPART",
@@ -83,6 +83,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-07-16T15:57:14.128484155"
+        "timestamp": "2026-07-23T20:19:33.066861966"
     }
 }

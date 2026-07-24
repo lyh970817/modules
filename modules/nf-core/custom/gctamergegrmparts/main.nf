@@ -1,12 +1,14 @@
 process CUSTOM_GCTAMERGEGRMPARTS {
     tag "${meta.id}"
     label 'process_single'
+
+    conda "${moduleDir}/environment.yml"
     container "${workflow.containerEngine in ['singularity', 'apptainer'] && !task.ext.singularity_pull_docker_container
         ? 'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/52/52ccce28d2ab928ab862e25aae26314d69c8e38bd41ca9431c67ef05221348aa/data'
         : 'community.wave.seqera.io/library/coreutils_grep_gzip_lbzip2_pruned:838ba80435a629f8'}"
 
     input:
-    tuple val(meta), path(grm_bin_parts), path(grm_n_bin_parts), path(grm_id_parts), val(part_numbers), val(expected_parts)
+    tuple val(meta), path(grm_files)
 
     output:
     tuple val(meta), path("${prefix}.grm.*"), emit: grm_files
@@ -17,22 +19,18 @@ process CUSTOM_GCTAMERGEGRMPARTS {
 
     script:
     prefix = task.ext.prefix ?: "${meta.id}"
-    bin_args = grm_bin_parts.collect { file -> "'${file}'" }.join(' ')
-    n_bin_args = grm_n_bin_parts.collect { file -> "'${file}'" }.join(' ')
-    id_args = grm_id_parts.collect { file -> "'${file}'" }.join(' ')
-    part_args = part_numbers.join(' ')
-    def helper_script = file("${moduleDir}/templates/gctamergegrmparts.sh").bytes.encodeBase64().toString()
-    """
-    printf '%s' '${helper_script}' | base64 --decode > gctamergegrmparts.sh
-    bash gctamergegrmparts.sh '${expected_parts}' '${prefix}' '${part_args}' "${bin_args}" "${n_bin_args}" "${id_args}" '${task.process}'
-    """
+    template('gctamergegrmparts.sh')
 
     stub:
     prefix = task.ext.prefix ?: "${meta.id}"
     """
-    printf '\0\0\0\0' > ${prefix}.grm.bin
-    printf '\0\0\0\0' > ${prefix}.grm.N.bin
-    printf 'stub\tstub\n' > ${prefix}.grm.id
-    printf '"%s":\n    gctamergegrmparts: 1.0.0\n' "${task.process}" > versions.yml
+    touch ${prefix}.grm.bin
+    touch ${prefix}.grm.N.bin
+    touch ${prefix}.grm.id
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        coreutils: \$(cat --version | head -n1 | sed 's/^.*) //')
+    END_VERSIONS
     """
 }

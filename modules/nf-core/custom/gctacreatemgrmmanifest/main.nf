@@ -1,12 +1,14 @@
 process CUSTOM_GCTACREATEMGRMMANIFEST {
     tag "${meta.id}"
-    label 'process_low'
+    label 'process_single'
+
+    conda "${moduleDir}/environment.yml"
     container "${workflow.containerEngine in ['singularity', 'apptainer'] && !task.ext.singularity_pull_docker_container
-        ? 'docker://quay.io/bioconda/base-glibc-busybox-bash:3.1'
-        : 'quay.io/bioconda/base-glibc-busybox-bash:3.1'}"
+        ? 'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/52/52ccce28d2ab928ab862e25aae26314d69c8e38bd41ca9431c67ef05221348aa/data'
+        : 'community.wave.seqera.io/library/coreutils_grep_gzip_lbzip2_pruned:838ba80435a629f8'}"
 
     input:
-    tuple val(meta), path(grm_files), val(grm_order)
+    tuple val(meta), path(grm_files)
 
     output:
     tuple val(meta), path("${prefix}.mgrm"), path(grm_files), emit: mgrm_bundle
@@ -17,18 +19,18 @@ process CUSTOM_GCTACREATEMGRMMANIFEST {
 
     script:
     prefix = task.ext.prefix ?: "${meta.id}"
-    order_args = grm_order.collect { value -> "'${value.toString().replace("'", "'\"'\"'")}'" }.join(' ')
-    file_args = grm_files.collect { file -> "'${file.name.toString().replace("'", "'\"'\"'")}'" }.join(' ')
     template('gctacreatemgrmmanifest.sh')
 
     stub:
     prefix = task.ext.prefix ?: "${meta.id}"
     """
-    touch ${prefix}.mgrm
+    for grm_id in *.grm.id; do
+        echo "\${grm_id%.grm.id}"
+    done | sort -V > ${prefix}.mgrm
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        custom_gctacreatemgrmmanifest: 1.0.0
+        coreutils: 9.5
     END_VERSIONS
     """
 }

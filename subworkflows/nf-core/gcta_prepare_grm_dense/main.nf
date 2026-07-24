@@ -25,37 +25,21 @@ workflow GCTA_PREPARE_GRM_DENSE {
     )
 
     ch_inputs = ch_joined.multiMap { key, meta, n_parts, part, mfile, bed_pgen, bim_pvar, fam_psam, meta2, snp_group_file ->
-        genotypes: tuple(meta, mfile, bed_pgen, bim_pvar, fam_psam, n_parts, part)
+        genotypes: tuple(meta, n_parts, part, mfile, bed_pgen, bim_pvar, fam_psam)
         snp_group: tuple(meta2, snp_group_file)
     }
 
     GCTA_MAKEGRMPART(ch_inputs.genotypes, ch_inputs.snp_group)
 
     ch_gathered = GCTA_MAKEGRMPART.out.grm_files
-        .map { meta, grm_parts, n_parts, part -> tuple(meta.id, meta, grm_parts, n_parts, part) }
+        .map { meta, grm_parts, n_parts, part -> tuple(meta.id, meta, grm_parts) }
         .groupTuple(by: 0)
-        .map { key, metas, file_lists, expected_values, returned_parts ->
-            def meta = metas.first()
-            def expected = expected_values.first() as Integer
-            def parts = returned_parts.collect { it as Integer }.sort()
-            if (metas.any { it != meta } || expected_values.any { it as Integer != expected }) {
-                throw new IllegalStateException("Inconsistent gathered identity for ${key}")
-            }
-            if (parts != (1..expected).toList()) {
-                throw new IllegalStateException("Returned part keys for ${key} were ${parts}, expected 1..${expected}")
-            }
-            def files = file_lists.flatten()
-            tuple(
-                meta,
-                files.findAll { file -> file.name.endsWith('.grm.bin') && !file.name.endsWith('.N.bin') },
-                files.findAll { file -> file.name.endsWith('.grm.N.bin') },
-                files.findAll { file -> file.name.endsWith('.grm.id') },
-                parts,
-                expected,
-            )
-        }
+        .map { key, metas, file_lists -> tuple(metas.first(), file_lists.flatten()) }
 
-    ch_effective_parts = ch_gathered.map { meta, bins, n_bins, ids, parts, expected -> tuple(meta, expected) }
+    ch_effective_parts = ch_genotypes
+        .map { meta, mfile, bed_pgen, bim_pvar, fam_psam -> meta }
+        .combine(val_n_parts)
+        .map { meta, n_parts -> tuple(meta, n_parts) }
     CUSTOM_GCTAMERGEGRMPARTS(ch_gathered)
 
     ch_versions = GCTA_MAKEGRMPART.out.versions_gcta

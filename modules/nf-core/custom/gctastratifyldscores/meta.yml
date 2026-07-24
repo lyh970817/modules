@@ -3,9 +3,12 @@ name: "custom_gctastratifyldscores"
 description: Stratify GCTA individual-SNP LD scores into explicit LD-by-MAF predictor groups
 keywords:
   - gcta
+  - genome-wide complex trait analysis
   - greml-ldms
   - ld score
+  - linkage disequilibrium
   - maf
+  - minor allele frequency
 tools:
   - custom:
       description: Checked-in R adapter implementing deterministic GCTA GREML-LDMS stratification
@@ -52,7 +55,7 @@ output:
   versions:
     - versions.yml:
         type: file
-        description: Adapter and R versions
+        description: R version
         pattern: "versions.yml"
         ontologies:
           - edam: "http://edamontology.org/format_3750" # YAML
@@ -60,7 +63,7 @@ topics:
   versions:
     - versions.yml:
         type: file
-        description: Adapter and R versions
+        description: R version
         pattern: "versions.yml"
         ontologies:
           - edam: "http://edamontology.org/format_3750" # YAML

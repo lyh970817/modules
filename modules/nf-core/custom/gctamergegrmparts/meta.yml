@@ -1,13 +1,15 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: "custom_gctamergegrmparts"
-description: Validate and concatenate row-partitioned GCTA dense GRM files in numeric part order
+description: Concatenate row-partitioned GCTA dense GRM files into a single GRM bundle
 keywords:
   - gcta
+  - genome-wide complex trait analysis
   - grm
+  - genomic relationship matrix
   - merge
 tools:
   - custom:
-      description: Checked-in static helper for GCTA --make-grm-part outputs
+      description: Checked-in bash helper concatenating GCTA --make-grm-part outputs
       homepage: "https://github.com/nf-core/modules"
       documentation: "https://yanglab.westlake.edu.cn/software/gcta/#MakingaGRM"
       licence: ["MIT"]
@@ -16,27 +18,11 @@ input:
   - - meta:
         type: map
         description: Groovy map containing GRM identity
-    - grm_bin_parts:
+    - grm_files:
         type: file
-        description: Complete set of row-partitioned GRM coefficient binaries
-        pattern: "*.part_*_*.grm.bin"
+        description: Complete set of row-partitioned GRM files for one stratum (.grm.bin, .grm.N.bin and .grm.id parts, any order)
+        pattern: "*.grm.*"
         ontologies: []
-    - grm_n_bin_parts:
-        type: file
-        description: Complete set of row-partitioned GRM observation-count binaries
-        pattern: "*.part_*_*.grm.N.bin"
-        ontologies: []
-    - grm_id_parts:
-        type: file
-        description: Complete set of row-partitioned GRM ID files
-        pattern: "*.part_*_*.grm.id"
-        ontologies: []
-    - part_numbers:
-        type: list
-        description: Explicit returned native part keys
-    - expected_parts:
-        type: integer
-        description: Expected consecutive part count
 output:
   grm_files:
     - - meta:
@@ -44,13 +30,13 @@ output:
           description: Groovy map containing GRM identity
       - "${prefix}.grm.*":
           type: file
-          description: Complete numerically concatenated GCTA dense-GRM bundle (.grm.bin, .grm.N.bin and .grm.id)
+          description: Concatenated GCTA dense-GRM bundle (.grm.bin, .grm.N.bin and .grm.id)
           pattern: "*.grm.*"
           ontologies: []
   versions:
     - versions.yml:
         type: file
-        description: Static adapter version
+        description: File containing software versions
         pattern: "versions.yml"
         ontologies:
           - edam: "http://edamontology.org/format_3750"
@@ -58,7 +44,7 @@ topics:
   versions:
     - versions.yml:
         type: file
-        description: Static adapter version
+        description: File containing software versions
         pattern: "versions.yml"
         ontologies:
           - edam: "http://edamontology.org/format_3750"

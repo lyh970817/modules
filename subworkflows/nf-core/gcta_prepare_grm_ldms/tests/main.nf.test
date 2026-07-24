@@ -48,7 +48,7 @@ nextflow_workflow {
                     assert provenance.get(2) == 'ld01_maf01'
                     assert provenance.get(3).predictor_count.toInteger() > 0
                 },
-                { assert workflow.out.versions.size() == 6 },
+                { assert workflow.out.versions.size() == 5 },
                 { assert snapshot(sanitizeOutput(workflow.out)).match() }
             )
         }

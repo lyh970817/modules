@@ -22,12 +22,11 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,dfb31f6306d07de7089fb6d5eef6d9c6"
+                    "versions.yml:md5,d05bfce57b36764225fa0b222ddee8d4"
                 ]
             },
             {
                 "CUSTOM_GCTASTRATIFYLDSCORES": {
-                    "gctastratifyldscores": "1.0.0",
                     "r-base": "4.2.1"
                 }
             }
@@ -36,7 +35,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-07-16T13:59:36.465636786"
+        "timestamp": "2026-07-23T20:09:08.792145091"
     },
     "gcta LD scores - native fixture": {
         "content": [
@@ -58,7 +57,7 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,dfb31f6306d07de7089fb6d5eef6d9c6"
+                    "versions.yml:md5,d05bfce57b36764225fa0b222ddee8d4"
                 ]
             },
             [
@@ -67,7 +66,6 @@
             ],
             {
                 "CUSTOM_GCTASTRATIFYLDSCORES": {
-                    "gctastratifyldscores": "1.0.0",
                     "r-base": "4.2.1"
                 }
             }
@@ -76,6 +74,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
         },
-        "timestamp": "2026-07-16T14:00:38.072190465"
+        "timestamp": "2026-07-23T20:09:01.471029123"
     }
 }
