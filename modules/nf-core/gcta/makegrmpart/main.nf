@@ -7,7 +7,7 @@ process GCTA_MAKEGRMPART {
         : 'community.wave.seqera.io/library/gcta:1.94.1--9bc35dc424fcf6e9'}"
 
     input:
-    tuple val(meta), path(mfile), path(bed_pgen), path(bim_pvar), path(fam_psam), val(nparts_gcta), val(part_gcta_job)
+    tuple val(meta), val(nparts_gcta), val(part_gcta_job), path(mfile), path(bed_pgen), path(bim_pvar), path(fam_psam)
     tuple val(meta2), path(snp_group_file)
 
     output:

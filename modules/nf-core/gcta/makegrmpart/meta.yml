@@ -22,6 +22,14 @@ input:
         description: |
           Groovy Map containing GRM-partition sample metadata
           e.g. `[ id:'gcta_grm' ]`
+    - nparts_gcta:
+        type: integer
+        description: Required total number of GRM partitions requested via
+          `--make-grm-part`
+    - part_gcta_job:
+        type: integer
+        description: Required one-based index of the GRM partition to compute via
+          `--make-grm-part`
     - mfile:
         type: file
         description: GCTA multi-input manifest consumed by `--mbfile` or
@@ -48,14 +56,6 @@ input:
           multi-input manifest
         pattern: "*.{fam,psam}"
         ontologies: []
-    - nparts_gcta:
-        type: integer
-        description: Required total number of GRM partitions requested via
-          `--make-grm-part`
-    - part_gcta_job:
-        type: integer
-        description: Required one-based index of the GRM partition to compute via
-          `--make-grm-part`
   - - meta2:
         type: map
         description: |
