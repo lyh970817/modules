@@ -52,13 +52,27 @@ output:
           description: A text file containing sample scores, in plink 2 .sscore format
           pattern: "*.{sscore}"
           ontologies: []
+  versions_plink2:
+    - - "${task.process}":
+          type: string
+          description: The process the version was collected from
+      - "plink2":
+          type: string
+          description: The tool name
+      - "plink2 --version 2>&1 | sed 's/^PLINK v//; s/ 64.*\\$//'":
+          type: eval
+          description: The command used to retrieve the PLINK 2 version
+topics:
   versions:
-    - versions.yml:
-        type: file
-        description: File containing software versions
-        pattern: "versions.yml"
-        ontologies:
-          - edam: http://edamontology.org/format_3750 # YAML
+    - - "${task.process}":
+          type: string
+          description: The process the version was collected from
+      - "plink2":
+          type: string
+          description: The tool name
+      - "plink2 --version 2>&1 | sed 's/^PLINK v//; s/ 64.*\\$//'":
+          type: eval
+          description: The command used to retrieve the PLINK 2 version
 authors:
   - "@nebfield"
 maintainers:

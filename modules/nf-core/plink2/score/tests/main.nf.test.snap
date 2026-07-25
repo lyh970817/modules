@@ -2,40 +2,28 @@
     "plink2_score": {
         "content": [
             {
-                "0": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "test.sscore:md5,97bde840f69febd65f2c00e9243126e9"
-                    ]
-                ],
-                "1": [
-                    "versions.yml:md5,17edce645e4ecc0bcde1d7bca0bdb637"
-                ],
                 "score": [
                     [
                         {
                             "id": "test",
                             "single_end": false
                         },
-                        "test.sscore:md5,97bde840f69febd65f2c00e9243126e9"
+                        "test.sscore:md5,dda319cdb2407eec25a6bffd3cccf9dd"
                     ]
                 ],
-                "versions": [
-                    "versions.yml:md5,17edce645e4ecc0bcde1d7bca0bdb637"
+                "versions_plink2": [
+                    [
+                        "PLINK2_SCORE",
+                        "plink2",
+                        "2.00a2.3LM"
+                    ]
                 ]
             }
         ],
-        "timestamp": "2023-10-24T15:44:38.753739"
-    },
-    "versions": {
-        "content": [
-            [
-                "versions.yml:md5,17edce645e4ecc0bcde1d7bca0bdb637"
-            ]
-        ],
-        "timestamp": "2023-10-24T15:44:38.745311"
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-07-25T17:21:39.523522264"
     }
 }
