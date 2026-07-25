@@ -22,22 +22,27 @@ input:
       type: file
       description: PLINK-format genotype file, either PLINK 1 BED or PLINK 2 PGEN
       pattern: "*.{bed,pgen}"
+      ontologies: []
   - variant_file:
       type: file
       description: PLINK-format variant file matching the genotype file
       pattern: "*.{bim,pvar}"
+      ontologies: []
   - sample_file:
       type: file
       description: PLINK-format sample file matching the genotype file
       pattern: "*.{fam,psam}"
+      ontologies: []
   - pheno:
       type: file
       description: REGENIE phenotype file
       pattern: "*"
+      ontologies: []
   - covar:
       type: file
       description: Optional REGENIE covariate file. Use [] when absent.
       pattern: "*"
+      ontologies: []
   - bsize:
       type: integer
       description: Required positive Step 1 block size propagated unchanged through every selected execution stage
@@ -57,14 +62,17 @@ output:
       type: file
       description: REGENIE Step 1 prediction list
       pattern: "*_pred.list"
+      ontologies: []
   - loco:
       type: file
       description: REGENIE Step 1 leave-one-chromosome-out predictions
       pattern: "*.loco.gz"
+      ontologies: []
   - logs:
       type: file
       description: REGENIE log files from the selected Step 1 execution path
       pattern: "*.log"
+      ontologies: []
   - versions:
       type: string
       description: Combined topic-version tuples from every REGENIE atom invoked on the selected execution path
